@@ -1,0 +1,11 @@
+@import '../configuration/colors';
+
+:root {
+    --swiper-theme-color: #{$color-primary};
+}
+
+.swiper-transition-timing-linear {
+    .swiper-wrapper {
+        transition-timing-function: linear !important;
+    }
+}

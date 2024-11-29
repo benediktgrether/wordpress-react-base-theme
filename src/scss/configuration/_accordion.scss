@@ -1,0 +1,17 @@
+@import "colors";
+
+$accordion-border-width: 0;
+$accordion-button-active-bg: $color-primary;
+$accordion-button-active-color: $color-white;
+
+$accordion-icon-color: $color-white;
+$accordion-icon-active-color: $color-white;
+
+// $accordion-color: $color-white;
+// $accordion-bg: $color-primary;
+// $accordion-padding-x: 0;
+// $accordion-button-focus-border-color: $color-secondary;
+// $accordion-button-focus-box-shadow: 0 0 0 0;
+
+// $accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M0,1.39L1.43,0l6.57,6.41L14.57,0l1.43,1.39-8,7.79L0,1.39Z' fill='#{$accordion-icon-color}' /></svg>");
+// $accordion-button-active-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M0,1.39L1.43,0l6.57,6.41L14.57,0l1.43,1.39-8,7.79L0,1.39Z' fill='#{$accordion-icon-active-color}' /></svg>");

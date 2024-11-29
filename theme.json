@@ -1,0 +1,33 @@
+{
+    "version": 2,
+    "settings": {
+        "blocks": {
+            "everydayblocktheme/text": {
+                "color": false
+            }
+        },
+        "color": {
+            "defaultPalette": false,
+            "palette": [
+                {
+                    "name": "Primary",
+                    "slug": "primary",
+                    "color": "#BE2830"
+                },
+                {
+                    "name": "Secondary",
+                    "slug": "secondary",
+                    "color": "#5C5C5B"
+                },
+                {
+                    "name": "Schwarz",
+                    "slug": "schwarz",
+                    "color": "#000000"
+                }
+            ]
+        },
+        "layout": {
+            "contentSize": "720px"
+        }
+    }
+}
