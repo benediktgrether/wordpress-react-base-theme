@@ -51,7 +51,14 @@ function EditComponent(props) {
     ];
 
     const innerBlocksProps = useInnerBlocksProps(
-        { className: 'container-row' },
+        {
+            className: 'container-row',
+            style: {
+                display: 'flex',
+                flexWrap: 'nowrap',
+                alignItems: 'flex-start', // Align to top
+            },
+        },
         {
             allowedBlocks,
             template,

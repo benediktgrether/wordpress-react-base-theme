@@ -4,7 +4,7 @@ import { layout } from '@wordpress/icons';
 import { InspectorControls, RichText } from '@wordpress/block-editor';
 
 import {
-    ImageComponent,
+    ImageSettings,
     getDefaultImageAttributes,
 } from '../../utilities/image/image-component';
 
@@ -39,7 +39,7 @@ function EditComponent(props) {
     return (
         <>
             <InspectorControls>
-                <ImageComponent
+                <ImageSettings
                     attributes={attributes}
                     setAttributes={setAttributes}
                     imageSizeOptions={imageSizeOptions}
