@@ -5,7 +5,7 @@ import {
     Image,
     ImageSettings,
     getDefaultImageAttributes,
-} from '../../utilities/image/image-component';
+} from '../../utilities/image/image';
 
 const imageSizeOptions = [
     { value: 'thumbnail', label: 'Thumbnail' },

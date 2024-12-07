@@ -6,7 +6,7 @@ import { InspectorControls, RichText } from '@wordpress/block-editor';
 import {
     ImageSettings,
     getDefaultImageAttributes,
-} from '../../utilities/image/image-component';
+} from '../../utilities/image/image';
 
 const imageSizeOptions = [
     { value: 'pageBanner', label: 'Banner' },

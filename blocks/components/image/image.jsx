@@ -1,5 +1,4 @@
 import { registerBlockType } from '@wordpress/blocks';
-
 import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
 import {
     Image,
@@ -14,13 +13,12 @@ const imageSizeOptions = [
     { value: 'medium', label: 'Medium' },
 ];
 
-registerBlockType('everydayblocktheme/heroslideitem', {
-    title: 'Hero Slide Item',
-    icon: icon.heroSlideItem,
-    parent: ['everydayblocktheme/heroslider'],
+registerBlockType('everydayblocktheme/image', {
+    title: 'Image',
+    icon: icon.image,
     supports: {},
     attributes: {
-        ...getDefaultImageAttributes(heroslideitem),
+        ...getDefaultImageAttributes('image'),
     },
     edit: EditComponent,
     save: SaveComponent,
@@ -39,9 +37,7 @@ function EditComponent(props) {
                 />
             </InspectorControls>
 
-            <div className="ratio ratio-16x9">
-                <Image mediaUrl={attributes.mediaUrl} />
-            </div>
+            <Image mediaUrl={attributes.mediaUrl} />
         </>
     );
 }

@@ -1,47 +1,125 @@
-import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
+/* eslint-disable no-console */
+/* eslint-disable jsx-a11y/img-redundant-alt */
+import apiFetch from '@wordpress/api-fetch';
 import {
-    Image,
-    ImageSettings,
-    getDefaultImageAttributes,
-} from '../../utilities/image/image-component';
-import { icon } from '../../configuration/icon/icons';
+    Button,
+    PanelBody,
+    PanelRow,
+    SelectControl,
+    ToggleControl,
+} from '@wordpress/components';
+import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
 
-const imageSizeOptions = [
-    { value: 'pageBanner', label: 'Banner' },
-    { value: 'full', label: 'Full' },
-    { value: 'medium', label: 'Medium' },
-];
+import placeholderImage from '../../../assets/images/placeholder-image.png';
 
-registerBlockType('everydayblocktheme/image', {
-    title: 'Image',
-    icon: icon.image,
-    supports: {},
-    attributes: {
-        ...getDefaultImageAttributes('image'),
+// Default attributes for the image component
+export const getDefaultImageAttributes = () => ({
+    mediaId: { type: 'number' },
+    mediaUrl: {
+        type: 'string',
+        default: placeholderImage,
     },
-    edit: EditComponent,
-    save: SaveComponent,
+    imageSize: { type: 'string', default: 'full' },
+    loading: { type: 'boolean', default: true },
 });
 
-function EditComponent(props) {
-    const { attributes, setAttributes } = props;
+// Reusable image component logic
+export function ImageSettings({ attributes, setAttributes, imageSizeOptions }) {
+    useEffect(() => {
+        async function fetchImage() {
+            try {
+                if (!attributes.mediaId) {
+                    console.error('Media ID is missing.');
+                    return;
+                }
+
+                const response = await apiFetch({
+                    path: `/wp/v2/media/${attributes.mediaId}`,
+                    method: 'GET',
+                });
+
+                if (!response || !response.media_details) {
+                    console.error('Invalid response:', response);
+                    return;
+                }
+
+                setAttributes({
+                    mediaUrl:
+                        response.media_details.sizes[attributes.imageSize]
+                            ?.source_url || response.source_url,
+                });
+            } catch (error) {
+                console.error('Error fetching media:', error);
+            }
+        }
+
+        fetchImage();
+    }, [attributes.mediaId, attributes.imageSize, setAttributes]);
+
+    function onFileSelect(media) {
+        setAttributes({
+            mediaId: media.id,
+            mediaUrl: media.url,
+        });
+    }
+
+    function onChangeSelectImageSize(imageSize) {
+        setAttributes({ imageSize });
+    }
+
+    function onChangeImageLoading(loading) {
+        setAttributes({ loading });
+    }
 
     return (
         <>
-            <InspectorControls>
-                <ImageSettings
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    imageSizeOptions={imageSizeOptions}
-                />
-            </InspectorControls>
-
-            <Image mediaUrl={attributes.mediaUrl} />
+            <PanelBody title="Bild Einstellungen" initialOpen={true}>
+                <PanelRow>
+                    <MediaUploadCheck>
+                        <MediaUpload
+                            onSelect={onFileSelect}
+                            value={attributes.mediaId}
+                            render={({ open }) => (
+                                <Button variant="primary" onClick={open}>
+                                    Bild auswählen
+                                </Button>
+                            )}
+                        />
+                    </MediaUploadCheck>
+                </PanelRow>
+                <PanelRow>
+                    <div className="ratio ratio-16x9">
+                        <img
+                            className="img-fluid object-fit-cover"
+                            src={attributes.mediaUrl}
+                            alt="Select"
+                        />
+                    </div>
+                </PanelRow>
+                <PanelRow>
+                    <SelectControl
+                        label="Bildgröße"
+                        value={attributes.imageSize}
+                        options={imageSizeOptions}
+                        onChange={onChangeSelectImageSize}
+                    />
+                </PanelRow>
+                <PanelRow>
+                    <ToggleControl
+                        label="Lazy Loading aktivieren"
+                        checked={attributes.loading}
+                        onChange={onChangeImageLoading}
+                    />
+                </PanelRow>
+            </PanelBody>
         </>
     );
 }
 
-function SaveComponent() {
-    return <InnerBlocks.Content />;
+export function Image({ mediaUrl, variant }) {
+    const classNames =
+        variant === 'cover' ? 'w-100 h-100 object-fit-cover' : 'w-auto h-100';
+
+    return <img className={classNames} src={mediaUrl} alt="Select Image" />;
 }
