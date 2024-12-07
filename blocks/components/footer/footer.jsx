@@ -1,10 +1,6 @@
 //https://wordpress.github.io/gutenberg/?path=/story/icons-icon--library
 import { registerBlockType } from '@wordpress/blocks';
-import {
-    InnerBlocks,
-    InspectorControls,
-    RichText,
-} from '@wordpress/block-editor';
+import { InspectorControls, RichText } from '@wordpress/block-editor';
 import { layout } from '@wordpress/icons';
 
 import {
@@ -27,7 +23,7 @@ registerBlockType('everydayblocktheme/footer', {
     keywords: '[]',
     supports: {},
     attributes: {
-        ...getDefaultImageAttributes(footer),
+        ...getDefaultImageAttributes(),
         address: {
             type: 'string',
             default: '',
@@ -62,10 +58,9 @@ function EditComponent(props) {
             <div className="container-fluid bg-secondary">
                 <div className="row justify-content-between align-items-center py-5">
                     <div className="col-1">
-                        <img
+                        <Image
+                            mediaUrl={attributes.mediaUrl}
                             className="footer-logo"
-                            src={attributes.mediaUrl}
-                            alt="Selected Image"
                         />
                     </div>
                     <RichText
