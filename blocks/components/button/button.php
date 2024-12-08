@@ -3,7 +3,6 @@
 use Everydayblocktheme\Utilities\Button_Utils;
 
 Button_Utils::init_button($attributes);
-
 ?>
 
 <div class="button-wrapper">

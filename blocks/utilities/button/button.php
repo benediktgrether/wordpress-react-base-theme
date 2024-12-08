@@ -13,20 +13,20 @@ class Button_Utils
         if (!isset($attributes['linkObject']["openInNewTab"])) {
             $attributes['linkObject']['openInNewTab'] = false;
         }
+
+        if (!isset($attributes['linkText'])) {
+            $attributes['linkText'] = 'Mehr erfahren';
+        }
+
+        if (!isset($attributes['colorName'])) {
+            $attributes['colorName'] = 'primary';
+        }
     }
 
     public static function render_button($attributes)
     {
         if (!isset($attributes['linkObject'])) {
             return;
-        }
-
-        if (!isset($attributes['text'])) {
-            $attributes['text'] = 'Mehr erfahren';
-        }
-
-        if (!isset($attributes['colorName'])) {
-            $attributes['colorName'] = 'primary';
         }
 
         $linkUrl = $attributes['linkObject']['url'];
@@ -36,8 +36,9 @@ class Button_Utils
             $linkUrl = 'https://' . $linkUrl;
         }
 
-        // Determine if the link is internal or external
-        $isExternal = (strpos($linkUrl, home_url()) === false);
+        if (!isset($attributes['colorName'])) {
+            $attributes['colorName'] = 'primary';
+        }
 
         $colorClass = '';
         switch ($attributes['colorName']) {
@@ -58,6 +59,6 @@ class Button_Utils
                 break;
         }
 
-        echo "<a href='{$linkUrl}' class='btn {$colorClass}' target='" . ($attributes['linkObject']['openInNewTab'] ? "_blank" : "_self") . "'>{$attributes['text']}</a>";
+        echo "<a href='{$linkUrl}' class='btn {$colorClass}' target='" . ($attributes['linkObject']['openInNewTab'] ? "_blank" : "_self") . "'>{$attributes['linkText']}</a>";
     }
 }

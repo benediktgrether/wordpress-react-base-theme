@@ -63,7 +63,7 @@ function EditComponent(props) {
                     </PanelRow>
                 </PanelBody>
             </InspectorControls>
-            <div className={`container-item-${attributes.columnsWdith}`}>
+            <div className={`grid-item-${attributes.columnsWdith}`}>
                 <div className="border border-light p-2">
                     <InnerBlocks
                         allowedBlocks={allowedBlocks}

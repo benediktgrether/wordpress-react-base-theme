@@ -20,15 +20,7 @@ registerBlockType('everydayblocktheme/grid-container', {
     category: 'layout',
     description: 'A Description',
     keywords: '[]',
-    supports: {
-        layout: {
-            allowEditing: false,
-            default: {
-                type: 'flex',
-                flexWrap: 'wrap',
-            },
-        },
-    },
+    supports: {},
 
     attributes: {
         ...defaultSpacerAttributes,
@@ -55,7 +47,7 @@ function EditComponent(props) {
             className: 'grid-row',
             style: {
                 display: 'flex',
-                flexWrap: 'nowrap',
+                flexWrap: 'wrap',
                 alignItems: 'flex-start', // Align to top
             },
         },
