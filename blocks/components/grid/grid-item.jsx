@@ -7,8 +7,8 @@ import {
 import { PanelBody, PanelRow, SelectControl } from '@wordpress/components';
 import { layout } from '@wordpress/icons';
 
-registerBlockType('everydayblocktheme/container-item', {
-    title: 'Container Item',
+registerBlockType('everydayblocktheme/grid-item', {
+    title: 'Grid Item',
     icon: layout,
     category: 'layout',
     description: 'A Description',

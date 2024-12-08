@@ -23,7 +23,7 @@ registerBlockType('everydayblocktheme/footer', {
     keywords: '[]',
     supports: {},
     attributes: {
-        ...getDefaultImageAttributes(),
+        ...getDefaultImageAttributes,
         address: {
             type: 'string',
             default: '',

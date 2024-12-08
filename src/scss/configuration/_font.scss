@@ -31,6 +31,8 @@
     /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+// Responsive Value for font size
+// $rfs-base-value: .6rem;
 $font-size-base: 1rem; // Assumes the browser default, typically `16px`
 $font-sizes: (
     14: $font-size-base * .875,

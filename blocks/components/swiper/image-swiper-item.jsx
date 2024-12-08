@@ -14,7 +14,7 @@ const imageSizeOptions = [
     { value: 'medium', label: 'Medium' },
 ];
 
-registerBlockType('everydayblocktheme/imageswiperitem', {
+registerBlockType('everydayblocktheme/image-swiper-item', {
     title: 'Image Swiper Item',
     icon: layout,
     category: 'layout',
@@ -22,7 +22,7 @@ registerBlockType('everydayblocktheme/imageswiperitem', {
     keywords: '[]',
     supports: {},
     attributes: {
-        ...getDefaultImageAttributes(imageswiperitem),
+        ...getDefaultImageAttributes,
         title: {
             type: 'string',
             default: '',

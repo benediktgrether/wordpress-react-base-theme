@@ -17,7 +17,7 @@ import { useEffect } from '@wordpress/element';
 import { v4 as uuidv4 } from 'uuid';
 import { icon } from '../../configuration/icon/icons';
 
-registerBlockType('everydayblocktheme/heroslider', {
+registerBlockType('everydayblocktheme/hero-slider', {
     title: 'Hero Slider',
     icon: icon.heroSlider,
     category: 'layout',
@@ -49,7 +49,7 @@ function EditComponent(props) {
         }
     }, []);
 
-    const BLOCKS_TEMPLATE = [['everydayblocktheme/heroslideitem']];
+    const BLOCKS_TEMPLATE = [['everydayblocktheme/hero-slider-item']];
 
     return (
         <>
@@ -65,7 +65,9 @@ function EditComponent(props) {
                 <div className="container">
                     <div className="border border-light p-2 bg-gray-100">
                         <InnerBlocks
-                            allowedBlocks={['everydayblocktheme/heroslideitem']}
+                            allowedBlocks={[
+                                'everydayblocktheme/hero-slider-item',
+                            ]}
                             template={BLOCKS_TEMPLATE}
                         />
                     </div>

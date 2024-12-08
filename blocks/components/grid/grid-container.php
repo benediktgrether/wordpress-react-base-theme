@@ -9,7 +9,7 @@ if (!isset($attributes["spacer"])) {
 $spacer = Spacer_Utils::render_spacer($attributes['spacer']);
 ?>
 
-<section class="container-row <?php echo $spacer; ?>">
+<section class="grid-container <?php echo $spacer; ?>">
     <div class="container">
         <div class="row justify-content-center">
             <?php echo $content; ?>

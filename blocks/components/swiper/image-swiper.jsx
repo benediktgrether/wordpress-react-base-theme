@@ -17,7 +17,7 @@ import {
 import { useEffect } from '@wordpress/element';
 import { v4 as uuidv4 } from 'uuid';
 
-registerBlockType('everydayblocktheme/imageswiper', {
+registerBlockType('everydayblocktheme/image-swiper', {
     title: 'Image Swiper',
     icon: layout,
     category: 'layout',
@@ -47,7 +47,7 @@ function EditComponent(props) {
         }
     }, []);
 
-    const BLOCKS_TEMPLATE = [['everydayblocktheme/imageswiperitem']];
+    const BLOCKS_TEMPLATE = [['everydayblocktheme/image-swiper-item']];
 
     return (
         <>

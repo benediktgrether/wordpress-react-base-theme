@@ -1,36 +1,61 @@
-import { registerBlockType } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
-import { icon } from '../../configuration/icon/icons';
+import {
+    RichText,
+    BlockControls,
+    AlignmentToolbar,
+} from '@wordpress/block-editor';
 
-registerBlockType('everydayblocktheme/text', {
-    title: 'Text',
-    icon: icon.paragraph,
-    category: 'layout',
-    description: 'A Description',
-    keywords: [],
-    supports: {},
-    attributes: {
-        text: {
-            type: 'string',
-        },
+export const defaultTextAttributes = {
+    text: {
+        type: 'string',
     },
-    parent: ['everydayblocktheme/container'],
+    alignment: {
+        type: 'string',
+    },
+};
 
-    edit: EditComponent,
-    save: () => null, // No save function, handled by PHP
-});
+export function Text({ attributes, setAttributes, enableAlignment = true }) {
+    let alignmentClass = '';
+    switch (attributes.alignment) {
+        case 'left':
+            alignmentClass = 'text-left';
+            break;
+        case 'center':
+            alignmentClass = 'text-center';
+            break;
+        case 'right':
+            alignmentClass = 'text-right';
+            break;
+        default:
+            alignmentClass = 'text-left';
+    }
 
-function EditComponent(props) {
-    const { attributes, setAttributes } = props;
-    return (
-        <>
-            <div>
+    // TODO: Set enable Alignment from attributes
+    if (enableAlignment) {
+        return (
+            <>
+                <BlockControls>
+                    <AlignmentToolbar
+                        value={attributes.alignment}
+                        onChange={(newVal) =>
+                            setAttributes({ alignment: newVal })
+                        }
+                    />
+                </BlockControls>
                 <RichText
                     value={attributes.text}
                     onChange={(newText) => setAttributes({ text: newText })}
                     placeholder="Text eingabe..."
+                    className={alignmentClass}
                 />
-            </div>
-        </>
+            </>
+        );
+    }
+    return (
+        <RichText
+            value={attributes.text}
+            onChange={(newText) => setAttributes({ text: newText })}
+            placeholder="Text eingabe..."
+            className={alignmentClass}
+        />
     );
 }

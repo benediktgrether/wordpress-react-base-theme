@@ -18,7 +18,7 @@ registerBlockType('everydayblocktheme/image', {
     icon: icon.image,
     supports: {},
     attributes: {
-        ...getDefaultImageAttributes('image'),
+        ...getDefaultImageAttributes,
     },
     edit: EditComponent,
     save: SaveComponent,

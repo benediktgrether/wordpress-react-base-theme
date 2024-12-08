@@ -7,28 +7,28 @@
     }
 }
 
-.container-row {
-    .wp-block:has(.container-item-1\/2) {
+.grid-row {
+    .wp-block:has(.grid-item-1\/2) {
         width: calc(50% - 1rem);
     }
 
-    .wp-block:has(.container-item-1\/3) {
+    .wp-block:has(.grid-item-1\/3) {
         width: calc(33.3333% - 1rem);
     }
 
-    .wp-block:has(.container-item-2\/3) {
+    .wp-block:has(.grid-item-2\/3) {
         width: calc(66.6666% - 1rem);
     }
 
-    .wp-block:has(.container-item-1\/4) {
+    .wp-block:has(.grid-item-1\/4) {
         width: calc(25% - 1rem);
     }
 
-    .wp-block:has(.container-item-3\/4) {
+    .wp-block:has(.grid-item-3\/4) {
         width: calc(75% - 1rem);
     }
 
-    .wp-block:has(.container-item-2\/5) {
+    .wp-block:has(.grid-item-2\/5) {
         width: calc(40% - 1rem);
     }
 }

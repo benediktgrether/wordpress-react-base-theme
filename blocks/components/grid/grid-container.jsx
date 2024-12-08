@@ -14,8 +14,8 @@ import {
     spacerClass,
 } from '../../configuration/spacer/spacer';
 
-registerBlockType('everydayblocktheme/container-row', {
-    title: 'Container Row',
+registerBlockType('everydayblocktheme/grid-container', {
+    title: 'Grid Container',
     icon: row,
     category: 'layout',
     description: 'A Description',
@@ -25,7 +25,7 @@ registerBlockType('everydayblocktheme/container-row', {
             allowEditing: false,
             default: {
                 type: 'flex',
-                flexWrap: 'nowrap',
+                flexWrap: 'wrap',
             },
         },
     },
@@ -41,18 +41,18 @@ registerBlockType('everydayblocktheme/container-row', {
 function EditComponent(props) {
     const { attributes, setAttributes } = props;
     const blockProps = useBlockProps({
-        className: 'container-row-wrapper',
+        className: 'grid-row-wrapper',
     });
 
-    const allowedBlocks = ['everydayblocktheme/container-item'];
+    const allowedBlocks = ['everydayblocktheme/grid-item'];
     const template = [
-        ['everydayblocktheme/container-item'],
-        ['everydayblocktheme/container-item'],
+        ['everydayblocktheme/grid-item'],
+        ['everydayblocktheme/grid-item'],
     ];
 
     const innerBlocksProps = useInnerBlocksProps(
         {
-            className: 'container-row',
+            className: 'grid-row',
             style: {
                 display: 'flex',
                 flexWrap: 'nowrap',

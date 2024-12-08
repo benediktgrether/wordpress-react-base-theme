@@ -14,7 +14,7 @@ import { useEffect } from '@wordpress/element';
 import placeholderImage from '../../../assets/images/placeholder-image.png';
 
 // Default attributes for the image component
-export const getDefaultImageAttributes = () => ({
+export const getDefaultImageAttributes = {
     mediaId: { type: 'number' },
     mediaUrl: {
         type: 'string',
@@ -22,7 +22,7 @@ export const getDefaultImageAttributes = () => ({
     },
     imageSize: { type: 'string', default: 'full' },
     loading: { type: 'boolean', default: true },
-});
+};
 
 // Reusable image component logic
 export function ImageSettings({ attributes, setAttributes, imageSizeOptions }) {

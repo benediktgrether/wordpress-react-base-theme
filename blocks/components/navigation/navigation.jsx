@@ -20,7 +20,7 @@ registerBlockType('everydayblocktheme/navigation', {
     keywords: ['navigation', 'menu'],
     supports: {},
     attributes: {
-        ...getDefaultImageAttributes(navigation),
+        ...getDefaultImageAttributes,
         imageSize: { type: 'string', default: 'logo' },
         loading: { type: 'boolean', default: false },
     },

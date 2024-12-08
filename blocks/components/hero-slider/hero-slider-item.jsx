@@ -14,13 +14,13 @@ const imageSizeOptions = [
     { value: 'medium', label: 'Medium' },
 ];
 
-registerBlockType('everydayblocktheme/heroslideitem', {
+registerBlockType('everydayblocktheme/hero-slider-item', {
     title: 'Hero Slide Item',
     icon: icon.heroSlideItem,
     parent: ['everydayblocktheme/heroslider'],
     supports: {},
     attributes: {
-        ...getDefaultImageAttributes(heroslideitem),
+        ...getDefaultImageAttributes,
     },
     edit: EditComponent,
     save: SaveComponent,
