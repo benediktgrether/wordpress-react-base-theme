@@ -1,30 +1,8 @@
 <?php
 
-if (!isset($attributes['mediaUrl'])) {
-    $attributes["mediaUrl"] = get_theme_file_uri('/assets/images/placeholder-image.png');
-}
+use Everydayblocktheme\Utilities\Image_Utils;
 
-if (!isset($attributes['imageSize'])) {
-    $attributes["imageSize"] = "full";
-}
+Image_Utils::init_image($attributes);
+?>
 
-if (isset($attributes["loading"])) {
-    $loading = "lazy";
-} else {
-    $loading = "eager";
-}
-
-
-if (isset($attributes["mediaId"])): ?>
-    <?php echo wp_get_attachment_image(
-        $attributes["mediaId"],
-        $attributes["imageSize"],
-        "",
-        [
-            "class" => "img-fluid w-100 object-fit-cover",
-            "loading" => $loading
-        ]
-    ); ?>
-<?php else: ?>
-    <img src="<?php echo $attributes["mediaUrl"]; ?>" alt="Image" />
-<?php endif; ?>
+<?php Image_Utils::render_image($attributes, "img-fluid w-100 h-100 object-fit-cover"); ?>

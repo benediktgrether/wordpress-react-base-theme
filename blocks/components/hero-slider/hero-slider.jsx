@@ -62,15 +62,11 @@ function EditComponent(props) {
             </InspectorControls>
 
             <div className="my-4">
-                <div className="container">
-                    <div className="border border-light p-2 bg-gray-100">
-                        <InnerBlocks
-                            allowedBlocks={[
-                                'everydayblocktheme/hero-slider-item',
-                            ]}
-                            template={BLOCKS_TEMPLATE}
-                        />
-                    </div>
+                <div className="border border-light p-2 bg-gray-100">
+                    <InnerBlocks
+                        allowedBlocks={['everydayblocktheme/hero-slider-item']}
+                        template={BLOCKS_TEMPLATE}
+                    />
                 </div>
             </div>
         </>

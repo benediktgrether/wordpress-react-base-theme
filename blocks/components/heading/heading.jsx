@@ -1,5 +1,9 @@
 import { Toolbar, ToolbarDropdownMenu } from '@wordpress/components';
-import { RichText, BlockControls } from '@wordpress/block-editor';
+import {
+    RichText,
+    BlockControls,
+    AlignmentToolbar,
+} from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
 import { icon } from '../../configuration/icon/icons';
 import {
@@ -26,6 +30,9 @@ registerBlockType('everydayblocktheme/heading', {
             default: 'h1', // Default to h1 tag
         },
         text: {
+            type: 'string',
+        },
+        alignment: {
             type: 'string',
         },
     },
@@ -61,7 +68,22 @@ function EditComponent(props) {
     }
 
     // Determine the current icon based on the selected tag
-    const currentIcon = headingIcons[tag] || heading;
+    const currentIcon = headingIcons[tag] || headingLevel1;
+
+    let alignmentClass = '';
+    switch (attributes.alignment) {
+        case 'left':
+            alignmentClass = 'text-left';
+            break;
+        case 'center':
+            alignmentClass = 'text-center';
+            break;
+        case 'right':
+            alignmentClass = 'text-right';
+            break;
+        default:
+            alignmentClass = 'text-left';
+    }
 
     return (
         <>
@@ -111,6 +133,10 @@ function EditComponent(props) {
                         ]}
                     />
                 </Toolbar>
+                <AlignmentToolbar
+                    value={attributes.alignment}
+                    onChange={(newVal) => setAttributes({ alignment: newVal })}
+                />
             </BlockControls>
 
             <RichText
@@ -118,7 +144,9 @@ function EditComponent(props) {
                 value={text}
                 onChange={onTextChange}
                 placeholder="Überschrift eingeben..."
+                className={alignmentClass}
             />
         </>
     );
 }
+export { EditComponent as Heading };

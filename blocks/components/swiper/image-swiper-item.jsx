@@ -1,9 +1,9 @@
-//https://wordpress.github.io/gutenberg/?path=/story/icons-icon--library
 import { registerBlockType } from '@wordpress/blocks';
 import { layout } from '@wordpress/icons';
 import { InspectorControls, RichText } from '@wordpress/block-editor';
 
 import {
+    Image,
     ImageSettings,
     getDefaultImageAttributes,
 } from '../../utilities/image/image';
@@ -48,11 +48,7 @@ function EditComponent(props) {
 
             <div className="position-relative">
                 <div className="ratio ratio-16x9">
-                    <img
-                        className="img-fluid object-fit-cover"
-                        src={attributes.mediaUrl}
-                        alt="Selected Image"
-                    />
+                    <Image mediaUrl={attributes.mediaUrl} variant="cover" />
                 </div>
                 <div className="position-absolute w-100 top-50 start-50 translate-middle z-1">
                     <RichText

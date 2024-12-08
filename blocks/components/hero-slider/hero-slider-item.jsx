@@ -40,7 +40,7 @@ function EditComponent(props) {
             </InspectorControls>
 
             <div className="ratio ratio-16x9">
-                <Image mediaUrl={attributes.mediaUrl} />
+                <Image mediaUrl={attributes.mediaUrl} variant="cover" />
             </div>
         </>
     );

@@ -1,12 +1,12 @@
 //https://wordpress.github.io/gutenberg/?path=/story/icons-icon--library
 import { registerBlockType } from '@wordpress/blocks';
-import { layout } from '@wordpress/icons';
+import { button } from '@wordpress/icons';
 
 import { Button, defaultButtonAttributes } from '../../utilities/button/button';
 
 registerBlockType('everydayblocktheme/button', {
     title: 'Button',
-    icon: layout,
+    icon: button,
     category: 'layout',
     description: 'A Description',
     keywords: '[]',

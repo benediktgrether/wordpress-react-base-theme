@@ -1,16 +1,19 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
-import { icon } from '../../configuration/icon/icons';
+import { Text } from '../../utilities/text/text';
+import { paragraph } from '@wordpress/icons';
 
 registerBlockType('everydayblocktheme/text', {
     title: 'Text',
-    icon: icon.paragraph,
+    icon: paragraph,
     category: 'layout',
     description: 'A Description',
     keywords: [],
     supports: {},
     attributes: {
         text: {
+            type: 'string',
+        },
+        alignment: {
             type: 'string',
         },
     },
@@ -22,15 +25,5 @@ registerBlockType('everydayblocktheme/text', {
 
 function EditComponent(props) {
     const { attributes, setAttributes } = props;
-    return (
-        <>
-            <div>
-                <RichText
-                    value={attributes.text}
-                    onChange={(newText) => setAttributes({ text: newText })}
-                    placeholder="Text eingabe..."
-                />
-            </div>
-        </>
-    );
+    return <Text attributes={attributes} setAttributes={setAttributes} />;
 }

@@ -83,7 +83,10 @@ require_once get_template_directory() . '/registerBlocks/block.php';
 // Register utilities
 require_once get_template_directory() . '/blocks/configuration/spacer/spacer.php';
 require_once get_template_directory() . '/blocks/configuration/align/align.php';
+require_once get_template_directory() . '/blocks/utilities/swiper/swiper-settings.php';
 require_once get_template_directory() . '/blocks/components/navigation/render_navigation.php';
+require_once get_template_directory() . '/blocks/utilities/image/image.php';
+require_once get_template_directory() . '/blocks/utilities/text/text.php';
 
 
 // Return ref from Navigation block

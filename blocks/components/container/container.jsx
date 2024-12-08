@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
-import { icon } from '../../configuration/icon/icons';
+import { file } from '@wordpress/icons';
 
 import {
     SpacerSettings,
@@ -10,7 +10,7 @@ import {
 
 registerBlockType('everydayblocktheme/container', {
     title: 'Container',
-    icon: icon.container,
+    icon: file,
     category: 'layout',
     description: 'A container block',
     keywords: ['container', 'content', 'wrap'],

@@ -1,51 +1,12 @@
 <?php
-if (!isset($attributes['loop'])) {
-    $attributes["loop"] = "true";
-}
 
-if (!isset($attributes['autoplay'])) {
-    $attributes["autoplay"] = "true";
-}
+use Everydayblocktheme\Utilities\Swiper_Utils;
 
-if (!isset($attributes['autoplaySpeed'])) {
-    $attributes["autoplaySpeed"] = 3000;
-}
-
-if (!isset($attributes['pagination'])) {
-    $attributes["pagination"] = "true";
-}
-
-if (!isset($attributes['navigation'])) {
-    $attributes["navigation"] = "true";
-}
-
-if (!isset($attributes['effect'])) {
-    $attributes["effect"] = "slide";
-}
-
-if (!isset($attributes['spaceBetween'])) {
-    $attributes["spaceBetween"] = 0;
-}
-
-if (!isset($attributes['slidesPerView'])) {
-    $attributes["slidesPerView"] = 1;
-}
-
-if (!isset($attributes['align'])) {
-    $attributes["align"] = "full";
-}
-
-if (!isset($attributes['infiniteLoop'])) {
-    $attributes["infiniteLoop"] = "false";
-}
-
-if ($attributes["infiniteLoop"] != "false") {
-    $attributes["infiniteLoop"] = "true";
-}
+Swiper_Utils::init_swiper($attributes);
 
 ?>
 
-<div class="swiper swiper-id-<?php echo $attributes["uuid"]; ?> <?php echo $attributes["infiniteLoop"] == "true" ? 'swiper-transition-timing-linear' : ''; ?> vw-100 vh-100"
+<div class="swiper swiper-id-<?php echo $attributes["uuid"]; ?> <?php echo $attributes["infiniteLoop"] == "true" ? 'swiper-transition-timing-linear' : ''; ?> vh-100"
     data-swiper data-swiper-id=<?php echo $attributes["uuid"]; ?>
     data-swiper-loop="<?php echo $attributes["loop"]; ?>"
     data-swiper-set-autoplay="<?php echo $attributes["autoplay"]; ?>"

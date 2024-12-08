@@ -2,8 +2,11 @@
 
 .editor-styles-wrapper {
     .is-root-container {
-        max-width: 1320px !important;
-        margin-inline: auto;
+        .wp-block-paragraph {
+            max-width: 48.75rem !important;
+            margin-inline: auto;
+
+        }
     }
 }
 
