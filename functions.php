@@ -87,6 +87,7 @@ require_once get_template_directory() . '/blocks/utilities/swiper/swiper-setting
 require_once get_template_directory() . '/blocks/components/navigation/render_navigation.php';
 require_once get_template_directory() . '/blocks/utilities/image/image.php';
 require_once get_template_directory() . '/blocks/utilities/text/text.php';
+require_once get_template_directory() . '/blocks/utilities/button/button.php';
 
 
 // Return ref from Navigation block
