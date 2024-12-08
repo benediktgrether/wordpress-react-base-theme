@@ -10,14 +10,6 @@ class Button_Utils
             return;
         }
 
-        if (!isset($attributes['text'])) {
-            $attributes['text'] = 'Mehr erfahren';
-        }
-
-        if (!isset($attributes['colorName'])) {
-            $attributes['colorName'] = 'primary';
-        }
-
         if (!isset($attributes['linkObject']["openInNewTab"])) {
             $attributes['linkObject']['openInNewTab'] = false;
         }
@@ -27,6 +19,14 @@ class Button_Utils
     {
         if (!isset($attributes['linkObject'])) {
             return;
+        }
+
+        if (!isset($attributes['text'])) {
+            $attributes['text'] = 'Mehr erfahren';
+        }
+
+        if (!isset($attributes['colorName'])) {
+            $attributes['colorName'] = 'primary';
         }
 
         $linkUrl = $attributes['linkObject']['url'];
@@ -58,6 +58,6 @@ class Button_Utils
                 break;
         }
 
-        return "<a href='{$linkUrl}' class='btn {$colorClass}' target='" . ($attributes['linkObject']['openInNewTab'] ? "_blank" : "_self") . "'>{$attributes['text']}</a>";
+        echo "<a href='{$linkUrl}' class='btn {$colorClass}' target='" . ($attributes['linkObject']['openInNewTab'] ? "_blank" : "_self") . "'>{$attributes['text']}</a>";
     }
 }
