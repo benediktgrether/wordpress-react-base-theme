@@ -1,11 +1,63 @@
+/*! purgecss start ignore */
 @import '../configuration/colors';
 
 :root {
     --swiper-theme-color: #{$color-primary};
+    --swiper-navigation-top-offset: auto;
+    --swiper-navigation-color: #{$color-white};
+    --swiper-responsive-navigation-size: 1rem;
+    --swiper-navigation-sides-offset: 0;
+
+    --swiper-pagination-bullet-size: 1rem;
+    --swiper-pagination-bullet-width: 1rem;
+    --swiper-pagination-bullet-height: 1rem;
+
+    @include media-breakpoint-up(lg) {
+        --swiper-responsive-navigation-size: 2.125rem;
+    }
 }
 
 .swiper-transition-timing-linear {
     .swiper-wrapper {
-        transition-timing-function: linear !important;
+        transition-timing-function: linear;
     }
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+    bottom: 0;
+    width: 2rem;
+    height: 2rem;
+
+    @include media-breakpoint-up(lg) {
+        width: 6.25rem;
+        height: 6.25rem;
+    }
+
+}
+
+.swiper-button-prev {
+    background-color: $color-primary;
+}
+
+.swiper-button-next {
+    background-color: $color-secondary;
+}
+
+.swiper-button-next::after {
+    content: '';
+    display: block;
+    background: url("data: image/svg+xml, %3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20292.11%20495.77%22%3E%3Cpath%20d%3D%22M44.23%2C495.77L0%2C451.54l203.66-203.66L0%2C44.23%2C44.23%2C0l247.88%2C247.88L44.23%2C495.77Z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E") center no-repeat;
+    width: var(--swiper-responsive-navigation-size);
+    height: var(--swiper-responsive-navigation-size);
+}
+
+.swiper-button-prev::after {
+    content: '';
+    display: block;
+    background: url("data: image/svg+xml, %3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20292.11%20495.77%22%3E%3Cpath%20d%3D%22M247.88%2C0l44.23%2C44.23L88.45%2C247.88l203.66%2C203.66-44.23%2C44.23L0%2C247.88%2C247.88%2C0Z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E") center no-repeat;
+    width: var(--swiper-responsive-navigation-size);
+    height: var(--swiper-responsive-navigation-size);
+}
+
+/*! purgecss end ignore */

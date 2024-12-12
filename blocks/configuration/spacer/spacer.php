@@ -1,6 +1,6 @@
 <?php
 
-namespace Everydayblocktheme\Utilities;
+namespace basetheme\Utilities;
 
 class Spacer_Utils
 {

@@ -16,6 +16,7 @@ export const defaultSwiperAttributes = {
     slidesPerView: { type: 'number', default: 1 },
     spaceBetween: { type: 'number', default: 0 },
     effect: { type: 'string', default: 'slide' },
+    infiniteLoop: { type: 'boolean', default: false },
 };
 
 // Reusable swiper settings component
@@ -27,7 +28,15 @@ export function SwiperSettings({ title, attributes, setAttributes }) {
                     label="Loop"
                     value={attributes.loop}
                     checked={attributes.loop}
-                    onChange={(loop) => setAttributes({ loop: loop })}
+                    onChange={(loop) => setAttributes({ loop })}
+                />
+            </PanelRow>
+            <PanelRow>
+                <ToggleControl
+                    label="Infinity Loop"
+                    value={attributes.infiniteLoop}
+                    checked={attributes.infiniteLoop}
+                    onChange={(infiniteLoop) => setAttributes({ infiniteLoop })}
                 />
             </PanelRow>
             <PanelRow>
@@ -35,9 +44,7 @@ export function SwiperSettings({ title, attributes, setAttributes }) {
                     label="Autoplay"
                     value={attributes.autoplay}
                     checked={attributes.autoplay}
-                    onChange={(autoplay) =>
-                        setAttributes({ autoplay: autoplay })
-                    }
+                    onChange={(autoplay) => setAttributes({ autoplay })}
                 />
             </PanelRow>
             <PanelRow>
@@ -56,9 +63,7 @@ export function SwiperSettings({ title, attributes, setAttributes }) {
                     label="Pagination"
                     value={attributes.pagination}
                     checked={attributes.pagination}
-                    onChange={(pagination) =>
-                        setAttributes({ pagination: pagination })
-                    }
+                    onChange={(pagination) => setAttributes({ pagination })}
                 />
             </PanelRow>
             <PanelRow>
@@ -66,9 +71,7 @@ export function SwiperSettings({ title, attributes, setAttributes }) {
                     label="Navigation"
                     value={attributes.navigation}
                     checked={attributes.navigation}
-                    onChange={(navigation) =>
-                        setAttributes({ navigation: navigation })
-                    }
+                    onChange={(navigation) => setAttributes({ navigation })}
                 />
             </PanelRow>
             <PanelRow>
@@ -101,7 +104,7 @@ export function SwiperSettings({ title, attributes, setAttributes }) {
                         { value: 'slide', label: 'Slide' },
                         { value: 'fade', label: 'Fade' },
                     ]}
-                    onChange={(effect) => setAttributes({ effect: effect })}
+                    onChange={(effect) => setAttributes({ effect })}
                 />
             </PanelRow>
         </PanelBody>

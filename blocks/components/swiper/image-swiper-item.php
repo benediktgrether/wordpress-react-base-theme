@@ -1,6 +1,6 @@
 <?php
 
-use Everydayblocktheme\Utilities\Image_Utils;
+use basetheme\Utilities\Image_Utils;
 
 Image_Utils::init_image($attributes);
 ?>

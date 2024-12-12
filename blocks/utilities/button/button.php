@@ -1,6 +1,6 @@
 <?php
 
-namespace Everydayblocktheme\Utilities;
+namespace basetheme\Utilities;
 
 class Button_Utils
 {
@@ -18,8 +18,8 @@ class Button_Utils
             $attributes['linkText'] = 'Mehr erfahren';
         }
 
-        if (!isset($attributes['colorName'])) {
-            $attributes['colorName'] = 'primary';
+        if (!isset($attributes['buttonColorName'])) {
+            $attributes['buttonColorName'] = 'primary';
         }
     }
 
@@ -36,29 +36,45 @@ class Button_Utils
             $linkUrl = 'https://' . $linkUrl;
         }
 
-        if (!isset($attributes['colorName'])) {
-            $attributes['colorName'] = 'primary';
+        if (!isset($attributes['linkText'])) {
+            $attributes['linkText'] = 'Mehr erfahren';
+        }
+
+
+
+        if (!isset($attributes['buttonColorName'])) {
+            $attributes['buttonColorName'] = 'primary';
+        }
+
+        if (!isset($attributes['linkObject']["openInNewTab"])) {
+            $attributes['linkObject']['openInNewTab'] = false;
         }
 
         $colorClass = '';
-        switch ($attributes['colorName']) {
+        $textColorClass = '';
+        switch ($attributes['buttonColorName']) {
             case 'primary':
                 $colorClass = 'btn-primary';
-                break;
-            case 'primary-dark':
-                $colorClass = 'btn-primary-dark';
+                $textColorClass = 'text-white';
                 break;
             case 'secondary':
                 $colorClass = 'btn-secondary';
+                $textColorClass = 'text-white';
                 break;
             case 'white':
                 $colorClass = 'btn-white';
+                $textColorClass = 'text-text';
+                break;
+            case 'gray':
+                $colorClass = 'btn-gray-500';
+                $textColorClass = 'text-primary';
                 break;
             default:
                 $colorClass = 'btn-primary';
+                $textColorClass = 'text-white';
                 break;
         }
 
-        echo "<a href='{$linkUrl}' class='btn {$colorClass}' target='" . ($attributes['linkObject']['openInNewTab'] ? "_blank" : "_self") . "'>{$attributes['linkText']}</a>";
+        echo "<a href='{$linkUrl}' class='btn {$colorClass} {$textColorClass}' target='" . ($attributes['linkObject']['openInNewTab'] ? "_blank" : "_self") . "'>{$attributes['linkText']}</a>";
     }
 }

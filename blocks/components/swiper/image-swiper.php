@@ -1,48 +1,21 @@
 <?php
-if (!isset($attributes['loop'])) {
-    $attributes["loop"] = "true";
-}
 
-if (!isset($attributes['autoplay'])) {
-    $attributes["autoplay"] = "true";
-}
+use basetheme\Utilities\Swiper_Utils;
+use basetheme\Utilities\Spacer_Utils;
 
-if (!isset($attributes['autoplaySpeed'])) {
-    $attributes["autoplaySpeed"] = 3000;
-}
-
-if (!isset($attributes['pagination'])) {
-    $attributes["pagination"] = "true";
-}
-
-if (!isset($attributes['navigation'])) {
-    $attributes["navigation"] = "true";
-}
-
-if (!isset($attributes['effect'])) {
-    $attributes["effect"] = "slide";
-}
-
-if (!isset($attributes['spaceBetween'])) {
-    $attributes["spaceBetween"] = 0;
-}
-
-if (!isset($attributes['slidesPerView'])) {
-    $attributes["slidesPerView"] = 1;
-}
-
-use Everydayblocktheme\Utilities\Spacer_Utils;
+Swiper_Utils::init_swiper($attributes);
 
 if (!isset($attributes["spacer"])) {
     $attributes["spacer"] = "medium";
 }
 
+
 $spacer = Spacer_Utils::render_spacer($attributes['spacer']);
 ?>
 
 
-<section class="container <?php echo $spacer; ?>">
-    <div class="image-swiper swiper swiper-id-<?php echo $attributes["uuid"]; ?>"
+<section class="bs-image-swiper container <?php echo $spacer; ?>">
+    <div class="image-swiper swiper swiper-id-<?php echo $attributes["uuid"]; ?> <?php echo $attributes["infiniteLoop"] == "true" ? 'swiper-transition-timing-linear' : ''; ?>"
         data-swiper data-swiper-id=<?php echo $attributes["uuid"]; ?>
         data-swiper-loop="<?php echo $attributes["loop"]; ?>"
         data-swiper-set-autoplay="<?php echo $attributes["autoplay"]; ?>"
@@ -52,7 +25,8 @@ $spacer = Spacer_Utils::render_spacer($attributes['spacer']);
         data-swiper-effect="<?php echo $attributes["effect"]; ?>"
         data-swiper-space-between="<?php echo $attributes["spaceBetween"]; ?>"
         data-swiper-slides-per-view="<?php echo $attributes["slidesPerView"]; ?>"
-        data-swiper-effect="<?php echo $attributes["effect"]; ?>">
+        data-swiper-infiniteloop="<?php echo $attributes["infiniteLoop"]; ?>">
+
 
         <div class="swiper-wrapper">
             <?php echo $content; ?>

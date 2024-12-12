@@ -5,8 +5,8 @@ import {
     AlignmentToolbar,
 } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
-import { icon } from '../../configuration/icon/icons';
 import {
+    heading,
     headingLevel1,
     headingLevel2,
     headingLevel3,
@@ -16,10 +16,11 @@ import {
 } from '@wordpress/icons'; // Import heading icons
 
 // Register the custom block
-registerBlockType('everydayblocktheme/heading', {
+registerBlockType('basetheme/heading', {
     title: 'Heading',
-    icon: icon.heading,
+    icon: heading,
     category: 'layout',
+    parent: ['basetheme/grid-item', 'basetheme/container'],
     description: 'A Description',
     keywords: ['heading', 'title', 'text'],
     supports: {},
@@ -36,7 +37,7 @@ registerBlockType('everydayblocktheme/heading', {
             type: 'string',
         },
     },
-    parent: ['everydayblocktheme/container'],
+    parent: ['basetheme/container'],
 
     edit: EditComponent,
     save: () => null, // No save function, handled by PHP

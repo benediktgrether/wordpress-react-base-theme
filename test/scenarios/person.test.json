@@ -1,0 +1,4 @@
+{
+    "label": "person",
+    "selectors": [".bs-person"]
+}

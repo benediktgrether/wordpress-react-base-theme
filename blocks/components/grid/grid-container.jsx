@@ -14,7 +14,9 @@ import {
     spacerClass,
 } from '../../configuration/spacer/spacer';
 
-registerBlockType('everydayblocktheme/grid-container', {
+import { ColorSettings } from '../../configuration/color/colors';
+
+registerBlockType('basetheme/grid-container', {
     title: 'Grid Container',
     icon: row,
     category: 'layout',
@@ -24,6 +26,7 @@ registerBlockType('everydayblocktheme/grid-container', {
 
     attributes: {
         ...defaultSpacerAttributes,
+        colorName: { type: 'string', default: 'white' },
     },
 
     edit: EditComponent,
@@ -32,15 +35,34 @@ registerBlockType('everydayblocktheme/grid-container', {
 
 function EditComponent(props) {
     const { attributes, setAttributes } = props;
+
+    let bgColor;
+    switch (attributes.colorName) {
+        case 'primary':
+            bgColor = 'bg-primary py-8';
+            break;
+        case 'secondary':
+            bgColor = 'bg-secondary py-8';
+            break;
+        case 'black':
+            bgColor = 'bg-black py-8';
+            break;
+        case 'white':
+            bgColor = 'bg-white';
+            break;
+        case 'gray':
+            bgColor = 'bg-gray-500 py-8';
+            break;
+        default:
+            bgColor = 'bg-primary py-8';
+    }
+
     const blockProps = useBlockProps({
         className: 'grid-row-wrapper',
     });
 
-    const allowedBlocks = ['everydayblocktheme/grid-item'];
-    const template = [
-        ['everydayblocktheme/grid-item'],
-        ['everydayblocktheme/grid-item'],
-    ];
+    const allowedBlocks = ['basetheme/grid-item'];
+    const template = [['basetheme/grid-item'], ['basetheme/grid-item']];
 
     const innerBlocksProps = useInnerBlocksProps(
         {
@@ -67,9 +89,14 @@ function EditComponent(props) {
                     attributes={attributes}
                     setAttributes={setAttributes}
                 />
+                <ColorSettings
+                    title="Color Settings"
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
             </InspectorControls>
 
-            <div className="my-4">
+            <div className={`my-4 ${bgColor}`}>
                 <div className={`${spacerClass(attributes.spacer)}`}>
                     <div className="border border-light p-2">
                         <div className="container">

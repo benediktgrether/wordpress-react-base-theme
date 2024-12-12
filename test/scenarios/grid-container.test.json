@@ -1,0 +1,4 @@
+{
+    "label": "grid-container",
+    "selectors": [".bs-grid-container"]
+}

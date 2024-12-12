@@ -1,6 +1,6 @@
 <?php
 
-namespace Everydayblocktheme\Utilities;
+namespace basetheme\Utilities;
 
 class Swiper_Utils
 {
@@ -43,7 +43,6 @@ class Swiper_Utils
             $attributes["infiniteLoop"] = "false";
         }
 
-        // Normalize infiniteLoop setting
         if ($attributes["infiniteLoop"] != "false") {
             $attributes["infiniteLoop"] = "true";
         }

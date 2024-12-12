@@ -5,6 +5,15 @@ const CleanTerminalPlugin = require('clean-terminal-webpack-plugin');
 
 module.exports = {
     ...defaultConfig,
+
+    resolve: {
+        alias: {
+            '@utilities': path.resolve(__dirname, 'blocks/utilities'),
+            '@configuration': path.resolve(__dirname, 'blocks/configuration'),
+        },
+        extensions: ['.js', '.jsx'], // Add file extensions for easier resolution
+    },
+
     module: {
         ...defaultConfig.module,
         rules: [...defaultConfig.module.rules],
@@ -12,7 +21,7 @@ module.exports = {
     plugins: [
         ...defaultConfig.plugins,
         new WebpackBuildNotifierPlugin({
-            title: 'Everyday Custom Elementor Components',
+            title: 'Base Theme',
             logo: path.resolve('./webpack_icons/favicon.png'),
             suppressSuccess: true,
         }),

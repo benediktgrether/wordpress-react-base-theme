@@ -2,9 +2,10 @@ import { registerBlockType } from '@wordpress/blocks';
 import { Text } from '../../utilities/text/text';
 import { paragraph } from '@wordpress/icons';
 
-registerBlockType('everydayblocktheme/text', {
+registerBlockType('basetheme/text', {
     title: 'Text',
     icon: paragraph,
+    parent: ['basetheme/grid-item', 'basetheme/container'],
     category: 'layout',
     description: 'A Description',
     keywords: [],
@@ -17,7 +18,6 @@ registerBlockType('everydayblocktheme/text', {
             type: 'string',
         },
     },
-    parent: ['everydayblocktheme/container'],
 
     edit: EditComponent,
     save: () => null, // No save function, handled by PHP

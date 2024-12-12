@@ -75,6 +75,6 @@ class JSXBlock
         }
 
         // Register the block type.
-        register_block_type("everydayblocktheme/{$this->name}", $ourArgs);
+        register_block_type("basetheme/{$this->name}", $ourArgs);
     }
 }

@@ -2,7 +2,7 @@
     "version": 2,
     "settings": {
         "blocks": {
-            "everydayblocktheme/text": {
+            "basetheme/text": {
                 "color": false
             }
         },
@@ -12,17 +12,27 @@
                 {
                     "name": "Primary",
                     "slug": "primary",
-                    "color": "#BE2830"
+                    "color": "#003b49"
                 },
                 {
                     "name": "Secondary",
                     "slug": "secondary",
-                    "color": "#5C5C5B"
+                    "color": "#ff7d45"
                 },
                 {
-                    "name": "Schwarz",
-                    "slug": "schwarz",
+                    "name": "Black",
+                    "slug": "black",
                     "color": "#000000"
+                },
+                {
+                    "name": "White",
+                    "slug": "white",
+                    "color": "#ffffff"
+                },
+                {
+                    "name": "Gray",
+                    "slug": "gray",
+                    "color": "#adb5bd"
                 }
             ]
         },

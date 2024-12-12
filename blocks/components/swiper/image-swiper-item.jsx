@@ -14,10 +14,11 @@ const imageSizeOptions = [
     { value: 'medium', label: 'Medium' },
 ];
 
-registerBlockType('everydayblocktheme/image-swiper-item', {
+registerBlockType('basetheme/image-swiper-item', {
     title: 'Image Swiper Item',
     icon: layout,
     category: 'layout',
+    parent: ['basetheme/image-swiper-item'],
     description: 'A Description',
     keywords: '[]',
     supports: {},

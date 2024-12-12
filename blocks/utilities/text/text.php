@@ -1,6 +1,6 @@
 <?php
 
-namespace Everydayblocktheme\Utilities;
+namespace basetheme\Utilities;
 
 class Text_Utils
 {
@@ -12,7 +12,7 @@ class Text_Utils
         }
     }
 
-    public static function render_text($attributes, $class = "text")
+    public static function render_text($text, $attributes, $class = "text")
     {
 
         $alignmentClass = "text-left";
@@ -31,6 +31,6 @@ class Text_Utils
                 break;
         }
 
-        return '<p class="' . $alignmentClass . ' ' . $class . '">' . $attributes["text"] . '</p>';
+        return '<p class="' . $alignmentClass . ' ' . $class . '">' . $text . '</p>';
     }
 }

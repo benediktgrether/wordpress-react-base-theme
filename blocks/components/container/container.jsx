@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks, InspectorControls } from '@wordpress/block-editor';
-import { file } from '@wordpress/icons';
+import { color, file } from '@wordpress/icons';
 
 import {
     SpacerSettings,
@@ -8,7 +8,9 @@ import {
     spacerClass,
 } from '../../configuration/spacer/spacer';
 
-registerBlockType('everydayblocktheme/container', {
+import { ColorSettings } from '../../configuration/color/colors';
+
+registerBlockType('basetheme/container', {
     title: 'Container',
     icon: file,
     category: 'layout',
@@ -17,6 +19,7 @@ registerBlockType('everydayblocktheme/container', {
     supports: {},
     attributes: {
         ...defaultSpacerAttributes,
+        colorName: { type: 'string', default: 'white' },
     },
 
     edit: EditComponent,
@@ -26,13 +29,37 @@ registerBlockType('everydayblocktheme/container', {
 function EditComponent(props) {
     const { attributes, setAttributes } = props;
 
+    let bgColor;
+    switch (attributes.colorName) {
+        case 'primary':
+            bgColor = 'bg-primary py-8';
+            break;
+        case 'secondary':
+            bgColor = 'bg-secondary py-8';
+            break;
+        case 'black':
+            bgColor = 'bg-black py-8';
+            break;
+        case 'white':
+            bgColor = 'bg-white';
+            break;
+        case 'gray':
+            bgColor = 'bg-gray-500 py-8';
+            break;
+        default:
+            bgColor = 'bg-primary py-8';
+    }
+
     const ALLOWED_BLOCKS = [
-        'everydayblocktheme/heading',
-        'everydayblocktheme/text',
-        'everydayblocktheme/list',
-        'everydayblocktheme/testimonial',
-        'everydayblocktheme/button',
-        'everydayblocktheme/googlemaps',
+        'basetheme/heading',
+        'basetheme/text',
+        // 'basetheme/list',
+        // 'basetheme/testimonial',
+        'basetheme/button',
+        'basetheme/blog-post',
+        // 'basetheme/googlemaps',
+        'basetheme/reference',
+        'basetheme/accordion-container',
         'contact-form-7/contact-form-selector',
     ];
     return (
@@ -43,15 +70,17 @@ function EditComponent(props) {
                     attributes={attributes}
                     setAttributes={setAttributes}
                 />
+                <ColorSettings
+                    title="Color Settings"
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
             </InspectorControls>
-            <div className="my-4">
+            <div className={`my-4 ${bgColor}`}>
                 <div className={`container ${spacerClass(attributes.spacer)}`}>
                     <div className="row">
                         <div className="border border-light p-2">
-                            <InnerBlocks
-                                allowedBlocks={ALLOWED_BLOCKS}
-                                renderAppender={InnerBlocks.ButtonBlockAppender}
-                            />
+                            <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} />
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import {
     ImageSettings,
     getDefaultImageAttributes,
 } from '../../utilities/image/image';
-import { icon } from '../../configuration/icon/icons';
+import { image } from '@wordpress/icons';
 
 const imageSizeOptions = [
     { value: 'pageBanner', label: 'Banner' },
@@ -13,9 +13,10 @@ const imageSizeOptions = [
     { value: 'medium', label: 'Medium' },
 ];
 
-registerBlockType('everydayblocktheme/image', {
+registerBlockType('basetheme/image', {
     title: 'Image',
-    icon: icon.image,
+    icon: image,
+    parent: ['basetheme/grid-item', 'basetheme/container'],
     supports: {},
     attributes: {
         ...getDefaultImageAttributes,

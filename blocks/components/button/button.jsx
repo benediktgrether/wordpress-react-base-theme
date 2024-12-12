@@ -4,10 +4,11 @@ import { button } from '@wordpress/icons';
 
 import { Button, defaultButtonAttributes } from '../../utilities/button/button';
 
-registerBlockType('everydayblocktheme/button', {
+registerBlockType('basetheme/button', {
     title: 'Button',
     icon: button,
     category: 'layout',
+    parent: ['basetheme/container', 'basetheme/grid-item'],
     description: 'A Description',
     keywords: '[]',
     supports: {},

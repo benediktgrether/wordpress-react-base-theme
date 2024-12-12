@@ -7,10 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { icon } from '../../configuration/icon/icons';
 
-registerBlockType('everydayblocktheme/accordion-item', {
+registerBlockType('basetheme/accordion-item', {
     title: 'Accordion Item',
     icon: icon.accordionItem,
     category: 'layout',
+    parent: ['basetheme/accordion-container'],
     description: 'A Description',
     keywords: '[]',
     supports: {},
@@ -47,7 +48,7 @@ function EditComponent(props) {
                 select('core/block-editor');
             const parentBlockId = getBlockParentsByBlockName(
                 clientId,
-                'everydayblocktheme/accordion-container'
+                'basetheme/accordion-container'
             )[0];
             return parentBlockId
                 ? getBlock(parentBlockId).attributes.uuid

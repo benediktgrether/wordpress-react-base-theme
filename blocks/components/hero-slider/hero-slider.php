@@ -1,12 +1,12 @@
 <?php
 
-use Everydayblocktheme\Utilities\Swiper_Utils;
+use basetheme\Utilities\Swiper_Utils;
 
 Swiper_Utils::init_swiper($attributes);
 
 ?>
 
-<div class="swiper swiper-id-<?php echo $attributes["uuid"]; ?> <?php echo $attributes["infiniteLoop"] == "true" ? 'swiper-transition-timing-linear' : ''; ?> vh-100"
+<section class="bs-hero-slider hero-slider swiper swiper-id-<?php echo $attributes["uuid"]; ?> <?php echo $attributes["infiniteLoop"] == "true" ? 'swiper-transition-timing-linear' : ''; ?>"
     data-swiper data-swiper-id=<?php echo $attributes["uuid"]; ?>
     data-swiper-loop="<?php echo $attributes["loop"]; ?>"
     data-swiper-set-autoplay="<?php echo $attributes["autoplay"]; ?>"
@@ -29,4 +29,4 @@ Swiper_Utils::init_swiper($attributes);
         <div class="swiper-button-prev swiper-button__prev-id-<?php echo $attributes["uuid"]; ?>"></div>
         <div class="swiper-button-next swiper-button__next-id-<?php echo $attributes["uuid"]; ?>"></div>
     <?php endif; ?>
-</div>
+</section>

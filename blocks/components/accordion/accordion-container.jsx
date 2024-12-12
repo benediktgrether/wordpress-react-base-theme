@@ -2,7 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { useEffect } from '@wordpress/element';
 import { v4 as uuidv4 } from 'uuid';
 
-import { icon } from '../../configuration/icon/icons';
+import { chevronDownSmall } from '@wordpress/icons';
 import {
     InnerBlocks,
     InspectorControls,
@@ -15,11 +15,12 @@ import {
     defaultSpacerAttributes,
 } from '../../configuration/spacer/spacer';
 
-registerBlockType('everydayblocktheme/accordion-container', {
+registerBlockType('basetheme/accordion-container', {
     title: 'Accordion',
-    icon: icon.dropdown,
+    icon: chevronDownSmall,
     category: 'layout',
     description: 'A Description',
+    parent: ['basetheme/container'],
     keywords: '[]',
     supports: {},
     attributes: {
@@ -43,10 +44,8 @@ function EditComponent(props) {
         }
     }, [attributes.uuid, setAttributes]);
 
-    const allowedBlocks = ['everydayblocktheme/accordion-item'];
-    const template = [
-        ['everydayblocktheme/accordion-item', { uuid: attributes.uuid }],
-    ];
+    const allowedBlocks = ['basetheme/accordion-item'];
+    const template = [['basetheme/accordion-item', { uuid: attributes.uuid }]];
 
     return (
         <>

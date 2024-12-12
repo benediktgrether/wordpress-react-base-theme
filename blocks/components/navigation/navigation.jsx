@@ -12,7 +12,7 @@ const imageSizeOptions = [
     { value: 'logo', label: 'Logo' },
 ];
 
-registerBlockType('everydayblocktheme/navigation', {
+registerBlockType('basetheme/navigation', {
     title: 'Navigation',
     icon: 'smiley',
     category: 'layout',

@@ -1,5 +1,5 @@
 import { useState } from '@wordpress/element';
-import { link } from '@wordpress/icons';
+import { button, link } from '@wordpress/icons';
 
 import {
     ToolbarGroup,
@@ -33,11 +33,12 @@ import {
 } from '../../configuration/align/align';
 
 export const defaultButtonAttributes = {
-    ...defaultColorNameAttributes,
+    ...defaultColorNameAttributes, // This was your original block color
     ...defaultSpacerAttributes,
     ...defaultAlignAttributes,
     linkText: { type: 'string', default: 'Mehr erfahren' },
     linkObject: { type: 'object', default: { url: '' } },
+    buttonColorName: { type: 'string', default: 'primary' }, // NEW attribute for button color
 };
 
 export function ButtonSettings({
@@ -58,9 +59,15 @@ export function ButtonSettings({
             </BlockControls>
             <InspectorControls>
                 <ColorSettings
-                    title="Color Settings"
-                    attributes={attributes}
-                    setAttributes={setAttributes}
+                    title="Button Color Settings"
+                    attributes={{ colorName: attributes.buttonColorName }}
+                    setAttributes={(newAttrs) => {
+                        if (newAttrs.colorName) {
+                            setAttributes({
+                                buttonColorName: newAttrs.colorName,
+                            });
+                        }
+                    }}
                 />
                 <SpacerSettings
                     title="Container Settings"
@@ -79,6 +86,7 @@ export function ButtonSettings({
 
 export function Button({ attributes, setAttributes }) {
     const [isLinkPickerVisible, setIsLinkPickerVisible] = useState(false);
+
     function handleLinkChange(newLink) {
         setAttributes({ linkObject: newLink });
     }
@@ -86,6 +94,36 @@ export function Button({ attributes, setAttributes }) {
     function handleTextChange(setText) {
         setAttributes({ linkText: setText });
     }
+
+    let buttonColor;
+    let textColor;
+
+    switch (attributes.buttonColorName) {
+        case 'primary':
+            buttonColor = 'primary';
+            textColor = 'text-white';
+            break;
+        case 'secondary':
+            buttonColor = 'secondary';
+            textColor = 'text-white';
+            break;
+        case 'black':
+            buttonColor = 'black';
+            textColor = 'text-white';
+            break;
+        case 'white':
+            buttonColor = 'white';
+            textColor = 'text-black';
+            break;
+        case 'gray':
+            buttonColor = 'gray-500';
+            textColor = 'text-primary';
+            break;
+        default:
+            buttonColor = 'primary';
+            textColor = 'text-white';
+    }
+
     return (
         <>
             <ButtonSettings
@@ -98,7 +136,7 @@ export function Button({ attributes, setAttributes }) {
                 <RichText
                     allowedFormats={[]}
                     tagName="a"
-                    className={`btn btn-${attributes.colorName} ${spacerClass(attributes.spacer)}`}
+                    className={`btn btn-${buttonColor} ${textColor} ${spacerClass(attributes.spacer)}`}
                     value={attributes.linkText}
                     onChange={handleTextChange}
                 />

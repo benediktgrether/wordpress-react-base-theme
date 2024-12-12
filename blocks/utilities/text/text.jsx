@@ -13,7 +13,12 @@ export const defaultTextAttributes = {
     },
 };
 
-export function Text({ attributes, setAttributes, enableAlignment = true }) {
+export function Text({
+    attributes,
+    setAttributes,
+    enableAlignment = true,
+    className,
+}) {
     let alignmentClass = '';
     switch (attributes.alignment) {
         case 'left':
@@ -45,7 +50,7 @@ export function Text({ attributes, setAttributes, enableAlignment = true }) {
                     value={attributes.text}
                     onChange={(newText) => setAttributes({ text: newText })}
                     placeholder="Text eingabe..."
-                    className={alignmentClass}
+                    className={(alignmentClass, className)}
                 />
             </>
         );
@@ -55,7 +60,7 @@ export function Text({ attributes, setAttributes, enableAlignment = true }) {
             value={attributes.text}
             onChange={(newText) => setAttributes({ text: newText })}
             placeholder="Text eingabe..."
-            className={alignmentClass}
+            className={(alignmentClass, className)}
         />
     );
 }

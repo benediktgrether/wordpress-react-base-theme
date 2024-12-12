@@ -1,6 +1,6 @@
 <?php
 
-use Everydayblocktheme\Utilities\Spacer_Utils;
+use basetheme\Utilities\Spacer_Utils;
 
 
 if (!isset($attributes["spacer"])) {
@@ -12,13 +12,8 @@ if (!isset($attributes['uuid'])) {
 }
 
 ?>
-
-<div class="container <?php echo Spacer_Utils::render_spacer($attributes['spacer']); ?>">
+<div class="bs-accordion <?php echo Spacer_Utils::render_spacer($attributes['spacer']); ?>">
     <div class="accordion" id="parent-accordion-id-<?php echo $attributes['uuid']; ?>">
         <?php echo $content; ?>
     </div>
-</div>
-
-<div class="accordion" id="accordionExample">
-    <!-- Content -->
 </div>

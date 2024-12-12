@@ -1,0 +1,13 @@
+.hero-slider {
+    height: 100vh;
+    height: 100svh;
+
+    @include media-breakpoint-up(lg) {
+        height: 80vh;
+    }
+}
+
+.hero-image {
+    height: 100%;
+    width: 100%;
+}

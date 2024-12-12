@@ -17,7 +17,7 @@ import {
 import { useEffect } from '@wordpress/element';
 import { v4 as uuidv4 } from 'uuid';
 
-registerBlockType('everydayblocktheme/image-swiper', {
+registerBlockType('basetheme/image-swiper', {
     title: 'Image Swiper',
     icon: layout,
     category: 'layout',
@@ -47,7 +47,7 @@ function EditComponent(props) {
         }
     }, []);
 
-    const BLOCKS_TEMPLATE = [['everydayblocktheme/image-swiper-item']];
+    const BLOCKS_TEMPLATE = [['basetheme/image-swiper-item']];
 
     return (
         <>
@@ -68,9 +68,7 @@ function EditComponent(props) {
                 <div className={`container ${spacerClass(attributes.spacer)}`}>
                     <div className="border border-light p-2 bg-gray-100">
                         <InnerBlocks
-                            allowedBlocks={[
-                                'everydayblocktheme/imageswiperitem',
-                            ]}
+                            allowedBlocks={['basetheme/image-swiper-item']}
                             template={BLOCKS_TEMPLATE}
                         />
                     </div>

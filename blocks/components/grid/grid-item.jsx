@@ -7,10 +7,11 @@ import {
 import { PanelBody, PanelRow, SelectControl } from '@wordpress/components';
 import { layout } from '@wordpress/icons';
 
-registerBlockType('everydayblocktheme/grid-item', {
+registerBlockType('basetheme/grid-item', {
     title: 'Grid Item',
     icon: layout,
     category: 'layout',
+    parent: ['basetheme/grid-container'],
     description: 'A Description',
     keywords: '[]',
     supports: {},
@@ -29,15 +30,14 @@ function EditComponent(props) {
     const { attributes, setAttributes } = props;
 
     const allowedBlocks = [
-        'everydayblocktheme/text',
-        'everydayblocktheme/heading',
-        'everydayblocktheme/image',
+        'basetheme/text',
+        'basetheme/heading',
+        'basetheme/image',
         'core/list',
-        'everydayblocktheme/list',
-        'everydayblocktheme/button',
-        'everydayblocktheme/testimonial',
-        'everydayblocktheme/calendar',
+        'basetheme/button',
         'contact-form-7/contact-form-selector',
+        'basetheme/card',
+        'basetheme/person',
     ];
 
     return (
@@ -65,10 +65,7 @@ function EditComponent(props) {
             </InspectorControls>
             <div className={`grid-item-${attributes.columnsWdith}`}>
                 <div className="border border-light p-2">
-                    <InnerBlocks
-                        allowedBlocks={allowedBlocks}
-                        renderAppender={InnerBlocks.ButtonBlockAppender}
-                    />
+                    <InnerBlocks allowedBlocks={allowedBlocks} />
                 </div>
             </div>
         </>

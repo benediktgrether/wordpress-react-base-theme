@@ -94,6 +94,7 @@ export function ImageSettings({ attributes, setAttributes, imageSizeOptions }) {
                             className="img-fluid object-fit-cover"
                             src={attributes.mediaUrl}
                             alt="Select"
+                            width={200}
                         />
                     </div>
                 </PanelRow>

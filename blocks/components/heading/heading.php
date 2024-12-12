@@ -24,4 +24,4 @@ switch ($attributes["alignment"]) {
         break;
 }
 
-echo "<{$attributes['tag']} class='heading {$alignmentClass}'>{$attributes['text']}</{$attributes["tag"]}>";
+echo "<{$attributes['tag']} class='bs-heading heading {$alignmentClass}'>{$attributes['text']}</{$attributes["tag"]}>";

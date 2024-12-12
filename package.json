@@ -1,5 +1,5 @@
 {
-    "name": "everyday-base-theme",
+    "name": "base-theme",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -8,7 +8,14 @@
         "dev": "NODE_ENV=development wp-scripts start src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx",
         "build": "NODE_ENV=production wp-scripts build src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx",
         "devFast": "wp-scripts start",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build:test": "NODE_ENV=production wp-scripts build src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx && cd test && backstop test --configPath=backstop.config.js",
+        "test:reference": "cd test && backstop reference --configPath=backstop.config.js",
+        "test:approve": "cd test && backstop approve --configPath=backstop.config.js",
+        "test": "cd test && backstop test --configPath=backstop.config.js",
+        "docs:install": "cd docs && pnpm i",
+        "docs:dev": "cd docs && next dev",
+        "docs:build": "cd docs && next build",
+        "docs:start": "cd docs && next start"
     },
     "keywords": [],
     "author": "",

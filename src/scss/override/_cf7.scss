@@ -1,0 +1,12 @@
+/*! purgecss start ignore */
+.wpcf7-response-output {
+    display: none;
+}
+
+.invalid {
+    .wpcf7-response-output {
+        display: block;
+    }
+}
+
+/*! purgecss end ignore */

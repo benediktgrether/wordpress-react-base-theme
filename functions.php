@@ -70,7 +70,7 @@ class PlaceholderBlock
         wp_register_script($this->name, get_stylesheet_directory_uri() . "/blocks/{$this->name}.jsx", array('wp-blocks', 'wp-editor'));
 
         // Register the block type with a render callback.
-        register_block_type("everydayblocktheme/{$this->name}", array(
+        register_block_type("basetheme/{$this->name}", array(
             'editor_script' => $this->name,
             "render_callback" => [$this, 'ourRenderCallback']
         ));
@@ -102,6 +102,17 @@ function render_core_navigation($block_content, $block)
 add_filter('render_block_core/navigation', 'render_core_navigation', 10, 2);
 
 
+// Return ref from Footer block
+function render_core_footer($block_content, $block)
+{
+    // Get the reference to the footer block
+    $ref = $block['attrs']['ref'];
+    $block_content = $ref;
+    return $block_content;
+}
+
+add_filter('render_block_core/footer', 'render_core_footer', 10, 2);
+
 /**
  * add SVG to allowed file uploads
  **/
@@ -115,3 +126,145 @@ function add_file_types_to_uploads($file_types)
     return $file_types;
 }
 add_action('upload_mimes', 'add_file_types_to_uploads');
+
+/**
+ * Add custom classes to the form elements of Contact Form 7
+ */
+
+// Disable CF7 default form styles and classes
+add_filter('wpcf7_form_class_attr', function ($class) {
+    return ''; // Return empty string to remove default classes
+});
+
+add_filter('wpcf7_form_elements', function ($content) {
+    // Remove all default CF7 classes from input, select, and textarea elements
+    $content = preg_replace('/\sclass=".*?"/', '', $content);
+    return $content;
+});
+
+add_filter('wpcf7_form_elements', function ($content) {
+    // Add the 'form-label' class to all <label> elements
+    $content = preg_replace('/<label(.*?)>/', '<label class="form-label w-100"$1>', $content);
+    // Add the 'form-control' class to all input fields
+    $content = preg_replace(
+        '/<(input|textarea|select)(.*?)class="(.*?)"/',
+        '<$1$2class="$3 form-control"',
+        $content
+    );
+
+    // If no class attribute exists, add 'form-control' class
+    $content = preg_replace(
+        '/<(input|textarea|select)(?!.*?class=)/',
+        '<$1 class="form-control"',
+        $content
+    );
+
+    // Replace submit input field with a button element
+    $content = preg_replace(
+        '/<input([^>]*?)type="submit"([^>]*?)value="([^"]*?)"([^>]*?)>/',
+        '<button type="submit" class="btn btn-primary text-white"$2$4>$3</button>',
+        $content
+    );
+
+    return $content;
+});
+
+
+add_filter('wpcf7_form_elements', function ($content) {
+    $content = preg_replace_callback(
+        '/<label([^>]*)><input([^>]*)type="checkbox"([^>]*)>(.*?)<\/label>/s',
+        function ($matches) {
+            // Generate a unique ID for each checkbox
+            $uniqueId = 'checkbox-' . uniqid();
+
+            // Extract input attributes and label text
+            $labelAttributes = $matches[1];
+            $inputAttributes = $matches[2] . 'type="checkbox"' . $matches[3];
+            $labelText = $matches[4];
+
+            // Build the Bootstrap-formatted checkbox structure with connected label
+            return '<div class="form-check">
+                        <input class="form-check-input" id="' . $uniqueId . '"' . $inputAttributes . '>
+                        <label class="form-check-label" for="' . $uniqueId . '"' . $labelAttributes . '>' . $labelText . '</label>
+                    </div>';
+        },
+        $content
+    );
+
+    return $content;
+});
+
+
+add_filter('wpcf7_form_elements', function ($content) {
+    $content = preg_replace_callback(
+        '/<label([^>]*)><input([^>]*)type="radio"([^>]*)>(.*?)<\/label>/s',
+        function ($matches) {
+            // Generate a unique ID for each radio button
+            $uniqueId = 'radio-' . uniqid();
+
+            // Extract input attributes and label text
+            $labelAttributes = $matches[1];
+            $inputAttributes = $matches[2] . 'type="radio"' . $matches[3];
+            $labelText = $matches[4];
+
+            // Build the Bootstrap-formatted radio button structure
+            return '<div class="form-check">
+                        <input class="form-check-input" id="' . $uniqueId . '"' . $inputAttributes . '>
+                        <label class="form-check-label" for="' . $uniqueId . '"' . $labelAttributes . '>' . $labelText . '</label>
+                    </div>';
+        },
+        $content
+    );
+
+    return $content;
+});
+
+/**
+ * Restrict the block types that can be used in the editor
+ */
+add_filter('allowed_block_types', 'my_function');
+
+function my_function($allowed_block_types)
+{
+
+    return array(
+        'core/paragraph',
+        'basetheme/accordion-container',
+        'basetheme/accordion-item',
+        'basetheme/big-teaser',
+        'basetheme/blog-post',
+        'basetheme/button',
+        'basetheme/call-to-action-container',
+        'basetheme/call-to-action-item',
+        'basetheme/card',
+        'basetheme/container',
+        'basetheme/heading',
+        'basetheme/text',
+        // 'basetheme/list',
+        // 'basetheme/testimonial',
+        'basetheme/button',
+        'basetheme/blog-post',
+        'basetheme/google-maps',
+        'basetheme/reference',
+        'basetheme/accordion-container',
+        'contact-form-7/contact-form-selector',
+        'basetheme/footer-container',
+        'basetheme/footer-item',
+        'basetheme/footer-navigation',
+        'basetheme/footer-social-media-container',
+        'basetheme/footer-social-media-icon',
+        'basetheme/footer-text',
+        'basetheme/grid-container',
+        'basetheme/grid-item',
+        'basetheme/person',
+        'basetheme/hero-slider',
+        'basetheme/hero-slider-item',
+        'basetheme/image',
+        'basetheme/logo-swiper-container',
+        'basetheme/logo-swiper-item',
+        'basetheme/navigation',
+        'basetheme/image-swiper',
+        'basetheme/image-swiper-item'
+
+    );
+}

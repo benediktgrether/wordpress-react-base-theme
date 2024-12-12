@@ -1,0 +1,4 @@
+{
+    "label": "blog-post",
+    "selectors": [".bs-blog-post"]
+}
