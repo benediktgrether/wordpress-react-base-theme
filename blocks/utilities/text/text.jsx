@@ -17,24 +17,25 @@ export function Text({
     attributes,
     setAttributes,
     enableAlignment = true,
-    className,
+    className = '',
 }) {
     let alignmentClass = '';
     switch (attributes.alignment) {
         case 'left':
-            alignmentClass = 'text-left';
+            alignmentClass = 'text-start';
             break;
         case 'center':
             alignmentClass = 'text-center';
             break;
         case 'right':
-            alignmentClass = 'text-right';
+            alignmentClass = 'text-end';
             break;
         default:
-            alignmentClass = 'text-left';
+            alignmentClass = 'text-start';
     }
 
-    // TODO: Set enable Alignment from attributes
+    const combinedClassName = `${alignmentClass} ${className}`.trim();
+
     if (enableAlignment) {
         return (
             <>
@@ -50,17 +51,18 @@ export function Text({
                     value={attributes.text}
                     onChange={(newText) => setAttributes({ text: newText })}
                     placeholder="Text eingabe..."
-                    className={(alignmentClass, className)}
+                    className={combinedClassName}
                 />
             </>
         );
     }
+
     return (
         <RichText
             value={attributes.text}
             onChange={(newText) => setAttributes({ text: newText })}
             placeholder="Text eingabe..."
-            className={(alignmentClass, className)}
+            className={combinedClassName}
         />
     );
 }

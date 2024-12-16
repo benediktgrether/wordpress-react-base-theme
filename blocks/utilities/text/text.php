@@ -18,16 +18,16 @@ class Text_Utils
         $alignmentClass = "text-left";
         switch ($attributes["alignment"]) {
             case "left":
-                $alignmentClass = "text-left";
+                $alignmentClass = "text-start";
                 break;
             case "center":
                 $alignmentClass = "text-center";
                 break;
             case "right":
-                $alignmentClass = "text-right";
+                $alignmentClass = "text-end";
                 break;
             default:
-                $alignmentClass = "text-left";
+                $alignmentClass = "text-start";
                 break;
         }
 
