@@ -12,10 +12,10 @@
         "test:reference": "cd test && backstop reference --configPath=backstop.config.js",
         "test:approve": "cd test && backstop approve --configPath=backstop.config.js",
         "test": "cd test && backstop test --configPath=backstop.config.js",
-        "docs:install": "cd docs && pnpm i",
-        "docs:dev": "cd docs && next dev",
-        "docs:build": "cd docs && next build",
-        "docs:start": "cd docs && next start"
+        "docs:install": "cd docs && pnpm install",
+        "docs:dev": "cd docs && pnpm run astro dev",
+        "docs:build": "cd docs && pnpm run astro build",
+        "docs:start": "cd docs && pnpm run astro dev"
     },
     "keywords": [],
     "author": "",
