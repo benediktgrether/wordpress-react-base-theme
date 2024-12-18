@@ -1,0 +1,17 @@
+---
+title: Reference with example
+description: Reference with example code
+sidebar:
+    order: 2
+    # Uses the default variant matching your site’s accent color
+    badge:
+        text: New
+        variant: success
+---
+import { Code } from '@astrojs/starlight/components';
+
+export const exampleCode = `console.log('This could come from a file or CMS!');`;
+export const fileName = 'example.js';
+export const highlights = ['file', 'CMS'];
+
+<Code code={exampleCode} lang="js" title={fileName} mark={highlights} />

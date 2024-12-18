@@ -1,0 +1,321 @@
+---
+title: Align
+description: This documentation outlines the implementation and usage of the Alignment Settings component, which provides alignment options for custom WordPress blocks.
+sidebar:
+  order: 0
+  badge:
+    text: New
+    variant: default
+# variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+import Align from "@components/configuration/align/Align.astro";
+
+<Align />
+
+
+The **Alignment Settings** feature allows users to set and modify the alignment of content within a custom WordPress block. This is achieved using the `PanelBody` and `SelectControl` components from `@wordpress/components`.
+
+---
+
+## Import Information
+
+### JavaScript Import
+
+```javascript
+import {
+    defaultAlignAttributes,
+    alignClass,
+    AlignSettings,
+} from '../../configuration/align/align';
+```
+
+```javascript
+attributes: {
+    ...defaultAlignAttributes,
+    // Other attributes...
+};
+```
+
+```javascript
+<SpacerSettings
+    title="Container Settings"
+    attributes={attributes}
+    setAttributes={setAttributes}
+/>
+```
+
+```javascript
+<div className={alignClass(attributes.align)}>
+```
+
+### PHP Import
+
+```php
+use Everydayblocktheme\Utilities\Align_Utils;
+if (!isset($attributes["align"])) {
+    $attributes["align"] = "left";
+}
+```
+
+```php
+$align = Align_Utils::render_align($attributes['align']);
+```
+
+```php
+echo "<div class='d-flex {$align}'>";
+```
+
+---
+
+## Default Attributes
+
+The `defaultAlignAttributes` object defines the default alignment attribute.
+
+```javascript
+export const defaultAlignAttributes = {
+    align: { type: 'string', default: 'left' },
+};
+```
+
+- **`align`**: The alignment property with a default value of `'left'`.
+
+---
+
+## Alignment Class Utility
+
+The `alignClass` function maps alignment values to corresponding CSS classes for layout control.
+
+```javascript
+export const alignClass = (align) => {
+    switch (align) {
+        case 'left':
+            return 'justify-content-start';
+        case 'center':
+            return 'justify-content-center';
+        case 'right':
+            return 'justify-content-end';
+        default:
+            return 'justify-content-start';
+    }
+};
+```
+
+### Supported Alignments
+
+| Alignment | CSS Class               |
+|-----------|-------------------------|
+| `left`    | `justify-content-start` |
+| `center`  | `justify-content-center`|
+| `right`   | `justify-content-end`   |
+
+---
+
+## Align Settings Component
+
+The `AlignSettings` component provides a user interface for selecting alignment options via a dropdown.
+
+### Component Definition
+
+```javascript
+export function AlignSettings({ title, attributes, setAttributes }) {
+    return (
+        <PanelBody title={title}>
+            <PanelRow>
+                <SelectControl
+                    label="Alignment"
+                    value={attributes.align}
+                    options={[
+                        { label: 'Left', value: 'left' },
+                        { label: 'Center', value: 'center' },
+                        { label: 'Right', value: 'right' },
+                    ]}
+                    onChange={(align) => setAttributes({ align })}
+                />
+            </PanelRow>
+        </PanelBody>
+    );
+}
+```
+
+### Props
+
+- **`title`**: The title displayed for the alignment settings panel.
+- **`attributes`**: The block attributes, including the current alignment value.
+- **`setAttributes`**: A function to update the block's attributes.
+
+### Select Control Options
+
+| Label   | Value  |
+|---------|--------|
+| Left    | `left` |
+| Center  | `center` |
+| Right   | `right` |
+
+---
+
+## How to Use
+
+1. Import the required components and functions:
+
+    ```javascript
+    import { PanelBody, PanelRow, SelectControl } from '@wordpress/components';
+    import { AlignSettings, defaultAlignAttributes, alignClass } from './path-to-your-file';
+    ```
+
+2. Add the `defaultAlignAttributes` to your block's attribute definitions:
+
+    ```javascript
+    attributes: {
+        ...defaultAlignAttributes,
+        // Other attributes...
+    };
+    ```
+
+3. Include the `AlignSettings` component in your block's settings panel:
+
+    ```javascript
+    <AlignSettings
+        title="Alignment Settings"
+        attributes={attributes}
+        setAttributes={setAttributes}
+    />
+    ```
+
+4. Use the `alignClass` utility to apply the appropriate CSS class in your block's frontend or editor output:
+
+    ```javascript
+    const className = alignClass(attributes.align);
+    ```
+
+---
+
+## Example Usage
+
+### Block Registration
+
+```javascript
+registerBlockType('my-plugin/my-block', {
+    attributes: {
+        ...defaultAlignAttributes,
+        // Other attributes...
+    },
+    edit({ attributes, setAttributes }) {
+        return (
+            <div className={alignClass(attributes.align)}>
+                <AlignSettings
+                    title="Alignment"
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+                {/* Block content */}
+            </div>
+        );
+    },
+    save({ attributes }) {
+        return (
+            <div className={alignClass(attributes.align)}>
+                {/* Block content */}
+            </div>
+        );
+    },
+});
+```
+
+---
+
+
+## Class Definition
+
+The `Align_Utils` class is defined within the `Everydayblocktheme\Utilities` namespace.
+
+```php
+namespace Everydayblocktheme\Utilities;
+
+class Align_Utils
+{
+    public static function render_align($attributes)
+    {
+        $algin = $attributes;
+
+        if (empty($algin)) {
+            return;
+        }
+
+        $alignClass = "";
+
+        switch ($algin) {
+            case 'left':
+                $alignClass = 'justify-content-start';
+                break;
+            case 'center':
+                $alignClass = 'justify-content-center';
+                break;
+            case 'right':
+                $alignClass = 'justify-content-end';
+                break;
+            default:
+                $alignClass = 'justify-content-start';
+                break;
+        }
+
+        return $alignClass;
+    }
+}
+```
+
+---
+
+## Method: `render_align`
+
+### Description
+
+The `render_align` method evaluates the alignment attribute and returns the corresponding Bootstrap CSS class for alignment.
+
+### Parameters
+
+- **`$attributes`**: *(string)* The alignment attribute provided (e.g., `'left'`, `'center'`, `'right'`).
+
+### Return Value
+
+- *(string)*: The Bootstrap CSS class corresponding to the alignment attribute.
+
+### Alignment Mappings
+
+| Alignment | CSS Class               |
+|-----------|-------------------------|
+| `left`    | `justify-content-start` |
+| `center`  | `justify-content-center`|
+| `right`   | `justify-content-end`   |
+| *Default* | `justify-content-start` |
+
+---
+
+## Usage Example
+
+### Import and Use the Class
+
+```php
+use Everydayblocktheme\Utilities\Align_Utils;
+
+// Example attribute
+$attributes = 'center';
+
+// Get the alignment class
+$alignClass = Align_Utils::render_align($attributes);
+
+// Output: 'justify-content-center'
+echo $alignClass;
+```
+
+---
+
+## Conclusion
+
+The **Alignment Settings** component is a reusable and customizable solution for managing alignment options in WordPress blocks, ensuring a consistent user experience and alignment functionality.
+
+
+The `Align_Utils` class is a utility for generating alignment CSS classes dynamically. It evaluates the provided alignment attribute and returns the appropriate Bootstrap alignment class.
+

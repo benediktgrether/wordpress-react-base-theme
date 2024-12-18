@@ -1,0 +1,290 @@
+---
+title: "Container"
+description: "Documentation for the Container custom WordPress block."
+---
+
+
+import { Code } from '@astrojs/starlight/components';
+
+## Container Block
+
+The **Container Block** is a customizable layout block that allows you to group and organize other blocks with specific settings for spacing, colors, and allowed inner blocks.
+
+### Block Metadata
+
+- **Title**: Container
+- **Icon**: File
+- **Category**: Layout
+- **Description**: A container block
+- **Keywords**: container, content, wrap
+
+### Attributes
+
+#### Default Attributes
+
+| Attribute Name | Type     | Default   | Description                                 |
+|----------------|----------|-----------|---------------------------------------------|
+| `spacer`       | `string` | `medium`  | Controls vertical spacing for the block.    |
+| `colorName`    | `string` | `white`   | Background color of the container.          |
+
+### Allowed Blocks
+
+The `InnerBlocks` component within the Container Block supports the following child blocks:
+
+- `basetheme/heading`
+- `basetheme/text`
+- `basetheme/button`
+- `basetheme/blog-post`
+- `basetheme/google-maps`
+- `basetheme/reference`
+- `basetheme/accordion-container`
+- `contact-form-7/contact-form-selector`
+
+### Settings Panels
+
+#### Spacer Settings
+
+This setting controls the spacing (margin-top) for the block.
+
+| Option         | Value     |
+|----------------|-----------|
+| None           | `""`     |
+| Extra Small    | `xSmall`  |
+| Small          | `small`   |
+| Medium         | `medium`  |
+| Large          | `large`   |
+| Extra Large    | `xLarge`  |
+| Extra Extra Large | `xxLarge` |
+
+#### Color Settings
+
+This setting controls the background color of the block.
+
+| Color Name | Color Code |
+|------------|------------|
+| Primary    | `#BE2830`  |
+| Secondary  | `#5C5C5B`  |
+| Black      | `#000000`  |
+| White      | `#FFFFFF`  |
+| Gray       | `#ADB5BD`  |
+
+### Component Breakdown
+
+#### Edit Component
+The `EditComponent` provides the block editor interface, including Inspector Controls for managing attributes and rendering the container with allowed child blocks.
+
+**Features:**
+- Dynamic background color classes based on `colorName` attribute.
+- Spacing classes derived from `spacer` attribute.
+- Renders an editable container with `InnerBlocks`.
+
+```jsx
+function EditComponent(props) {
+    const { attributes, setAttributes } = props;
+
+    let bgColor;
+    switch (attributes.colorName) {
+        case 'primary':
+            bgColor = 'bg-primary py-8';
+            break;
+        case 'secondary':
+            bgColor = 'bg-secondary py-8';
+            break;
+        case 'black':
+            bgColor = 'bg-black py-8';
+            break;
+        case 'white':
+            bgColor = 'bg-white';
+            break;
+        case 'gray':
+            bgColor = 'bg-gray-500 py-8';
+            break;
+        default:
+            bgColor = 'bg-primary py-8';
+    }
+
+    const ALLOWED_BLOCKS = [
+        'basetheme/heading',
+        'basetheme/text',
+        'basetheme/button',
+        'basetheme/blog-post',
+        'basetheme/google-maps',
+        'basetheme/reference',
+        'basetheme/accordion-container',
+        'contact-form-7/contact-form-selector',
+    ];
+
+    return (
+        <>
+            <InspectorControls>
+                <SpacerSettings
+                    title="Container Settings"
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+                <ColorSettings
+                    title="Color Settings"
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            </InspectorControls>
+            <div className={`my-4 ${bgColor}`}>
+                <div className={`container ${spacerClass(attributes.spacer)}`}>
+                    <div className="row">
+                        <div className="border border-light p-2">
+                            <InnerBlocks
+                                allowedBlocks={ALLOWED_BLOCKS}
+                                renderAppender={InnerBlocks.ButtonBlockAppender}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
+```
+
+#### Save Component
+The `SaveComponent` defines how the block's content is saved in the database, leveraging `InnerBlocks.Content` to store nested content.
+
+```jsx
+function SaveComponent() {
+    return <InnerBlocks.Content />;
+}
+```
+
+### Spacer Utility
+The `SpacerSettings` and `spacerClass` utilities handle margin-top classes for vertical spacing.
+
+#### Spacer Classes
+| Spacer Value | CSS Class      |
+|--------------|----------------|
+| xSmall       | `mt-2`         |
+| Small        | `mt-3`         |
+| Medium       | `mt-4`         |
+| Large        | `mt-3 mt-lg-5` |
+| xLarge       | `mt-5 mt-lg-10`|
+| xxLarge      | `mt-6 mt-lg-12`|
+
+#### SpacerSettings Component
+```jsx
+export function SpacerSettings({ title, attributes, setAttributes }) {
+    return (
+        <PanelBody title={title}>
+            <PanelRow>
+                <SelectControl
+                    label="Spacer"
+                    value={attributes.spacer}
+                    options={[
+                        { label: 'None', value: '' },
+                        { label: 'Extra Small', value: 'xSmall' },
+                        { label: 'Small', value: 'small' },
+                        { label: 'Medium', value: 'medium' },
+                        { label: 'Large', value: 'large' },
+                        { label: 'Extra Large', value: 'xLarge' },
+                        { label: 'Extra Extra Large', value: 'xxLarge' },
+                    ]}
+                    onChange={(spacer) => setAttributes({ spacer })}
+                />
+            </PanelRow>
+        </PanelBody>
+    );
+}
+```
+
+### Color Utility
+The `ColorSettings` utility handles background color selection using a predefined color palette.
+
+#### Color Palette
+```jsx
+export const colorValues = [
+    { name: 'primary', color: '#BE2830' },
+    { name: 'secondary', color: '#5C5C5B' },
+    { name: 'black', color: '#000000' },
+    { name: 'white', color: '#fff' },
+    { name: 'gray', color: '#adb5bd' },
+];
+```
+
+#### ColorSettings Component
+```jsx
+export function ColorSettings({ title, attributes, setAttributes }) {
+    const currentColorValue = colorValues.filter((color) => {
+        return color.name === attributes.colorName;
+    })[0].color;
+
+    function handleColorChange(colorCode) {
+        const { name } = getColorObjectByColorValue(colorValues, colorCode);
+        setAttributes({ colorName: name });
+    }
+
+    return (
+        <PanelBody title={title}>
+            <PanelRow>
+                <ColorPalette
+                    disableCustomColors={true}
+                    clearable={false}
+                    colors={colorValues}
+                    value={currentColorValue}
+                    onChange={handleColorChange}
+                />
+            </PanelRow>
+        </PanelBody>
+    );
+}
+```
+
+### Frontend Rendering
+
+The following PHP code is used to render the container block on the frontend:
+
+```php
+<?php
+
+use basetheme\Utilities\Spacer_Utils;
+
+if (!isset($attributes["spacer"])) {
+    $attributes["spacer"] = "medium";
+}
+
+if (!isset($attributes["colorName"])) {
+    $attributes["colorName"] = "white";
+}
+
+$bgColor = "";
+
+switch ($attributes['colorName']) {
+    case 'primary':
+        $bgColor = 'bg-primary py-8';
+        break;
+    case 'secondary':
+        $bgColor = 'bg-secondary py-8';
+        break;
+    case 'white':
+        $bgColor = 'bg-white';
+        break;
+    case 'gray':
+        $bgColor = 'bg-gray-500 py-8';
+        break;
+    default:
+        $bgColor = 'bg-primary py-8';
+        break;
+}
+
+?>
+
+<section class="<?php echo $bgColor; ?> <?php echo Spacer_Utils::render_spacer($attributes['spacer']); ?>">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <?php echo $content; ?>
+            </div>
+        </div>
+    </div>
+</section>
+```
+
+---
+
+For further details, refer to the WordPress Block Editor documentation.

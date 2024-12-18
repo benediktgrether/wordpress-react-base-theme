@@ -1,0 +1,21 @@
+@import "colors";
+
+$navbar-nav-link-padding-x: 2rem;
+
+// Dropdown
+$dropdown-bg: $color-primary;
+$dropdown-color: $color-white;
+$dropdown-border-color: transparent;
+$dropdown-border-radius: 0;
+$dropdown-box-shadow: none;
+
+$navbar-light-color: $color-white;
+$navbar-light-hover-color: $color-black;
+$navbar-light-active-color: $navbar-light-hover-color;
+
+$dropdown-link-color: $dropdown-color;
+$dropdown-link-hover-color: $navbar-light-hover-color;
+$dropdown-link-hover-bg: $dropdown-bg;
+
+$dropdown-link-active-color: $navbar-light-hover-color;
+$dropdown-link-active-bg: $dropdown-bg;

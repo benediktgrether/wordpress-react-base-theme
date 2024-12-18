@@ -1,0 +1,18 @@
+@import "colors";
+
+$accordion-border-width: 0;
+$accordion-border-radius: 0;
+$accordion-button-bg: $color-primary;
+$accordion-button-color: $color-white;
+$accordion-button-active-bg: $color-primary;
+$accordion-button-active-color: $color-white;
+
+$accordion-icon-color: $color-white;
+$accordion-icon-active-color: $color-white;
+
+// $accordion-color: $color-white;
+// $accordion-color: var(--#{$prefix}body-bg);
+// $accordion-bg: $color-primary;
+// $accordion-padding-x: 0;
+// $accordion-button-focus-border-color: $color-secondary;
+$accordion-button-focus-box-shadow: 0 0 0 0;

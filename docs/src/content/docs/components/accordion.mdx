@@ -1,0 +1,153 @@
+---
+title: Accordion
+description: Your Description
+sidebar:
+  badge:
+    text: WIP - new
+    variant: caution
+# variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+import Accordion from "@components/components/Accordion/Accordion.astro";
+
+<Accordion />
+
+<hr/>
+
+An accordion is a vertically stacked list of items that utilizes show/hide functionality to reveal content. It is a great way to manage content-heavy sections of your website.
+It's has a accodion-container and a accordion-item.
+
+<hr />
+
+## Default Attributes
+
+### Accordion Container
+
+| Attribute | Type   | Default  | Description                                            |
+|-----------|--------|----------|--------------------------------------------------------|
+| spacer    | string | "medium" | Controls the vertical spacing size of the container.  |
+| uuid      | string | ""       | A unique identifier generated for each accordion set. |
+
+
+### Accordion Item
+
+| Attribute | Type   | Default   | Description                                                    |
+|-----------|--------|-----------|----------------------------------------------------------------|
+| question  | string | "Frage"   | The question text displayed in the accordion item's header.    |
+| answer    | string | "Antwort" | The answer text displayed within the accordion item's content. |
+| uuid      | string | ""        | A unique identifier inherited from the parent accordion block. |
+| itemUuid  | string | ""        | A unique identifier generated for each individual accordion item. |
+
+
+## Component Breakdown
+
+### Block Registration
+```js
+registerBlockType('basetheme/accordion-container', {
+    title: 'Accordion',
+    icon: chevronDownSmall,
+    category: 'layout',
+    parent: ['basetheme/container'],
+    description: 'A Description',
+    keywords: '[]',
+    supports: {},
+    attributes: {
+        ...defaultSpacerAttributes,
+        uuid: {
+            type: 'string',
+            default: '',
+        },
+    },
+
+    edit: EditComponent,
+    save: SaveComponent,
+});
+```
+**What This Does:**
+
+- Registers a block named `basetheme/accordion-container`.
+- Ensures it can only be placed inside `basetheme/container`.
+- Includes a `uuid` attribute for uniqueness and `spacer` attributes for spacing, merged from `defaultSpacerAttributes`.
+- Uses `EditComponent` for the editor interface and `SaveComponent` for the frontend output.
+
+**Attributes**
+
+- **uuid (string):** Default `""`. A unique identifier generated for each accordion container instance.
+- **spacer (string):** Derived from `defaultSpacerAttributes`. Controls vertical spacing classes applied to the container.
+
+**Edit Component**
+```js
+function EditComponent(props) {
+    const { attributes, setAttributes } = props;
+
+    useEffect(() => {
+        if (!attributes.uuid) {
+            setAttributes({ uuid: uuidv4() });
+        }
+    }, [attributes.uuid, setAttributes]);
+
+    const allowedBlocks = ['basetheme/accordion-item'];
+    const template = [['basetheme/accordion-item', { uuid: attributes.uuid }]];
+
+    return (
+        <>
+            <InspectorControls>
+                <SpacerSettings
+                    title="Container Settings"
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            </InspectorControls>
+            <div className="border border-light p-2">
+                <div className="accordion" id="accordionExample">
+                    <InnerBlocks
+                        allowedBlocks={allowedBlocks}
+                        template={template}
+                        templateLock={false}
+                    />
+                </div>
+            </div>
+        </>
+    );
+}
+```
+
+**Features:**
+
+- **UUID Generation:**
+  Uses a `useEffect` hook to assign a unique UUID to the container if it doesn't already have one. This ensures each accordion instance is uniquely identifiable.
+
+- **Allowed Blocks and Template:**
+  Restricts the inner blocks to only `basetheme/accordion-item`.
+  Sets a default template with one initial accordion item linked to the container’s UUID.
+
+- **Inspector Controls:**
+  Uses `InspectorControls` to render `SpacerSettings`, allowing the user to adjust vertical spacing.
+
+- **Editor Output:**
+  Renders a `.accordion` wrapper with a Bootstrap-compatible structure.
+  `InnerBlocks` handles nested items, ensuring that the user can add multiple `accordion-item` blocks.
+
+**Save Component**
+
+```js
+function SaveComponent() {
+    return <InnerBlocks.Content />;
+}
+```
+
+**Features:**
+
+- Outputs the inner block content as-is on the frontend.
+- Since the main customization (spacing, UUID) is handled at edit time, the front-end relies on the static markup and the nested `accordion-item` blocks for display and interaction.
+
+**Summary**
+The `accordion-container` block:
+
+- Generates a unique UUID for identification.
+- Provides spacing controls via the `spacer` attribute.
+- Only allows `accordion-item` blocks inside.
+- Uses a default template to include an initial `accordion-item`.
+- Outputs a clean, minimal markup with `InnerBlocks.Content()` for the frontend.

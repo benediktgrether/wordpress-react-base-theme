@@ -1,0 +1,152 @@
+---
+title: Video Utilities
+description: How to Work with the Video Utilities
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+# Video Utilities
+
+## How to work with the Video Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Video_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+export const useUtilsVideo = `
+Video_Utils::add_video_control($this, 'video', 'Video');
+`
+
+<Code code={useUtilsVideo} lang="php" />
+
+<hr />
+
+**Use the Component in the render method**
+
+
+export const renderUtils = `
+<?php echo Video_Utils::render_video($settings, "video", $settings['image'], "img-16x9 w-100 object-fit-cover") ?>
+`
+
+<Code code={renderUtils} lang="php" />
+
+
+<hr />
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+require_once(__DIR__ . '/widgets/utilities/video-utilities.php');
+`
+
+<Code code={registerUtils} lang="php" />
+
+## Utils class and render methode
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\Utilities;
+
+use Elementor\Group_Control_Image_Size;
+
+class Video_Utils
+{
+    public static function add_video_control($widget, $id = "video", $label = "Video")
+    {
+        $widget->add_control(
+            $id,
+            [
+                "label" => __($label, "text-domain"),
+                "type" => \Elementor\Controls_Manager::MEDIA,
+                'media_type' => 'video',
+            ]
+        );
+
+        $widget->add_control(
+            $id . "_autoplay",
+            [
+                "label" => __("Autoplay", "text-domain"),
+                "type" => \Elementor\Controls_Manager::SWITCHER,
+                "label_on" => __("Yes", "text-domain"),
+                "label_off" => __("No", "text-domain"),
+                "return_value" => "yes",
+                "default" => "no",
+            ]
+        );
+
+        $widget->add_control(
+            $id . "_loop",
+            [
+                "label" => __("Loop", "text-domain"),
+                "type" => \Elementor\Controls_Manager::SWITCHER,
+                "label_on" => __("Yes", "text-domain"),
+                "label_off" => __("No", "text-domain"),
+                "return_value" => "yes",
+                "default" => "no",
+            ]
+        );
+
+        $widget->add_control(
+            $id . "_muted",
+            [
+                "label" => __("Muted", "text-domain"),
+                "type" => \Elementor\Controls_Manager::SWITCHER,
+                "label_on" => __("Yes", "text-domain"),
+                "label_off" => __("No", "text-domain"),
+                "return_value" => "yes",
+                "default" => "no",
+            ]
+        );
+
+        $widget->add_control(
+            $id . "_controls",
+            [
+                "label" => __("Controls", "text-domain"),
+                "type" => \Elementor\Controls_Manager::SWITCHER,
+                "label_on" => __("Yes", "text-domain"),
+                "label_off" => __("No", "text-domain"),
+                "return_value" => "yes",
+                "default" => "no",
+            ]
+        );
+    }
+
+    public static function render_video($settings, $id = "video", $poster, $class = "")
+    {
+        $video = $settings[$id];
+        $video_url = $video['url'];
+        $autoplay = $settings[$id . "_autoplay"] === "yes" ? "autoplay" : "";
+        $loop = $settings[$id . "_loop"] === "yes" ? "loop" : "";
+        $muted = $settings[$id . "_muted"] === "yes" ? "muted" : "";
+        $controls = $settings[$id . "_controls"] === "yes" ? "controls" : "";
+        $poster = $poster['url'];
+
+        $class_attribute = !empty($class) ? $class : 'img-fluid';
+
+        if (empty($video['id'])) {
+            return;
+        }
+?>
+        <video
+            class="<?php echo $class_attribute; ?>" <?php echo $autoplay; ?> <?php echo $loop; ?> <?php echo $muted; ?> <?php echo $controls; ?>
+            poster="<?php echo $poster; ?>">
+            <source src="<?php echo esc_url($video_url); ?>" type="video/mp4">
+        </video>
+<?php
+
+    }
+}
+
+?>
+`
+
+<Code code={utilsClass} lang="php" />

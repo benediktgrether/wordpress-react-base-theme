@@ -1,0 +1,22 @@
+---
+const { align = 'left' }: { align?: 'left' | 'center' | 'right' } =
+    Astro.props || {};
+
+const classNameMap = {
+    left: 'justify-content-start',
+    center: 'justify-content-center',
+    right: 'justify-content-end',
+};
+
+const alignClass = classNameMap[align] || 'justify-content-start';
+---
+
+<style lang="scss">
+    .bg-bs-gray-500 {
+        background-color: #212529;
+    }
+</style>
+
+<div class={`d-flex ${alignClass}`}>
+    <div class="text-center w-25 py-3 bg-bs-gray-500">align: {align}</div>
+</div>

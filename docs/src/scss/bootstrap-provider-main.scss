@@ -1,0 +1,105 @@
+.bootstrap-provider {
+    @import 'configuration/variables';
+
+    // Utilities - Bootstrap API
+    // @import 'utilities/utility-api';
+
+    // Import Bootstrap scss
+    @import 'bootstrap';
+
+.bg-primary {
+        background-color: $color-primary !important;
+    }
+
+    .bg-secondary {
+        background-color: $color-secondary !important;
+    }
+
+    .bg-tertiary {
+        background-color: $color-tertiary !important;
+    }
+
+    .bg-white {
+        background-color: $color-white !important;
+    }
+
+    .bg-black {
+        background-color: $color-black !important;
+    }
+
+    .bg-cta {
+        background-color: $color-cta !important;
+    }
+
+    .bg-text {
+        background-color: $color-text !important;
+    }
+
+    .bg-warning {
+        background-color: $color-warning !important;
+    }
+
+    .text-primary {
+        color: $color-primary !important;
+    }
+
+    .text-secondary {
+        color: $color-secondary !important;
+    }
+
+    .text-tertiary {
+        color: $color-tertiary !important;
+    }
+
+    .text-white {
+        color: $color-white !important;
+    }
+
+    .text-black {
+        color: $color-black !important;
+    }
+
+    .text-cta {
+        color: $color-cta !important;
+    }
+
+    .text-warning {
+        color: $color-warning !important;
+    }
+
+    .text-gray-100 {
+        color: $color-gray-100 !important;
+    }
+
+    .text-gray-200 {
+        color: $color-gray-200 !important;
+    }
+
+    .text-gray-300 {
+        color: $color-gray-300 !important;
+    }
+
+    .text-gray-400 {
+        color: $color-gray-400 !important;
+    }
+
+    .text-gray-500 {
+        color: $color-gray-500 !important;
+    }
+
+    .text-gray-600 {
+        color: $color-gray-600 !important;
+    }
+
+    .text-gray-700 {
+        color: $color-gray-700 !important;
+    }
+
+    .text-gray-800 {
+        color: $color-gray-800 !important;
+    }
+
+    .text-gray-900 {
+        color: $color-gray-900 !important;
+    }
+}

@@ -1,0 +1,54 @@
+---
+const { spacerSize, title } = Astro.props as {
+    spacerSize: 'mt-2' | 'mt-3' | 'mt-4' | 'mt-5' | 'mt-10' | 'mt-12';
+    title: string;
+};
+
+const classNameMap = {
+    'mt-2': 'h-2',
+    'mt-3': 'h-3',
+    'mt-4': 'h-4',
+    'mt-5': 'h-5',
+    'mt-10': 'h-10',
+    'mt-12': 'h-12',
+};
+
+const classNameHeight = classNameMap[spacerSize] || 'h-0';
+---
+
+<style lang="scss">
+    $spacer: 1rem;
+
+    .bg-bs-gray-500 {
+        background-color: #212529;
+    }
+
+    .h-2 {
+        height: calc($spacer * 0.5);
+    }
+
+    .h-3 {
+        height: calc($spacer * 1);
+    }
+
+    .h-4 {
+        height: calc($spacer * 1.5);
+    }
+
+    .h-5 {
+        height: calc($spacer * 2);
+    }
+
+    .h-10 {
+        height: calc($spacer * 6);
+    }
+
+    .h-12 {
+        height: calc($spacer * 8);
+    }
+</style>
+
+<div class="spacer mt-4 d-flex justify-content-center align-items-center">
+    <span>{title}</span>
+</div>
+<div class={`spacer ${classNameHeight} bg-bs-gray-500`}></div>

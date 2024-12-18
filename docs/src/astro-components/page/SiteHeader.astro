@@ -1,0 +1,250 @@
+---
+const currentUrl = "/"; // Simulate the current URL
+---
+
+<script>
+	import { Dropdown } from "bootstrap";
+</script>
+
+<style lang="scss">
+	$color-primary: #535353;
+	$color-navigation-color: #535353;
+	$color-secondary: #1e1e1e;
+	$color-white: #ffffff;
+
+	$theme-colors: (
+		"primary": $color-primary,
+		"secondary": $color-secondary,
+		"white": $color-white,
+		"navigation-color": $color-navigation-color,
+	);
+	.docs {
+		position: relative;
+		@import "bootstrap";
+		.navbar-nav .active > a {
+			font-weight: bold;
+			color: #fff;
+		}
+
+		.container-fluid-header-navigation {
+			// height: 6.125rem;
+			padding-block: 1.625rem;
+		}
+
+		.header-navigation-logo {
+			width: auto !important;
+			height: 2.625rem !important;
+		}
+
+		.header-navigation-logo-link {
+			height: 2.625rem !important;
+			display: inline-block;
+		}
+
+		.dropdown-toggle {
+			&:hover,
+			&:focus {
+				background-color: transparent !important;
+			}
+		}
+
+		.dropdown-menu {
+			background-color: $color-primary !important;
+			border: 0 !important;
+			margin-left: 1rem !important;
+			padding: 1rem !important;
+			border-radius: 0 !important;
+		}
+
+		.navbar-toggler-button {
+			background-color: $color-primary !important;
+			border: 0 !important;
+
+			&:hover,
+			&:focus {
+				border: 0 !important;
+				border-color: $color-primary !important;
+			}
+		}
+
+		.nav-link {
+			position: relative;
+			color: $color-white !important;
+			font-weight: 400 !important;
+			// padding: 0.875rem 4.4375rem !important;
+			margin: 0 1rem !important;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $color-secondary !important;
+			}
+
+			&:before {
+				@media screen and (min-width: 992px) {
+					content: "";
+					height: 2px;
+					position: absolute;
+					bottom: 0;
+					width: 100%;
+					left: 0;
+					background-color: $color-secondary !important;
+					z-index: 2;
+					opacity: 0 !important;
+				}
+			}
+
+			&:after {
+				border: none !important;
+			}
+		}
+
+		.parent-active {
+			.nav-link {
+				@media screen and (min-width: 992px) {
+					color: $color-secondary !important;
+				}
+
+				&:before {
+					@media screen and (min-width: 992px) {
+						opacity: 1 !important;
+					}
+				}
+			}
+		}
+
+		.dropdown-toggle {
+			.icon-chevron-down {
+				fill: $color-white !important;
+				height: 0.75rem;
+				width: 0.75rem;
+				margin-left: 0.5rem;
+			}
+		}
+
+		.dropdown-nav-item {
+			margin-block: 1rem;
+			white-space: nowrap;
+		}
+
+		.dropdown-nav-item:first-child {
+			margin-top: 0;
+		}
+
+		.dropdown-nav-item:last-child {
+			margin-bottom: 0;
+		}
+
+		.dropdown-item-nav-item {
+			color: $color-white !important;
+
+			&:hover,
+			&:focus,
+			&:focus-within {
+				color: $color-secondary !important;
+			}
+		}
+
+		.dropdown-nav-item {
+			&.active {
+				.dropdown-item-nav-item {
+					color: $color-secondary !important;
+				}
+			}
+		}
+
+		.nav-item:not(.dropdown) {
+			&.active {
+				.nav-link {
+					&:before {
+						@media screen and (min-width: 992px) {
+							opacity: 1 !important;
+						}
+					}
+				}
+			}
+		}
+		.navigation-color {
+			background-color: $color-navigation-color !important;
+		}
+	}
+</style>
+
+<div class="docs">
+	<!-- SVG Icon Definition -->
+	<svg style="display: none;">
+		<symbol id="nav-chevron" viewBox="0 0 448 512">
+			<path
+				class="cls-1"
+				d="M207,381.5L12.7,187.1c-9.4-9.4-9.4-24.6,0-33.9l22.7-22.7c9.4-9.4,24.5-9.4,33.9,0l154.7,154,154.7-154c9.4-9.3,24.5-9.3,33.9,0l22.7,22.7c9.4,9.4,9.4,24.6,0,33.9l-194.3,194.3c-9.4,9.4-24.6,9.4-33.9,0h0Z"
+			></path>
+		</symbol>
+	</svg>
+
+	<!-- Navigation Bar -->
+	<div class="w-100 z-15">
+		<nav class="navbar navbar-expand-lg navigation-color">
+			<div class="container">
+				<div class="navbar-brand">
+					<img
+						src="/favicon.svg"
+						alt="Site Logo"
+						class="header-navigation-logo"
+					/>
+				</div>
+				<button
+					class="navbar-toggler navbar-toggler-button"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div
+					class="collapse navbar-collapse justify-content-end pt-3 pt-lg-0"
+					id="navbarNav"
+				>
+					<ul class="navbar-nav">
+						<li class="nav-item fs-18 mt-0">
+							<div class="nav-link fs-18">Home</div>
+						</li>
+						<li class="nav-item fs-18 mt-0 dropdown">
+							<button
+								class="nav-link dropdown-toggle text-white d-flex justify-content-center align-items-center"
+								id="navbarDropdown-1"
+								role="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false"
+							>
+								Services
+								<svg class="icon icon-chevron-down">
+									<use xlink:href="#nav-chevron"></use>
+								</svg>
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-nav-item">
+									<div class="dropdown-item-nav-item fs-18">
+										Web Development
+									</div>
+								</li>
+								<li class="dropdown-nav-item">
+									<div class="dropdown-item-nav-item fs-18">
+										SEO
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item mt-0 fs-18">
+							<div class="nav-link fs-18">About Us</div>
+						</li>
+						<li class="nav-item mt-0 fs-18">
+							<div class="nav-link fs-18">Contact</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</div>

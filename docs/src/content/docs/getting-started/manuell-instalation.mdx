@@ -1,0 +1,59 @@
+---
+title: Manuell Installation
+description: A guide in my new Starlight docs site.
+---
+
+# Manual Installation Steps
+
+## Prerequisites
+- A local WordPress installation where the theme or plugin will be added.
+- [Node.js](https://nodejs.org/en/) installed on your local machine.
+- [pnpm](https://pnpm.io/installation) installed globally.
+
+## Installation Instructions
+
+1. **Check out the repository into your local WordPress installation**
+- For a theme: place the repository contents in `wp-content/themes/your-theme`.
+- For a plugin: place the repository contents in `wp-content/plugins/your-plugin`.
+
+2. **Install Node.js and pnpm (if not already installed)**
+- Install Node.js from the official website: [https://nodejs.org/](https://nodejs.org/)
+- Install pnpm:
+
+```bash
+npm install -g pnpm
+```
+<hr/>
+
+3. **Install dependencies**
+Navigate to the project directory and install the dependencies:
+
+```bash
+pnpm install
+```
+<hr/>
+
+4. **Run the development environment**
+This will start a local dev environment and watch for changes:
+
+```bash
+pnpm run dev
+```
+<hr/>
+
+5. **Build for production**
+Once satisfied with your changes:
+
+```bash
+pnpm run build
+```
+<hr/>
+
+6. **Adjusting Purge Settings for Missing Styles**
+If some styles are missing after the build, add the relevant selectors or styles to:
+
+- purge.php, or
+- Purge ignore settings in the configuration files
+This ensures those styles won’t be removed in the production build.
+
+You’re all set! You now have a local development environment ready for making changes and producing production-ready builds as needed.

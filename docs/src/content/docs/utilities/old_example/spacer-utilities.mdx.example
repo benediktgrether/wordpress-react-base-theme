@@ -1,0 +1,112 @@
+---
+title: Spacer Utilities
+description: How to Work with the Spacer Utilities
+
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+# Spacer Utilities
+
+## How to work with the Spacer Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Spacer_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+export const useUtilsSpacer = `
+Spacer_Utils::add_spacer_control($this);
+`
+
+<Code code={useUtilsSpacer} lang="php"/>
+
+<hr />
+
+**Use the Component in the render method**
+
+export const renderUtils = `
+<?php echo Spacer_Utils::render_spacer($settings); ?>
+`
+
+<Code code={renderUtils} lang="php"/>
+
+<hr />
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+require_once(__DIR__ . '/widgets/utilities/spacer-utilities.php');
+`
+
+<Code code={registerUtils} lang="php"/>
+
+## Utils class and render methode
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\\Utilities;
+
+class Spacer_Utils
+{
+    public static function add_spacer_control($widget)
+    {
+        $widget->add_control(
+            'spacer',
+            [
+                'label' => __('Spacer', 'text-domain'),
+                'type' => \\Elementor\\Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => __('None', 'text-domain'),
+                    'small' => __('Small', 'text-domain'),
+                    'medium' => __('Medium', 'text-domain'),
+                    'large' => __('Large', 'text-domain'),
+                    'xLarge' => __('Extra Large', 'text-domain'),
+                ],
+            ]
+        );
+    }
+
+    public static function render_spacer($settings)
+    {
+        $spacer = $settings['spacer'];
+
+        if (empty($spacer)) {
+            return;
+        }
+
+        $spacerClass = "";
+
+        switch ($spacer) {
+            case 'small':
+                $spacerClass = 'mt-3';
+                break;
+            case 'medium':
+                $spacerClass = 'mt-4';
+                break;
+            case 'large':
+                $spacerClass = 'mt-3 mt-lg-5';
+                break;
+            case 'xLarge':
+                $spacerClass = 'mt-5 mt-lg-10';
+                break;
+            default:
+                $spacerClass = 'mt-0';
+                break;
+        }
+
+        return $spacerClass;
+    }
+}
+`
+
+<Code code={utilsClass} lang="php"/>

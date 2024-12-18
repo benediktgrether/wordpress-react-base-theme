@@ -1,0 +1,104 @@
+---
+title: Content Utilities
+description: How to Work with the Content Utilities
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+
+# Content Utilities
+
+## How to work with the Content Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Content_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+export const useUtils = `
+Content_Utils::add_content_control($this, 'content', 'Content');
+`
+
+<Code code={useUtils} lang="php"/>
+
+<hr />
+
+**Add inline editing attributes if the control is not in a repeater**
+
+export const inlineEdit = `
+    $this->add_render_attribute('content', 'class', 'fs-16 mt-2');
+    $this->add_inline_editing_attributes('content', 'advanced');
+`
+
+<Code code={inlineEdit} lang="php"/>
+
+<hr />
+
+**Use the Component in the render method**
+
+export const renderUtils = `
+    <?php Content_Utils::render_content($settings,
+    'content', $this->get_render_attribute_string('content'));
+    ?>
+`
+
+<Code code={renderUtils} lang="php"/>
+
+<hr />
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+    require_once(__DIR__ . '/widgets/utilities/content-utilities.php');
+`
+
+<Code code={registerUtils} lang="php"/>
+
+<hr />
+
+## Utils class and render method
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\\Utilities;
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
+class Content_Utils
+{
+    public static function add_content_control(
+        $widget, $id = 'content', $label = 'Content', $default = 'Content'
+    )
+    {
+        $widget->add_control(
+            $id,
+            [
+                'label' => __($label, 'text-domain'),
+                'type' => \\Elementor\\Controls_Manager::WYSIWYG,
+                'default' => __($default, 'text-domain'),
+                'label_block' => true,
+            ]
+        );
+    }
+
+    public static function render_content($settings, $id = 'content', $class = "")
+    {
+        $content = $settings[$id];
+        $class_attribute = !empty($class) ? "{$class}" : 'class="fs-18 fw-light"';
+
+        echo "<div {$class_attribute}>{$content}</div>";
+    }
+}
+`
+
+<Code code={utilsClass} lang="php"/>

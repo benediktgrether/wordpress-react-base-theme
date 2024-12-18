@@ -1,0 +1,63 @@
+{
+  "Add new MDX Documentation": {
+    "prefix": "docs",
+    "body": [
+      "---",
+      "title: ${TM_FILENAME_BASE/(.)(.*)/${1:/upcase}${2}/}",
+      "description: ${1:Your Description}",
+      "---",
+      "",
+      "import { Code } from '@astrojs/starlight/components';"
+    ],
+    "description": "Insert MDX Documentation for Astro with Capitalized Title and Description"
+  },
+  "Add new MDX Documentation with Sidebar Order": {
+    "prefix": "docsSidebar",
+    "body": [
+      "---",
+      "title: ${TM_FILENAME_BASE/(.)(.*)/${1:/upcase}${2}/}",
+      "description: ${1:Your Description}",
+      "sidebar:",
+      "  order: ${2:0}",
+      "---",
+      "",
+      "import { Code } from '@astrojs/starlight/components';"
+    ],
+    "description": "Insert MDX Documentation for Astro with Capitalized Title, Description, and Sidebar Order"
+  },
+  "Add new MDX Documentation with Badge": {
+    "prefix": "docsBadge",
+    "body": [
+      "---",
+      "title: ${TM_FILENAME_BASE/(.)(.*)/${1:/upcase}${2}/}",
+      "description: ${1:Your Description}",
+      "sidebar:",
+      "  badge:",
+      "    text: ${2:New}",
+      "    variant: ${3:default}",
+      "# variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';",
+      "---",
+      "",
+      "import { Code } from '@astrojs/starlight/components';"
+    ],
+    "description": "Insert MDX Documentation for Astro with Capitalized Title, Description, and Sidebar Badge"
+  },
+  "Add new MDX Documentation with Sidebar Order and Badge": {
+    "prefix": "docsSidebarBadge",
+    "body": [
+      "---",
+      "title: ${TM_FILENAME_BASE/(.)(.*)/${1:/upcase}${2}/}",
+      "description: ${1:Your Description}",
+      "sidebar:",
+      "  order: ${2:0}",
+      "  badge:",
+      "    text: ${3:New}",
+      "    variant: ${4:default}",
+      "# variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';",
+      "---",
+      "",
+      "import { Code } from '@astrojs/starlight/components';"
+    ],
+    "description": "Insert MDX Documentation for Astro with Capitalized Title, Description, Sidebar Order, and Badge"
+  }
+}

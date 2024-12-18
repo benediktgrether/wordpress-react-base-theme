@@ -1,0 +1,96 @@
+---
+title: Anchor Utilities
+description: How to Work with the Anchor Utilities
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+# Anchor Utilities
+
+## How to work with the Anchor Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Anchor_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+export const useUtilsAnchor = `
+Anchor_Utils::add_anchor_control($this);
+`
+
+<Code code={useUtilsAnchor} lang="php"/>
+
+<hr />
+
+**Use the Component in the render method**
+
+The Anchor Utils is working with an id attribute.
+
+export const renderUtils = `
+<?php echo Anchor_Utils::render_anchor($settings); ?>
+`
+
+<Code code={renderUtils} lang="php"/>
+
+# Example of the utils class and render methode
+
+export const exampleRenderUtils = `
+<div <?php echo Anchor_Utils::render_anchor($settings); ?>
+class="<?php echo Spacer_Utils::render_spacer($settings); ?>">
+...
+</div>
+`
+
+<Code code={exampleRenderUtils} lang="php"/>
+
+<hr />
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+require_once(__DIR__ . '/widgets/utilities/anchor-utilities.php');
+`
+
+<Code code={registerUtils} lang="php"/>
+
+## Utils class and render methode
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\\Utilities;
+
+class Anchor_Utils
+{
+    public static function add_anchor_control($widget)
+    {
+        $widget->add_control(
+            'anchor',
+            [
+                'label' => esc_html__('Anchor Link', 'textdomain'),
+                'type' => \\Elementor\\Controls_Manager::TEXT,
+            ]
+        );
+    }
+
+    public static function render_anchor($settings)
+    {
+        $anchor = $settings['anchor'];
+
+        if (empty($anchor)) {
+            return;
+        }
+
+        return "id=" . $anchor;
+    }
+}
+`
+
+<Code code={utilsClass} lang="php"/>

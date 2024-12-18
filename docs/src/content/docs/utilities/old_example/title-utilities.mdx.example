@@ -1,0 +1,182 @@
+---
+title: Title Utilities
+description: How to Work with the Title Utilities
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+
+# Title Utilities
+
+## How to work with the Title Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Title_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+TEXT
+
+export const useUtilsText = `
+Title_Utils::add_title_control(
+    $this,
+    'title',
+    'Title',
+    'TEXT',
+    'This is my Placeholder Text for the Title'
+    );
+`
+
+<Code code={useUtilsText} lang="php"/>
+
+<hr />
+
+TEXTAREA
+
+export const useUtilsTextarea = `
+Title_Utils::add_title_control(
+    $this,
+    'title',
+    'Title',
+    'TEXTAREA',
+    'This is my Placeholder Text for the Title'
+    );
+`
+
+<Code code={useUtilsTextarea} lang="php"/>
+
+<hr />
+
+WYSIWYG
+
+export const useUtilsWYSIWYG = `
+Title_Utils::add_title_control(
+    $this,
+    'title',
+    'Title',
+    'WYSIWYG',
+    'This is my Placeholder Text for the Title',
+    'h2'
+    );
+`
+
+<Code code={useUtilsWYSIWYG} lang="php"/>
+
+<hr />
+
+**Add inline editing attributes if the control is not in a repeater**
+
+export const inlineEdit = `
+$this->add_render_attribute('title', 'class', 'font-family-heading fs-32');
+$this->add_inline_editing_attributes('title', 'none');
+`
+
+<Code code={inlineEdit} lang="php"/>
+
+<hr />
+
+**Use the Component in the render method**
+
+export const renderUtils = `
+<?php echo Title_Utils::render_title(
+    $settings,
+    'title',
+    $this->get_render_attribute_string('title')
+);
+?>
+`
+
+<Code code={renderUtils} lang="php"/>
+
+<hr />
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+require_once(__DIR__ . '/widgets/utilities/title-utilities.php');
+`
+
+<Code code={registerUtils} lang="php"/>
+
+<hr />
+
+## Utils class and render method
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\\Utilities;
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
+class Title_Utils
+{
+    public static function add_title_control(
+        $widget,
+        $id = 'title',
+        $label = 'Title',
+        $input_type = "TEXTAREA",
+        $default = '',
+        $tag = "h2"
+    )
+    {
+        $widget->add_control(
+            $id,
+            [
+                'label' => __($label, 'text-domain'),
+                'type' => \\Elementor\\Controls_Manager::TEXTAREA,
+                'default' => __($default, 'text-domain'),
+                'label_block' => true,
+            ]
+        );
+
+        if ($input_type === "TEXT") {
+            $widget->update_control(
+                $id,
+                [
+                    'type' => \\Elementor\\Controls_Manager::TEXT, // Update to text if specified
+                ]
+            );
+        }
+
+        if ($input_type === "WYSIWYG") {
+            $widget->update_control(
+                $id,
+                [
+                    'type' => \\Elementor\\Controls_Manager::WYSIWYG, // Update to text if specified
+                    'default' => __('<' . $tag . '>' . $default . '</' . $tag . '>', 'text-domain'),
+                ]
+            );
+        }
+    }
+
+    public static function render_title($settings, $id = 'title', $class = "", $tag = "")
+    {
+        $title = $settings[$id];
+        $class_attribute = !empty($class) ? "{$class}" : 'class="fs-42 fw-light"';
+        $tag = !empty($tag) ? $tag : 'h2';
+
+        echo "<{$tag} {$class_attribute}>{$title}</{$tag}>";
+    }
+
+    public static function render_wysiwyg_title($settings, $id = 'title', $class = "")
+    {
+        $title = $settings[$id];
+        $class_attribute = !empty($class) ? "{$class}" : 'class="fs-42 fw-light"';
+
+        echo "<div {$class_attribute}>{$title}</div>";
+    }
+}
+
+`
+
+<Code code={utilsClass} lang="php"/>

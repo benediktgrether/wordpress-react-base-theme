@@ -1,0 +1,39 @@
+$color-primary: #BE2830;
+$color-secondary: #5C5C5B;
+$color-tertiary: #F5F5F5;
+$color-white: #ffffff;
+$color-black: #000000;
+$color-cta: $color-primary;
+$color-text: $color-black;
+$color-warning: #ffda6a;
+
+
+$color-gray-100: #f8f9fa;
+$color-gray-200: #e9ecef;
+$color-gray-300: #dee2e6;
+$color-gray-400: #ced4da;
+$color-gray-500: #adb5bd;
+$color-gray-600: #6c757d;
+$color-gray-700: #495057;
+$color-gray-800: #343a40;
+$color-gray-900: #212529;
+
+$theme-colors: (
+    "primary": $color-primary,
+    "secondary": $color-secondary,
+    "tertiary": $color-tertiary,
+    "white": $color-white,
+    "black": $color-black,
+    "cta": $color-cta,
+    "text": $color-text,
+    "gray-100": $color-gray-100,
+    "gray-200": $color-gray-200,
+    "gray-300": $color-gray-300,
+    "gray-400": $color-gray-400,
+    "gray-500": $color-gray-500,
+    "gray-600": $color-gray-600,
+    "gray-700": $color-gray-700,
+    "gray-800": $color-gray-800,
+    "gray-900": $color-gray-900,
+    "warning": $color-warning
+);

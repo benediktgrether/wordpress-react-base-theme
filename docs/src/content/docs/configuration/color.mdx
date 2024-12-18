@@ -1,0 +1,231 @@
+---
+title: Color
+description: This documentation provides an overview of the Color Settings component, which allows users to select predefined colors for custom WordPress blocks.
+sidebar:
+  order: 1
+  badge:
+    text: New
+    variant: default
+# variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+import Color from "@components/configuration/color/Color.astro";
+
+<Color />
+
+
+---
+
+## Overview
+
+The **Color Settings** feature enables users to choose a color from a predefined palette. It includes utilities for managing default color attributes and dynamically updating block settings based on the selected color.
+
+---
+
+### Import Information
+
+#### JavaScript Import
+
+```jsx
+import {
+    defaultColorNameAttributes,
+    ColorSettings,
+} from '../../configuration/color/colors';
+```
+
+```jsx
+    attributes: {
+        ...defaultColorNameAttributes
+
+        // To Override the default color name attribute
+        colorName: { type: 'string', default: 'white' },
+        // Other attributes...
+```
+
+```jsx
+<ColorSettings
+    title="Color Settings"
+    attributes={attributes}
+    setAttributes={setAttributes}
+/>
+```
+
+```jsx
+let bgColor;
+switch (attributes.colorName) {
+    case 'primary':
+        bgColor = 'bg-primary';
+        break;
+    case 'secondary':
+        bgColor = 'bg-secondary';
+        break;
+    case 'black':
+        bgColor = 'bg-black';
+        break;
+    case 'white':
+        bgColor = 'bg-white';
+        break;
+    default:
+        bgColor = 'bg-primary';
+}
+```
+
+```jsx
+<div className={bgColor}>
+```
+
+
+---
+
+## Default Color Attributes
+
+The `defaultColorNameAttributes` object defines the default color name attribute.
+
+```javascript
+export const defaultColorNameAttributes = {
+    colorName: { type: 'string', default: 'primary' },
+};
+```
+
+- **`colorName`**: The name of the color, defaulting to `'primary'`.
+
+---
+
+## Color Values
+
+The `colorValues` array contains the predefined color palette.
+
+```javascript
+export const colorValues = [
+    { name: 'primary', color: '#BE2830' },
+    { name: 'secondary', color: '#5C5C5B' },
+    { name: 'black', color: '#000000' },
+    { name: 'white', color: '#fff' },
+    { name: 'gray', color: '#adb5bd' },
+];
+```
+
+### Color Definitions
+
+| Name       | Hex Code   |
+|------------|------------|
+| `primary`  | `#BE2830`  |
+| `secondary`| `#5C5C5B`  |
+| `black`    | `#000000`  |
+| `white`    | `#ffffff`  |
+| `gray`     | `#adb5bd`  |
+
+---
+
+## ColorSettings Component
+
+The `ColorSettings` component renders a color palette and manages color selection.
+
+### Component Definition
+
+```javascript
+export function ColorSettings({ title, attributes, setAttributes }) {
+    const currentColorValue = colorValues.filter((color) => {
+        return color.name === attributes.colorName;
+    })[0].color;
+
+    function handleColorChange(colorCode) {
+        // from the hex value that the color palette gives us, we need to find its color name
+        const { name } = getColorObjectByColorValue(colorValues, colorCode);
+        setAttributes({ colorName: name });
+    }
+
+    return (
+        <PanelBody title={title}>
+            <PanelRow>
+                <ColorPalette
+                    disableCustomColors={true}
+                    clearable={false}
+                    colors={colorValues}
+                    value={currentColorValue}
+                    onChange={handleColorChange}
+                />
+            </PanelRow>
+        </PanelBody>
+    );
+}
+```
+
+### Props
+
+- **`title`**: The title displayed for the color settings panel.
+- **`attributes`**: The block attributes, including the current color name.
+- **`setAttributes`**: A function to update the block's attributes.
+
+---
+
+## How to Use
+
+1. Import the required components and functions:
+
+    ```javascript
+    import { ColorSettings, colorValues, defaultColorNameAttributes } from './path-to-your-file';
+    ```
+
+2. Add the `defaultColorNameAttributes` to your block's attribute definitions:
+
+    ```javascript
+    const attributes = {
+        ...defaultColorNameAttributes,
+        // Other attributes...
+    };
+    ```
+
+3. Include the `ColorSettings` component in your block's settings panel:
+
+    ```javascript
+    <ColorSettings
+        title="Color Settings"
+        attributes={attributes}
+        setAttributes={setAttributes}
+    />
+    ```
+
+4. Use the `attributes.colorName` value to apply styles in your block's frontend or editor output.
+
+---
+
+## Example Usage
+
+### Block Registration
+
+```javascript
+registerBlockType('my-plugin/my-block', {
+    attributes: {
+        ...defaultColorNameAttributes,
+        // Other attributes...
+    },
+    edit({ attributes, setAttributes }) {
+        return (
+            <div style={{ color: colorValues.find(c => c.name === attributes.colorName).color }}>
+                <ColorSettings
+                    title="Color Settings"
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+                {/* Block content */}
+            </div>
+        );
+    },
+    save({ attributes }) {
+        return (
+            <div style={{ color: colorValues.find(c => c.name === attributes.colorName).color }}>
+                {/* Block content */}
+            </div>
+        );
+    },
+});
+```
+
+---
+
+## Conclusion
+
+The **Color Settings** component simplifies color selection for WordPress blocks by providing a predefined palette and dynamic attribute management. It ensures consistent color usage and an intuitive user interface.

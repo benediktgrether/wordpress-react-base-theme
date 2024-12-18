@@ -1,0 +1,81 @@
+---
+title: Icon Utilities
+description: How to Work with the Icon Utilities
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+# Icon Utilities
+
+## How to work with the Icon Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Icon_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+export const useUtilsIcon = `
+Icon_Utils::add_icon_control($this, 'icon', 'Icon');
+`
+
+<Code code={useUtilsIcon} lang="php" />
+
+<hr />
+
+**Use the Component in the render method**
+
+We are using the Icons Manager from Elementor to render the icon.
+
+export const renderUtils = `
+<?php \\Elementor\\Icons_Manager::render_icon($social_media_item['icon'], ['aria-hidden' => 'true']); ?>
+`
+
+<Code code={renderUtils} lang="php" />
+
+<hr />
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+require_once(__DIR__ . '/widgets/utilities/icon-utilities.php');
+`
+
+<Code code={registerUtils} lang="php" />
+
+
+## Utils class and render methode
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\\Utilities;
+
+class Icon_Utils
+{
+    public static function add_icon_control($widget, $id = "icon", $label = "Icon", $default = "fa fa-star")
+    {
+        $widget->add_control(
+            $id,
+            [
+                'label' => __($label, 'text-domain'),
+                'type' => \\Elementor\\Controls_Manager::ICONS,
+                'default' => [
+                    'value' => $default,
+                    'library' => 'fa-solid',
+                ],
+            ]
+        );
+    }
+}
+`
+
+<Code code={utilsClass} lang="php" />
+
+

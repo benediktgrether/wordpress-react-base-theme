@@ -1,0 +1,26 @@
+---
+const { color, title } = Astro.props as {
+    color: string;
+    title: string;
+};
+
+const classNameColor = `bg-${color}`;
+---
+
+<style lang="scss">
+    .w-64px {
+        width: 64px;
+    }
+
+    .h-64px {
+        height: 64px;
+    }
+</style>
+
+<div
+    class="mt-0 px-2 d-flex justify-content-center align-items-center flex-column"
+>
+    <div class={`color ${classNameColor} w-64px h-64px rounded-circle shadow`}>
+    </div>
+    <div class="">{color}</div>
+</div>

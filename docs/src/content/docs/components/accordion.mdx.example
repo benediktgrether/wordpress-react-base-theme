@@ -1,0 +1,213 @@
+---
+title: Accordion
+description: Your Description
+sidebar:
+  badge:
+    text: New
+    variant: default
+# variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+import Accordion from "@components/components/Accordion/Accordion.astro";
+
+<Accordion />
+
+<hr/>
+
+This documentation provides an overview of the `Accordion` and `Accordion Item` components used within a WordPress environment. These components are registered as Gutenberg blocks and are intended for use in a theme or plugin that supports block-based editing.
+
+
+The Accordion system consists of two main components:
+
+1. **Accordion Container** (`basetheme/accordion-container`):
+   Acts as the parent block that can contain one or multiple Accordion Items. It sets up the structure and provides a unique `UUID` to ensure proper functionality and reference for each nested Accordion Item.
+
+2. **Accordion Item** (`basetheme/accordion-item`):
+   A child block that resides inside the Accordion Container. Each Accordion Item represents a question and answer pair (or a collapsible section of content).
+
+## Files
+
+- **Accordion Container Block**:
+  - `accordion-container.jsx` (Editor-side logic)
+  - `accordion-container.php` (Frontend rendering logic)
+
+- **Accordion Item Block**:
+  - `accordion-item.jsx` (Editor-side logic)
+  - `accordion-item.php` (Frontend rendering logic)
+
+## Accordion Container
+
+### Block Registration
+
+**File:** `accordion-container.jsx`
+
+- **Name:** `basetheme/accordion-container`
+- **Title:** Accordion
+- **Category:** layout
+- **Parent:** `basetheme/container` (This block must be placed inside a `basetheme/container` block)
+- **Description:** A container that groups multiple accordion items together.
+
+### Attributes
+
+- **uuid**: A unique identifier (string) generated using `uuidv4()` to ensure each accordion instance is distinct.
+- **Spacer Attributes (spacer)**: Controlled by the `SpacerSettings` component to add spacing around the accordion. Default is `medium`.
+
+### Edit Component
+
+The edit component (`EditComponent`) uses:
+- `InspectorControls` to display spacer settings.
+- `InnerBlocks` to allow inserting `basetheme/accordion-item` blocks.
+- A template ensures at least one `accordion-item` is present.
+- Uses `useEffect` to generate a `uuid` if none exists.
+
+**Key Points:**
+- The container is wrapped in a styled `div` (`.border .border-light .p-2`) for visual clarity in the editor.
+- The `InnerBlocks` are rendered inside a `.accordion` container.
+- Allowed blocks: `basetheme/accordion-item`.
+
+### Save Component
+
+The save component (`SaveComponent`) returns the `InnerBlocks.Content`, as the actual markup on the frontend is handled by `accordion-container.php`.
+
+### Frontend Rendering
+
+**File:** `accordion-container.php`
+
+- Wraps the accordion items in a `<div class="bs-accordion">` container.
+- Uses the `uuid` attribute to create a unique `id` for the parent container: `id="parent-accordion-id-{uuid}"`
+- Adds spacing classes via `Spacer_Utils::render_spacer($attributes['spacer'])`.
+
+**Example Frontend Markup:**
+```php
+<?php
+
+use basetheme\Utilities\Spacer_Utils;
+
+
+if (!isset($attributes["spacer"])) {
+    $attributes["spacer"] = "medium";
+}
+
+if (!isset($attributes['uuid'])) {
+    $attributes['uuid'] = 'error';
+}
+
+?>
+<div class="bs-accordion <?php echo Spacer_Utils::render_spacer($attributes['spacer']); ?>">
+    <div class="accordion" id="parent-accordion-id-<?php echo $attributes['uuid']; ?>">
+        <?php echo $content; ?>
+    </div>
+</div>
+```
+
+# Accordion Item
+
+## Block Registration
+
+**File:** `accordion-item.jsx`
+
+- **Name:** `basetheme/accordion-item`
+- **Title:** Accordion Item
+- **Category:** layout
+- **Parent:** `basetheme/accordion-container`
+- **Description:** A collapsible item that belongs inside an Accordion.
+
+## Attributes
+
+- **question (string):** The title or question to be displayed on the accordion header. Default: `"Frage"`.
+- **answer (string):** The content or answer displayed inside the accordion body. Default: `"Antwort"`.
+- **uuid (string):** Inherited from the parent container to associate the item with the correct accordion group.
+- **itemUuid (string):** A unique identifier for each Accordion Item, generated with `uuidv4()`.
+
+## Edit Component
+
+**Key Points:**
+- Uses `RichText` fields to edit `question` and `answer` attributes.
+- Obtains the parent block’s `uuid` using `useSelect` and sets it to the item’s `uuid` attribute if it differs.
+- Generates a unique `itemUuid` for each item, and regenerates it if the block is copied or duplicated.
+- The editor displays a styled accordion item with editable `question` and `answer` fields.
+
+## Save Component
+
+`save` returns `null` as the frontend output is handled by the PHP template.
+
+## Frontend Rendering
+
+**File:** `accordion-item.php`
+
+- Renders a `.accordion-item` including a `.accordion-header` and a `.accordion-collapse` section.
+- Uses Bootstrap classes like `accordion-button` and `accordion-collapse`.
+- The `data-bs-target` and `data-bs-parent` attributes are set using the `uuid` and `itemUuid` attributes to ensure proper collapse/expand behavior.
+- `question` and `answer` attributes are output as HTML content.
+
+**Example Frontend Markup:**
+```php
+<?php
+
+if (!isset($attributes['uuid'])) {
+    $attributes['uuid'] = 'error';
+}
+
+if (!isset($attributes['itemUuid'])) {
+    $attributes['itemUuid'] = 'childError';
+}
+
+?>
+
+<div class="accordion-item py-2">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-child-id-<?php echo $attributes['itemUuid']; ?>" aria-expanded="false" aria-controls="accordion-child-id-<?php echo $attributes['itemUuid']; ?>">
+            <?php echo $attributes['question']; ?>
+        </button>
+    </h2>
+    <div id="accordion-child-id-<?php echo $attributes['itemUuid']; ?>" class="accordion-collapse collapse" data-bs-parent="#parent-accordion-id-<?php echo $attributes['uuid']; ?>">
+        <div class="accordion-body">
+            <?php echo $attributes['answer']; ?>
+        </div>
+    </div>
+</div>
+```
+
+# Usage
+
+**Add the Accordion Container:**
+Within the WordPress Block Editor, insert a `basetheme/container` block. Inside that container, add the Accordion block (`basetheme/accordion-container`).
+
+**Add Accordion Items:**
+Within the Accordion Container, insert one or more `basetheme/accordion-item` blocks. Each item will have a question and an answer that can be edited directly in the block editor.
+
+**Styling & Spacing:**
+Use the Inspector Controls on the Accordion Container to adjust spacing (e.g., small, medium, large) around the entire accordion.
+
+**Frontend Rendering:**
+On the frontend, these blocks render with Bootstrap’s accordion classes. Clicking on the question toggles the display of the corresponding answer.
+
+---
+
+## Notes
+
+- **UUIDs:** Ensure multiple accordions on the same page do not conflict by using unique `uuid` and `itemUuid` attributes.
+- **Copying an Item:** If an accordion item is duplicated, it will be assigned a new `itemUuid`, ensuring uniqueness.
+- **Bootstrap Integration:**
+  The markup leverages Bootstrap’s accordion classes (`accordion`, `accordion-item`, `accordion-header`, `accordion-button`, `accordion-collapse`) and attributes (`data-bs-toggle`, `data-bs-target`) to provide a collapsible interface. Make sure Bootstrap’s JS and CSS are included in your theme or site.
+
+---
+
+## Potential Customizations
+
+- **Styling:**
+  Adjust classes or add custom CSS to modify colors, spacing, and transitions.
+
+- **Additional Attributes:**
+  Extend the `registerBlockType` calls to add custom fields like icons, animations, or custom HTML structures.
+
+- **Localization:**
+  Use translation functions to localize strings like `"Frage"` and `"Antwort"`.
+
+---
+
+## Conclusion
+
+This Accordion system provides a flexible, easily editable, and responsive Q&A or collapsible content structure within the WordPress block editor environment. By understanding the attributes, structure, and styling, you can confidently incorporate these blocks into your WordPress site and customize them as needed.

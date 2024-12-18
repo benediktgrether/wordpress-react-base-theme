@@ -1,0 +1,67 @@
+---
+title: Icon
+description: Your Description
+sidebar:
+  order: 5
+  badge:
+    text: Deprecated
+    variant: danger
+# variant?: 'note' | 'tip' | 'caution' | 'danger' | 'success' | 'default';
+---
+
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+## Icon Configuration
+
+<Aside type="caution">The icon configuration is deprecated as we will transition to using Gutenberg icons for the backend in the future. <br/> https://wordpress.github.io/gutenberg/?path=/story/icons-icon--library</Aside>
+
+## Overview
+The following code snippet contains the icon configuration for various components. This configuration has been **deprecated** and should no longer be used in new implementations. However, it is retained here for reference and documentation purposes.
+
+> **Note:** This icon configuration is deprecated and may be removed in future versions. Developers should migrate to the updated approach when available.
+
+---
+
+```javascript
+export const icon = {
+    paragraph: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M192 32l64 0 160 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0 0 352c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-352-32 0 0 352c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96-32 0c-88.4 0-160-71.6-160-160s71.6-160 160-160z" />
+        </svg>
+    ),
+    heading: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M0 64C0 46.3 14.3 32 32 32l48 0 48 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-16 0 0 112 224 0 0-112-16 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l48 0 48 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-16 0 0 144 0 176 16 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-48 0-48 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l16 0 0-144-224 0 0 144 16 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-48 0-48 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l16 0 0-176L48 96 32 96C14.3 96 0 81.7 0 64z" />
+        </svg>
+    ),
+    heroSlider: (
+        <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            aria-hidden="true"
+            focusable="false"
+        >
+            <path
+                d="M16.375 4.5H4.625a.125.125 0 0 0-.125.125v8.254l2.859-1.54a.75.75 0 0 1 .68-.016l2.384 1.142 2.89-2.074a.75.75 0 0 1 .874 0l2.313 1.66V4.625a.125.125 0 0 0-.125-.125Zm.125 9.398-2.75-1.975-2.813 2.02a.75.75 0 0 1-.76.067l-2.444-1.17L4.5 14.583v1.792c0 .069.056.125.125.125h11.75a.125.125 0 0 0 .125-.125v-2.477ZM4.625 3C3.728 3 3 3.728 3 4.625v11.75C3 17.273 3.728 18 4.625 18h11.75c.898 0 1.625-.727 1.625-1.625V4.625C18 3.728 17.273 3 16.375 3H4.625ZM20 8v11c0 .69-.31 1-.999 1H6v1.5h13.001c1.52 0 2.499-.982 2.499-2.5V8H20Z"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+            ></path>
+        </svg>
+    ),
+    // Remaining icons omitted for brevity
+};
+```
+
+## Notes
+
+- **Deprecated:**
+This configuration is no longer recommended for use in new codebases. Ensure that you migrate to the updated configuration or approach as soon as possible.
+
+- **Retained for Reference:**
+This documentation is intended for archival and reference purposes only.
+
+- **Future Updates:**
+Any future changes to the icons should adhere to the latest standards and guidelines.

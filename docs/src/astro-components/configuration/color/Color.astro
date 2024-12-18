@@ -1,0 +1,17 @@
+---
+import BootstrapProvider from '@components/Provider/BootstrapProvider.astro';
+import ColorItem from './ColorItem.astro';
+---
+
+<BootstrapProvider>
+    <div class="d-flex">
+        <ColorItem color="primary" />
+        <ColorItem color="secondary" />
+        <ColorItem color="tertiary" />
+        <ColorItem color="white" />
+        <ColorItem color="black" />
+        <ColorItem color="cta" />
+        <ColorItem color="text" />
+        <ColorItem color="warning" />
+    </div>
+</BootstrapProvider>

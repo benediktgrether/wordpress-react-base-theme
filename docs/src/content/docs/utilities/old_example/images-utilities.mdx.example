@@ -1,0 +1,189 @@
+---
+title: Image Utilities
+description: How to Work with the Image Utilities
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+# Image Utilities
+
+## How to work with the Image Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Image_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+export const useUtilsImage = `
+Image_Utils::add_image_control($this, 'image', 'Image', 'full', "lazy");
+`
+
+<Code code={useUtilsImage} lang="php" />
+
+<hr />
+
+
+**Use the Component in the render method**
+
+export const renderUtils = `
+<?php echo Image_Utils::render_image($settings, "image", "img-fluid object-fit-cover") ?>
+`
+
+<Code code={renderUtils} lang="php" />
+
+<hr />
+
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+require_once(__DIR__ . '/widgets/utilities/image-utilities.php');
+`
+
+<Code code={registerUtils} lang="php" />
+
+
+## Utils class and render methode
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\\Utilities;
+
+use Elementor\\Group_Control_Image_Size;
+
+class Image_Utils
+{
+    public static function add_image_control($widget, $id = 'image', $label = 'Image', $image_size = 'full', $loading = 'lazy')
+    {
+        $widget->add_control(
+            $id,
+            [
+                'label' => __($label, 'text-domain'),
+                'type' => \\Elementor\\Controls_Manager::MEDIA,
+                "dynamic" => [
+                    "active" => true,
+                ],
+                'default' => [
+                    'url' => \\Elementor\\Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
+
+        $widget->add_responsive_control(
+            $id . "_object-position",
+            [
+                'label' => __('Object Position', 'textdomain'),
+                'type' => \\Elementor\\Controls_Manager::SELECT,
+                'default' => 'center center',
+                'options' => [
+                    'top left' => __('Top Left', 'textdomain'),
+                    'top center' => __('Top Center', 'textdomain'),
+                    'top right' => __('Top Right', 'textdomain'),
+                    'center left' => __('Center Left', 'textdomain'),
+                    'center center' => __('Center Center', 'textdomain'),
+                    'center right' => __('Center Right', 'textdomain'),
+                    'bottom left' => __('Bottom Left', 'textdomain'),
+                    'bottom center' => __('Bottom Center', 'textdomain'),
+                    'bottom right' => __('Bottom Right', 'textdomain'),
+                    'custom' => __('Custom', 'textdomain'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} img' => 'object-position: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $widget->add_responsive_control(
+            $id . "_custom_top_position",
+            [
+                'label' => __('Custom Top Position', 'textdomain'),
+                'type' => \\Elementor\\Controls_Manager::NUMBER,
+                'default' => 50,
+                'condition' => [
+                    $id . "_object-position" => 'custom',
+                ],
+            ]
+        );
+
+        $widget->add_responsive_control(
+            $id . "_custom_left_position",
+            [
+                'label' => __('Custom Left Position', 'textdomain'),
+                'type' => \\Elementor\\Controls_Manager::NUMBER,
+                'default' => 50,
+                'condition' => [
+                    $id . "_object-position" => 'custom',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} img' => 'object-position: {{' . $id . '_custom_left_position.VALUE}}% {{' . $id . '_custom_top_position.VALUE}}%;',
+                ],
+            ]
+        );
+
+        // Dynamically name the size control based on the image ID
+        $widget->add_group_control(
+            \\Elementor\\Group_Control_Image_Size::get_type(),
+            [
+                'name' => $id . '_size', // Unique name based on the image ID
+                'exclude' => ['custom'], // Optional: Exclude sizes you don't want.
+                'include' => [], // Optional: Include specific sizes only.
+                'default' => $image_size,
+                'separator' => 'none',
+                'condition' => [
+                    $id . '[url]!' => '',
+                ],
+            ]
+        );
+
+        $widget->add_control(
+            $id . '_lazy_load',
+            [
+                'label' => __('Lazy Load', 'textdomain'),
+                'type' => \\Elementor\\Controls_Manager::SWITCHER,
+                'label_on' => __('Yes', 'textdomain'),
+                'label_off' => __('No', 'textdomain'),
+                'return_value' => 'lazy',
+                'default' => $loading,
+            ]
+        );
+    }
+
+    public static function render_image($settings, $id = "image", $class = "")
+    {
+        $image = $settings[$id];
+        $image_url = $image['url'];
+        $lazy_load = $settings[$id . '_lazy_load'];
+
+        $class_attribute = !empty($class) ? $class : 'img-fluid';
+
+        if (empty($image['id'])) {
+?>
+            <img src="<?php echo esc_url($image_url); ?>" alt="<?php if (!empty($image['id'])) {echo get_post_meta($image['id'], '_wp_attachment_image_alt', true);}; ?> " class="<?php echo $class_attribute; ?>" loading="<?php echo $lazy_load; ?>">
+
+<?php
+        } else {
+            $image_size = $settings[$id . '_size_size'];
+
+            echo wp_get_attachment_image(
+                $image['id'],
+                $image_size,
+                "",
+                [
+                    "class" => $class_attribute,
+                    "loading" => $lazy_load,
+                ]
+            );
+        }
+    }
+}
+`
+
+<Code code={utilsClass} lang="php" />

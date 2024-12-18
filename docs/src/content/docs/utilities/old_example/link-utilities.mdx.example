@@ -1,0 +1,138 @@
+---
+title: Link Utilities
+description: How to Work with Link Utilities in Elementor
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+# Title Utilities
+
+## How to work with the Link Utilities
+
+**Import the Component into the Head**
+
+export const importUtils = `
+use EverydayElementor\\Utilities\\Link_Utils;
+`
+
+<Code code={importUtils} lang="php"/>
+
+<hr />
+
+**Use the Component in controls**
+
+export const useUtilsLink = `
+Link_Utils::add_link_control($this, "link", "Link");
+Link_Utils::add_link_title_control($this, "link_title", "Title");
+`
+
+<Code code={useUtilsLink} lang="php"/>
+
+<hr />
+
+**Add inline editing attributes if the control is not in a repeater**
+
+export const inlineEdit = `
+    $this->add_render_attribute('link_title', 'class', 'btn btn-primary');
+    $this->add_inline_editing_attributes('link_title', 'none');
+`
+
+<Code code={inlineEdit} lang="php"/>
+
+<hr />
+
+**Use the Component in the render method**
+
+export const renderUtils = `
+<?php echo Link_Utils::render_link($settings, 'link', 'link_title', $this->get_render_attribute_string('link_title')); ?>
+`
+
+<Code code={renderUtils} lang="php"/>
+
+<hr />
+
+## Add the utils to the registration of all widgets
+
+export const registerUtils = `
+require_once(__DIR__ . '/widgets/utilities/link-utilities.php');
+`
+
+<Code code={registerUtils} lang="php"/>
+
+<hr />
+
+## Utils class and render method
+
+export const utilsClass = `
+<?php
+
+namespace EverydayElementor\\Utilities;
+
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
+class Link_Utils
+{
+    public static function add_link_control($widget, $id_link = 'link', $label = 'Link')
+    {
+        $widget->add_control(
+            $id_link,
+            [
+                'label' => __($label, 'text-domain'),
+                'type' => \\Elementor\\Controls_Manager::URL,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'placeholder' => esc_html__('https://your-link.com', 'elementor'),
+                'default' => [
+                    'url' => '',
+                ],
+            ]
+        );
+    }
+
+    public static function add_link_title_control($widget, $id_link_title = 'link_title', $label = 'Link Title')
+    {
+        $widget->add_control(
+            $id_link_title,
+            [
+                'label' => __($label, 'text-domain'),
+                'type' => \\Elementor\\Controls_Manager::TEXT,
+                'default' => __($label, 'text-domain'),
+                'label_block' => true,
+            ]
+        );
+    }
+
+    public static function render_link($settings, $id_link = 'link', $id_link_title = "link_title", $class = "")
+    {
+        $link = $settings[$id_link];
+        $link_title = $settings[$id_link_title];
+        $link_attributes = '';
+        $class_attribute = !empty($class) ? "{$class}" : 'class="btn';
+
+        if (!empty($link['url'])) {
+            // Trim the URL to remove leading/trailing spaces
+            $url = trim($link['url']);
+            $link_attributes .= 'href="' . esc_url($url) . '"';
+        }
+
+        if (!empty($link['is_external'])) {
+            $link_attributes .= ' target="_blank"';
+        }
+
+        if (!empty($link['nofollow'])) {
+            $link_attributes .= ' rel="nofollow"';
+        }
+
+
+
+        echo "<a {$link_attributes} {$class_attribute}>{$link_title}</a>";
+    }
+}
+
+`
+
+<Code code={utilsClass} lang="php"/>
