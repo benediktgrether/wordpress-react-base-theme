@@ -2,14 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="position-relative vh-60">
+                <div class="position-relative w-100 h-100">
                     <div class="position-absolute top-50 start-50 translate-middle">
-                        <h1 class="w-100 fs-300 fw-bold text-gray-light text-center">
+                        <h1 class="w-100 fs-300 fw-bold text-gray-300 text-center">
                             404
                         </h1>
                     </div>
                     <div class="position-absolute top-50 start-50 translate-middle w-100">
-                        <h2 class="w-100 fs-30 fw-bold text-gray-dark text-center">
+                        <h2 class="w-100 fs-30 fw-bold text-gray-700 text-center">
                             Tut uns leid, die Seite konnte nicht gefunden
                             werden.
                         </h2>
