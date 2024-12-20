@@ -4,9 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "NODE_ENV=development wp-scripts start src/js/index.js blocks/**/**/*.jsx",
-        "dev": "NODE_ENV=development wp-scripts start src/js/index.js blocks/**/**/*.jsx",
-        "build": "NODE_ENV=production wp-scripts build src/js/index.js blocks/**/**/*.jsx",
+        "start": "NODE_ENV=development wp-scripts start src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx blocks/layout/**/*.jsx",
+        "dev": "NODE_ENV=development wp-scripts start src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx blocks/layout/**/*.jsx",
+        "build": "NODE_ENV=production wp-scripts build src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx blocks/layout/**/*.jsx",
         "devFast": "wp-scripts start",
         "build:test": "NODE_ENV=production wp-scripts build src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx blocks/layout/**/*.jsx && cd test && backstop test --configPath=backstop.config.js",
         "test:reference": "cd test && backstop reference --configPath=backstop.config.js",

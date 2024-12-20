@@ -37,7 +37,6 @@ registerBlockType('basetheme/heading', {
             type: 'string',
         },
     },
-    parent: ['basetheme/container'],
 
     edit: EditComponent,
     save: () => null, // No save function, handled by PHP
