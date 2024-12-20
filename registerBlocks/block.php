@@ -50,5 +50,4 @@ new JSXBlock('big-teaser', true);
 
 new JSXBlock('blog-post', true);
 new JSXBlock('reference', true);
-
 new JSXBlock('person', true);
