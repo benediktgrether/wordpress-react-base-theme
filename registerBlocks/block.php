@@ -4,6 +4,8 @@
 require_once get_template_directory() . '/registerBlocks/JSXBlock.php';
 
 // Register blocks using JSXBlock
+
+new JSXBlock('main', true);
 new JSXBlock('accordion-container', true);
 new JSXBlock('accordion-item', true);
 

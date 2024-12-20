@@ -1,5 +1,6 @@
 //https://wordpress.github.io/gutenberg/?path=/story/icons-icon--library
 import { registerBlockType } from '@wordpress/blocks';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { layout } from '@wordpress/icons';
 registerBlockType('basetheme/main', {
     title: 'Main',
@@ -17,16 +18,13 @@ registerBlockType('basetheme/main', {
 function EditComponent(props) {
     const { attributes, setAttributes } = props;
     return (
-        <div>
-            <h1>Hello World</h1>
-        </div>
+        <InnerBlocks
+            allowedBlocks={['core/post-content']}
+            template={[['core/post-content']]}
+        />
     );
 }
 
 function SaveComponent() {
-    return (
-        <div>
-            <h1>Hello World</h1>
-        </div>
-    );
+    return <InnerBlocks.Content />;
 }

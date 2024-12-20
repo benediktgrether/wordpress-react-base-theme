@@ -228,6 +228,7 @@ function my_function($allowed_block_types)
 {
 
     return array(
+        "basetheme/main",
         'core/paragraph',
         'basetheme/accordion-container',
         'basetheme/accordion-item',
