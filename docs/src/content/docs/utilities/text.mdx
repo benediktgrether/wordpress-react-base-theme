@@ -1,6 +1,6 @@
 ---
 title: Text
-description: Your Description
+description: This documentation provides an overview of the Text component, which handles text input and alignment options for custom WordPress blocks.
 sidebar:
   badge:
     text: New
@@ -9,3 +9,229 @@ sidebar:
 ---
 
 import { Code } from '@astrojs/starlight/components';
+
+import Text from "@components/utilities/text/Text.astro";
+
+<Text text="This is a text component." />
+
+## Text Component
+
+The **Text** component allows users to input rich text content with optional text alignment controls. It utilizes `RichText`, `BlockControls`, and `AlignmentToolbar` from `@wordpress/block-editor`.
+
+---
+
+## Import Information
+
+### JavaScript Import
+
+```javascript
+import { Text, defaultTextAttributes } from '../../utilities/text/text';
+```
+
+```javascript
+    attributes: {
+        ...defaultTextAttributes,
+        // Other attributes...
+    },
+```
+
+```javascript
+<Text
+    attributes={attributes}
+    setAttributes={setAttributes}
+    enableAlignment={true}
+    className="custom-class"
+/>
+```
+
+### PHP Import
+
+```php
+use basetheme\Utilities\Text_Utils;
+if (!isset($attributes["text"])) {
+    $attributes["text"] = "";
+}
+```
+
+```php
+  <?php echo Text_Utils::render_text($attributes["text"], $attributes, "class"); ?>
+```
+
+## Default Attributes
+
+The `defaultTextAttributes` object defines the default attributes for the text and alignment properties.
+
+```javascript
+export const defaultTextAttributes = {
+    text: {
+        type: 'string',
+    },
+    alignment: {
+        type: 'string',
+    },
+};
+```
+
+- **`text`**: The text content of the block.
+- **`alignment`**: The alignment of the text (`'left'`, `'center'`, `'right'`).
+
+---
+
+## Text Component
+
+The `Text` component renders a rich text editor with optional alignment controls.
+
+### Component Definition
+
+```javascript
+export function Text({
+    attributes,
+    setAttributes,
+    enableAlignment = true,
+    className = '',
+}) {
+    let alignmentClass = '';
+    switch (attributes.alignment) {
+        case 'left':
+            alignmentClass = 'text-start';
+            break;
+        case 'center':
+            alignmentClass = 'text-center';
+            break;
+        case 'right':
+            alignmentClass = 'text-end';
+            break;
+        default:
+            alignmentClass = 'text-start';
+    }
+
+    const combinedClassName = `${alignmentClass} ${className}`.trim();
+
+    if (enableAlignment) {
+        return (
+            <>
+                <BlockControls>
+                    <AlignmentToolbar
+                        value={attributes.alignment}
+                        onChange={(newVal) =>
+                            setAttributes({ alignment: newVal })
+                        }
+                    />
+                </BlockControls>
+                <RichText
+                    value={attributes.text}
+                    onChange={(newText) => setAttributes({ text: newText })}
+                    placeholder="Text eingabe..."
+                    className={combinedClassName}
+                />
+            </>
+        );
+    }
+
+    return (
+        <RichText
+            value={attributes.text}
+            onChange={(newText) => setAttributes({ text: newText })}
+            placeholder="Text eingabe..."
+            className={combinedClassName}
+        />
+    );
+}
+```
+
+### Props
+
+- **`attributes`**: The block's attributes, including `text` and `alignment`.
+- **`setAttributes`**: A function to update the block's attributes.
+- **`enableAlignment`**: *(boolean)* Enables or disables alignment controls. Defaults to `true`.
+- **`className`**: *(string)* Additional CSS classes for the text component.
+
+---
+
+## Alignment Classes
+
+The alignment is mapped to the following Bootstrap text alignment classes:
+
+| Alignment | CSS Class    |
+|-----------|--------------|
+| `left`    | `text-start` |
+| `center`  | `text-center`|
+| `right`   | `text-end`   |
+| *Default* | `text-start` |
+
+---
+
+## How to Use
+
+1. Import the required components and functions:
+
+    ```javascript
+    import { Text, defaultTextAttributes } from './path-to-your-file';
+    ```
+
+2. Add the `defaultTextAttributes` to your block's attribute definitions:
+
+    ```javascript
+    const attributes = {
+        ...defaultTextAttributes,
+        // Other attributes...
+    };
+    ```
+
+3. Include the `Text` component in your block's edit function:
+
+    ```javascript
+    <Text
+        attributes={attributes}
+        setAttributes={setAttributes}
+        enableAlignment={true}
+        className="custom-class"
+    />
+    ```
+
+4. Use the `attributes.text` value in your block's save function or frontend output.
+
+---
+
+## Example Usage
+
+### Block Registration
+
+```javascript
+registerBlockType('my-plugin/my-block', {
+    attributes: {
+        ...defaultTextAttributes,
+        // Other attributes...
+    },
+    edit({ attributes, setAttributes }) {
+        return (
+            <Text
+                attributes={attributes}
+                setAttributes={setAttributes}
+                enableAlignment={true}
+                className="custom-class"
+            />
+        );
+    },
+    save({ attributes }) {
+        const alignmentClass =
+            attributes.alignment === 'center'
+                ? 'text-center'
+                : attributes.alignment === 'right'
+                ? 'text-end'
+                : 'text-start';
+
+        return (
+            <div className={`${alignmentClass} custom-class`}>
+                {attributes.text}
+            </div>
+        );
+    },
+});
+```
+
+---
+
+## Conclusion
+
+The **Text** component provides a versatile and reusable solution for managing text input and alignment in custom WordPress blocks. Its use of `RichText` and `AlignmentToolbar` ensures a seamless and user-friendly experience.

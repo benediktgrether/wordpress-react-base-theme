@@ -19,10 +19,6 @@ const classNameHeight = classNameMap[spacerSize] || 'h-0';
 <style lang="scss">
     $spacer: 1rem;
 
-    .bg-bs-gray-500 {
-        background-color: #212529;
-    }
-
     .h-2 {
         height: calc($spacer * 0.5);
     }
@@ -51,4 +47,4 @@ const classNameHeight = classNameMap[spacerSize] || 'h-0';
 <div class="spacer mt-4 d-flex justify-content-center align-items-center">
     <span>{title}</span>
 </div>
-<div class={`spacer ${classNameHeight} bg-bs-gray-500`}></div>
+<div class={`spacer ${classNameHeight} light-dark-background`}></div>

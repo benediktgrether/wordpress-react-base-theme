@@ -1,0 +1,40 @@
+---
+import BootstrapProvider from '@components/Provider/BootstrapProvider.astro';
+---
+
+<BootstrapProvider>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="position-relative vh-60">
+                    <div
+                        class="position-absolute top-50 start-50 translate-middle"
+                    >
+                        <h1
+                            class="w-100 fs-120 fw-bold text-gray-400 text-center"
+                        >
+                            404
+                        </h1>
+                    </div>
+                    <div
+                        class="position-absolute top-50 start-50 translate-middle w-100"
+                    >
+                        <h2
+                            class="w-100 fs-30 fw-bold text-gray-600 text-center"
+                        >
+                            Tut uns leid, die Seite konnte nicht gefunden
+                            werden.
+                        </h2>
+                    </div>
+                    <div
+                        class="position-absolute top-65 start-50 translate-middle"
+                    >
+                        <div class="btn btn-bootstrap-primary">
+                            Zur Startseite
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</BootstrapProvider>

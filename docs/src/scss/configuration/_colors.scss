@@ -19,21 +19,53 @@ $color-gray-800: #343a40;
 $color-gray-900: #212529;
 
 $theme-colors: (
-    "primary": $color-primary,
-    "secondary": $color-secondary,
-    "tertiary": $color-tertiary,
-    "white": $color-white,
-    "black": $color-black,
-    "cta": $color-cta,
-    "text": $color-text,
-    "gray-100": $color-gray-100,
-    "gray-200": $color-gray-200,
-    "gray-300": $color-gray-300,
-    "gray-400": $color-gray-400,
-    "gray-500": $color-gray-500,
-    "gray-600": $color-gray-600,
-    "gray-700": $color-gray-700,
-    "gray-800": $color-gray-800,
-    "gray-900": $color-gray-900,
-    "warning": $color-warning
+    "bootstrap-primary": $color-primary,
+    "bootstrap-secondary": $color-secondary,
+    "bootstrap-tertiary": $color-tertiary,
+    "bootstrap-white": $color-white,
+    "bootstrap-black": $color-black,
+    "bootstrap-cta": $color-cta,
+    "bootstrap-text": $color-text,
+    "bootstrap-gray-100": $color-gray-100,
+    "bootstrap-gray-200": $color-gray-200,
+    "bootstrap-gray-300": $color-gray-300,
+    "bootstrap-gray-400": $color-gray-400,
+    "bootstrap-gray-500": $color-gray-500,
+    "bootstrap-gray-600": $color-gray-600,
+    "bootstrap-gray-700": $color-gray-700,
+    "bootstrap-gray-800": $color-gray-800,
+    "bootstrap-gray-900": $color-gray-900,
+    "bootstrap-warning": $color-warning
 );
+
+// Mixin to generate background utilities
+@mixin generate-bg-utilities($colors-map) {
+    @each $color-name, $color-value in $colors-map {
+        // Remove the "bootstrap-" prefix if desired
+        // Here we assume all keys start with "bootstrap-" (10 characters + 1 for the hyphen = 11 chars total)
+        $short-name: str-slice($color-name, 11);
+
+        .bg-bootstrap-#{$short-name} {
+            background-color: $color-value !important;
+        }
+    }
+}
+
+// Include the mixin
+@include generate-bg-utilities($theme-colors);
+
+
+// Mixin to generate text color utilities
+@mixin generate-text-utilities($colors-map) {
+    @each $color-name, $color-value in $colors-map {
+        // Strip out "bootstrap-" prefix to get a shorter class name
+        $short-name: str-slice($color-name, 11);
+
+        .text-bootstrap-#{$short-name} {
+            color: $color-value !important;
+        }
+    }
+}
+
+// Include the mixin to generate the text classes
+@include generate-text-utilities($theme-colors);

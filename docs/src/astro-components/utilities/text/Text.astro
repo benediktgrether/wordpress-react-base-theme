@@ -1,0 +1,14 @@
+---
+import BootstrapProvider from '@components/Provider/BootstrapProvider.astro';
+const { text } = Astro.props;
+---
+
+<BootstrapProvider>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 border border-primary p-3">
+                <p>{text}</p>
+            </div>
+        </div>
+    </div></BootstrapProvider
+>

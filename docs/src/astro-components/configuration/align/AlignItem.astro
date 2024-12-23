@@ -11,12 +11,8 @@ const classNameMap = {
 const alignClass = classNameMap[align] || 'justify-content-start';
 ---
 
-<style lang="scss">
-    .bg-bs-gray-500 {
-        background-color: #212529;
-    }
-</style>
-
 <div class={`d-flex ${alignClass}`}>
-    <div class="text-center w-25 py-3 bg-bs-gray-500">align: {align}</div>
+    <div class="text-center w-25 py-3 light-dark-background">
+        align: {align}
+    </div>
 </div>
