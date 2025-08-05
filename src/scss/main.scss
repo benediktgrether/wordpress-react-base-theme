@@ -1,27 +1,30 @@
-@import 'configuration/variables';
+// @import 'configuration/variables';
 
-// Utilities - Bootstrap API
-@import 'utilities/utility-api';
+// // Utilities - Bootstrap API
+// @import 'utilities/utility-api';
 
-// Import Bootstrap scss
-@import 'bootstrap';
+// // Import Bootstrap scss
+// @import 'bootstrap';
 
-@import "backend/editor";
+// @import "backend/editor";
 
-// Utilities
-@import "utilities/swiper";
-@import "utilities/image-backdrop";
+// // Utilities
+// @import "utilities/swiper";
+// @import "utilities/image-backdrop";
 
-// Override
-@import "override/swiper";
-@import "override/cf7";
+// // Override
+// @import "override/swiper";
+// @import "override/cf7";
 
-// Components
-@import "components/navigation";
-@import "components/hero-slider";
-@import "components/logo-swiper";
-@import "components/big-teaser";
-@import "components/blog-post";
-@import "components/reference-post";
-@import "components/person";
-@import "components/footer";
+// // Components
+// @import "components/navigation";
+// @import "components/hero-slider";
+// @import "components/logo-swiper";
+// @import "components/big-teaser";
+// @import "components/blog-post";
+// @import "components/reference-post";
+// @import "components/person";
+// @import "components/footer";
+
+
+@import "tailwindcss";
