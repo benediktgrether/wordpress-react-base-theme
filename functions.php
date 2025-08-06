@@ -9,6 +9,12 @@ function features()
     add_editor_style(array('build/style-index.css', "build/index.css"));
 }
 
+add_action('wp_enqueue_scripts', function () {
+    // Remove Global Styles inline CSS (added by block themes)
+    wp_dequeue_style('global-styles');
+    wp_dequeue_style('global-styles-inline-css');
+}, 20);
+
 add_action('after_setup_theme', 'features');
 
 function addImageSizes()
