@@ -38,7 +38,7 @@ $blog_posts = new WP_Query($args);
                         <div class="p-4">
                             <h2 class="text-2xl font-semibold mb-2"><?php the_title(); ?></h2>
                             <p class="text-gray-600 mb-4"><?php the_excerpt(); ?></p>
-                            <a href="<?php the_permalink(); ?>" class="inline-block bg-primary-default hover:bg-primary-hover text-white font-medium py-2 px-4 rounded transition-colors duration-300">
+                            <a href="<?php the_permalink(); ?>" class="inline-block bg-primary-default hover:bg-primary-hover mt-4 text-white font-medium py-2 px-4 rounded transition-colors duration-300 no-underline">
                                 Read more
                             </a>
                         </div>
