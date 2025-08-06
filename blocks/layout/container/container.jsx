@@ -79,7 +79,7 @@ function EditComponent(props) {
             <div className={`my-4 ${bgColor}`}>
                 <div className={`container ${spacerClass(attributes.spacer)}`}>
                     <div className="row">
-                        <div className="border border-light p-2">
+                        <div className="border border-indigo-600 p-2">
                             <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} />
                         </div>
                     </div>
