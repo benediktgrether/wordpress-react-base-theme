@@ -1,31 +1,31 @@
 <?php
 
 if (!isset($attributes["columnsWdith"])) {
-    $attributes["columnsWdith"] = "col-12 col-md-6";
+    $attributes["columnsWdith"] = "w-full px-2 md:w-6/12 px-2";
 }
 
-$columnsClass = "col-12 col-md-6";
+$columnsClass = "w-full px-2 md:w-6/12 px-2";
 switch ($attributes["columnsWdith"]) {
     case "1/2":
-        $columnsClass = "col-12 col-md-6";
+        $columnsClass = "w-full px-2 md:w-6/12 px-2";
         break;
     case "1/3":
-        $columnsClass = "col-12 col-md-4";
+        $columnsClass = "w-full px-2 md:w-4/12 px-2";
         break;
     case "2/3":
-        $columnsClass = "col-12 col-md-8";
+        $columnsClass = "w-full px-2 md:w-8/12 px-2";
         break;
     case "1/4":
-        $columnsClass = "col-12 col-md-3";
+        $columnsClass = "w-full px-2 md:w-3/12 px-2";
         break;
     case "2/5":
-        $columnsClass = "col-12 col-md-5";
+        $columnsClass = "w-full px-2 md:w-5/12 px-2";
         break;
     case "3/4":
-        $columnsClass = "col-12 col-md-9";
+        $columnsClass = "w-full px-2 md:w-9/12 px-2";
         break;
     default:
-        $columnsClass = "col-12 col-md-6";
+        $columnsClass = "w-full px-2 md:w-6/12 px-2";
         break;
 }
 

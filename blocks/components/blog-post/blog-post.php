@@ -27,7 +27,7 @@ $blog_posts = new WP_Query($args);
 
 ?>
 <div class="bs-blog-post container mt-6">
-    <div class="row">
+    <div class="flex flex-wrap -mx-2">
         <?php
         if ($blog_posts->have_posts()) : ?>
             <?php while ($blog_posts->have_posts()) : $blog_posts->the_post(); ?>

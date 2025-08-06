@@ -54,7 +54,7 @@ function EditComponent(props) {
         <>
             <div className="my-4">
                 <div className="border border-light p-2">
-                    <div className="container">
+                    <div className="container mx-auto">
                         <div {...blockProps}>
                             <div {...innerBlocksProps} />
                         </div>

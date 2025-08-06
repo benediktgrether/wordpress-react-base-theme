@@ -25,3 +25,5 @@
     --color-secondary-900: #7e1c10;
     --color-secondary-950: #440a06;
 }
+
+@import "./backend/editor.css";

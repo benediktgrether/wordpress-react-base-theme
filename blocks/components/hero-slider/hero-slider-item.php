@@ -27,8 +27,8 @@ if (!isset($attributes['linkObject'])) {
             <?php Image_Utils::render_image($attributes, "w-100 h-100 object-fit-cover"); ?>
         </div>
         <div class="position-absolute w-100 z-1 top-50 start-50 translate-middle">
-            <div class="container">
-                <div class="row">
+            <div class="container mx-auto">
+                <div class="flex flex-wrap -mx-2">
                     <div class="col-12 col-lg-6">
                         <?php if ($attributes['text'] != "") : ?>
                             <?php echo Text_Utils::render_text($attributes["text"], $attributes, "fs-72 text-white mb-5"); ?>

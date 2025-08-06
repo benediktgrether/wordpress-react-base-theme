@@ -34,8 +34,8 @@ switch ($attributes['colorName']) {
 ?>
 
 <section class="bs-grid-container grid-container <?php echo $bgColor; ?> <?php echo $spacer; ?>">
-    <div class="container">
-        <div class="row row-gap-4">
+    <div class="container mx-auto">
+        <div class="flex flex-wrap -mx-2">
             <?php echo $content; ?>
         </div>
     </div>
