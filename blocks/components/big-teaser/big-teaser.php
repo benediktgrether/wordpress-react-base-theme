@@ -13,5 +13,5 @@ if (!isset($attributes["spacer"])) {
 ?>
 
 <section class="bs-big-teaser big-teaser <?php echo Spacer_Utils::render_spacer($attributes['spacer']); ?>">
-    <?php Image_Utils::render_image($attributes, "w-100 h-100 object-fit-cover"); ?>
+    <?php Image_Utils::render_image($attributes, "w-full h-full object-cover"); ?>
 </section>
