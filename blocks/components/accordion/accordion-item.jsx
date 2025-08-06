@@ -1,10 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
-
 import { useEffect } from '@wordpress/element';
 import { v4 as uuidv4 } from 'uuid';
-
 import { icon } from '../../configuration/icon/icons';
 
 registerBlockType('basetheme/accordion-item', {
@@ -12,28 +10,14 @@ registerBlockType('basetheme/accordion-item', {
     icon: icon.accordionItem,
     category: 'layout',
     parent: ['basetheme/accordion-container'],
-    description: 'A Description',
-    keywords: '[]',
+    description: 'Accordion Item block always open (Tailwind)',
     supports: {},
     attributes: {
-        question: {
-            type: 'string',
-            default: 'Frage',
-        },
-        answer: {
-            type: 'string',
-            default: 'Antwort',
-        },
-        uuid: {
-            type: 'string',
-            default: '', // This will be inherited from the parent container
-        },
-        itemUuid: {
-            type: 'string',
-            default: '', // This will be generated for each item
-        },
+        question: { type: 'string', default: 'Frage' },
+        answer: { type: 'string', default: 'Antwort' },
+        uuid: { type: 'string', default: '' },
+        itemUuid: { type: 'string', default: '' },
     },
-
     edit: EditComponent,
     save: () => null,
 });
@@ -41,7 +25,7 @@ registerBlockType('basetheme/accordion-item', {
 function EditComponent(props) {
     const { attributes, setAttributes, clientId } = props;
 
-    // Get the parent block's attributes
+    // Fetch parent container UUID
     const parentUuid = useSelect(
         (select) => {
             const { getBlockParentsByBlockName, getBlock } =
@@ -57,61 +41,46 @@ function EditComponent(props) {
         [clientId]
     );
 
-    // Update the UUID attribute only if it's different from the parent
+    // Sync parent UUID
     useEffect(() => {
         if (attributes.uuid !== parentUuid) {
             setAttributes({ uuid: parentUuid });
         }
     }, [attributes.uuid, parentUuid, setAttributes]);
 
+    // Generate initial item UUID
     useEffect(() => {
         if (!attributes.itemUuid) {
             setAttributes({ itemUuid: uuidv4() });
         }
     }, [attributes.itemUuid, setAttributes]);
 
-    // Generate a new itemUuid if the block is copied
+    // Refresh UUID on duplication
     useEffect(() => {
-        const newItemUuid = uuidv4();
-        setAttributes({ itemUuid: newItemUuid });
+        setAttributes({ itemUuid: uuidv4() });
     }, [clientId, setAttributes]);
 
+    const blockProps = useBlockProps({
+        className: 'accordion-item border-b border-gray-200',
+    });
+
     return (
-        <div className="accordion-item" {...useBlockProps()}>
-            <h2 className="accordion-header" id={`heading-${attributes.uuid}`}>
-                <div
-                    className="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={`#collapse-${attributes.uuid}`}
-                    aria-expanded="true"
-                    aria-controls={`collapse-${attributes.uuid}`}
-                >
-                    <RichText
-                        allowedFormats={[]}
-                        placeholder="Enter your question"
-                        value={attributes.question}
-                        onChange={(newText) =>
-                            setAttributes({ question: newText })
-                        }
-                    />
-                </div>
+        <div {...blockProps}>
+            <h2 className="bg-primary-default text-white px-4 py-3 font-semibold">
+                <RichText
+                    allowedFormats={[]}
+                    placeholder="Enter your question"
+                    value={attributes.question}
+                    onChange={(newText) => setAttributes({ question: newText })}
+                />
             </h2>
-            <div
-                id={`collapse-${attributes.uuid}`}
-                className="accordion-collapse collapse show"
-                data-bs-parent="#accordionExample"
-            >
-                <div className="accordion-body">
-                    <RichText
-                        allowedFormats={[]}
-                        placeholder="Enter your answer"
-                        value={attributes.answer}
-                        onChange={(newText) =>
-                            setAttributes({ answer: newText })
-                        }
-                    />
-                </div>
+            <div className="accordion-body bg-gray-50 p-4 text-gray-700">
+                <RichText
+                    allowedFormats={[]}
+                    placeholder="Enter your answer"
+                    value={attributes.answer}
+                    onChange={(newText) => setAttributes({ answer: newText })}
+                />
             </div>
         </div>
     );

@@ -83,7 +83,7 @@ function EditComponent(props) {
                     )}`}
                 >
                     <div className="flex flex-wrap -mx-2">
-                        <div className="border border-gray-500 p-2 w-full">
+                        <div className="border border-gray-200 p-2 w-full">
                             <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} />
                         </div>
                     </div>
