@@ -1,4 +1,4 @@
-import '../scss/main.scss';
+import '../css/main.css';
 
 import { initSwiper } from './components/swiper';
 import { queryFilter } from './components/queryFilter';
