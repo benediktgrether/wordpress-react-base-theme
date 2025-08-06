@@ -43,10 +43,10 @@ module.exports = {
             logo: path.resolve('./webpack_icons/favicon.png'),
             suppressSuccess: true,
         }),
-        // new CleanTerminalPlugin({
-        //     beforeCompile: true,
-        //     message: 'New Build Started...',
-        //     onlyInWatchMode: false,
-        // }),
+        new CleanTerminalPlugin({
+            beforeCompile: true,
+            message: 'New Build Started...',
+            onlyInWatchMode: true,
+        }),
     ],
 };
