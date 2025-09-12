@@ -3,3 +3,5 @@
 @import "./configuration/variables.css";
 
 @import "./backend/editor.css";
+
+@import "./components/heading.css";
