@@ -24,6 +24,7 @@ class Image_Utils
 
     public static function render_image($attributes, $class = "img-fluid w-100 object-fit-cover")
     {
+        echo var_dump($attributes);
         if (isset($attributes["mediaId"])): ?>
             <?php echo wp_get_attachment_image(
                 $attributes["mediaId"],
