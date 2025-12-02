@@ -16,7 +16,7 @@ registerBlockType('basetheme/grid-item', {
     keywords: '[]',
     supports: {},
     attributes: {
-        columnsWdith: {
+        columnsWidth: {
             type: 'string',
             default: '1/2',
         },
