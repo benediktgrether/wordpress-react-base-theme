@@ -2,7 +2,6 @@
 
 use basetheme\Utilities\Spacer_Utils;
 
-
 if (!isset($attributes["spacer"])) {
     $attributes["spacer"] = "medium";
 }
@@ -12,8 +11,6 @@ if (!isset($attributes['uuid'])) {
 }
 
 ?>
-<div class="bs-accordion <?php echo Spacer_Utils::render_spacer($attributes['spacer']); ?>">
-    <div class="accordion" id="parent-accordion-id-<?php echo $attributes['uuid']; ?>">
-        <?php echo $content; ?>
-    </div>
+<div class="tw-accordion <?php echo Spacer_Utils::render_spacer($attributes['spacer']); ?>" id="accordion-<?php echo $attributes['uuid']; ?>">
+    <?php echo $content; ?>
 </div>

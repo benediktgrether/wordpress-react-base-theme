@@ -53,8 +53,8 @@ function EditComponent(props) {
                         <Image mediaUrl={attributes.mediaUrl} variant="cover" />
                     </div>
                     <div className="position-absolute w-100 z-1 top-50 start-50 translate-middle">
-                        <div className="container">
-                            <div className="row">
+                        <div className="container mx-auto">
+                            <div className="flex flex-wrap -mx-2">
                                 <div className="col-6">
                                     <Text
                                         attributes={attributes}

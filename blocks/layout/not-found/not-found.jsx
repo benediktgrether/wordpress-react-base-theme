@@ -16,9 +16,9 @@ registerBlockType('everydayblocktheme/not-found', {
 
 function EditComponent() {
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-12">
+        <div className="container mx-auto">
+            <div className="flex flex-wrap -mx-2">
+                <div className="w-full px-2">
                     <div className="position-relative vh-97">
                         <div className="position-absolute top-50 start-50 translate-middle">
                             <h1 className="w-100 fs-300 fw-bold text-gray-light text-center">

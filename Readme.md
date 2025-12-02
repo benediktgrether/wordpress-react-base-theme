@@ -80,19 +80,19 @@ There for we use backstop.js
 
 To ensure the quality and functionality of our code, we have set up several test commands. These commands help us run visual regression tests and build processes in a controlled environment.
 
--   `build:test`: Builds the project in production mode and runs visual regression tests.
+- `build:test`: Builds the project in production mode and runs visual regression tests.
     ```bash
     NODE_ENV=production wp-scripts build src/js/index.js blocks/utilities/**/*.jsx blocks/components/**/*.jsx && cd test && backstop test --configPath=backstop.config.js
     ```
--   `test:reference`: Generates reference images for visual regression testing.
+- `test:reference`: Generates reference images for visual regression testing.
     ```bash
     cd test && backstop reference --configPath=backstop.config.js
     ```
--   `test:approve`: Approves the visual regression test results.
+- `test:approve`: Approves the visual regression test results.
     ```bash
     cd test && backstop approve --configPath=backstop.config.js
     ```
--   `test`: Runs the visual regression tests.
+- `test`: Runs the visual regression tests.
 
     ```bash
     cd test && backstop test --configPath=backstop.config.js
@@ -101,7 +101,6 @@ To ensure the quality and functionality of our code, we have set up several test
     ## Adding a New Test
 
     To set up a new test, follow these steps:
-
     1. **Add a Scenario**: In the `test/scenarios` folder, create a new scenario file or update an existing one. Define the label and the selector for the new test case.
 
     2. **Update Dynamic PHP**: In the `dynamic.php` file, add a class name prefixed with `bs-` followed by the component name. This ensures that the component is correctly identified during the test.
@@ -122,20 +121,19 @@ To ensure the quality and functionality of our code, we have set up several test
     ```
 
     3. **Run Test Commands**: Use the test commands to generate reference images and run the visual regression tests.
-
-    -   Generate reference images:
+    - Generate reference images:
 
         ```bash
         cd test && backstop reference --configPath=backstop.config.js
         ```
 
-    -   Run visual regression tests:
+    - Run visual regression tests:
 
         ```bash
         cd test && backstop test --configPath=backstop.config.js
         ```
 
-    -   Approve test results:
+    - Approve test results:
         ```bash
         cd test && backstop approve --configPath=backstop.config.js
         ```
@@ -144,5 +142,5 @@ To ensure the quality and functionality of our code, we have set up several test
 
 ## TODO
 
--   [ ] Setup correct alias.
--   [ ] Build Documentation with nextjs in folder docs
+- [ ] Migrate from Bootstrap to Tailwind
+      [Migrate from Bootstrap to Tailwind](https://www.infyways.com/tools/bootstrap-to-tailwind/)

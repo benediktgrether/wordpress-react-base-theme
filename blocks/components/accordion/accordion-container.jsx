@@ -56,7 +56,7 @@ function EditComponent(props) {
                     setAttributes={setAttributes}
                 />
             </InspectorControls>
-            <div className="border border-light p-2">
+            <div className="border border-gray-200 p-2">
                 <div className="accordion" id="accordionExample">
                     <InnerBlocks
                         allowedBlocks={allowedBlocks}

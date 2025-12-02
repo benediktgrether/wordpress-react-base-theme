@@ -4,23 +4,15 @@ namespace basetheme\Utilities;
 
 class Button_Utils
 {
-    public static function init_button($attributes)
+    public static function init_button(&$attributes)
     {
         if (!isset($attributes['linkObject'])) {
             return;
         }
 
-        if (!isset($attributes['linkObject']["openInNewTab"])) {
-            $attributes['linkObject']['openInNewTab'] = false;
-        }
-
-        if (!isset($attributes['linkText'])) {
-            $attributes['linkText'] = 'Mehr erfahren';
-        }
-
-        if (!isset($attributes['buttonColorName'])) {
-            $attributes['buttonColorName'] = 'primary';
-        }
+        $attributes['linkObject']['openInNewTab'] = $attributes['linkObject']['openInNewTab'] ?? false;
+        $attributes['linkText'] = $attributes['linkText'] ?? 'Mehr erfahren';
+        $attributes['buttonColorName'] = $attributes['buttonColorName'] ?? 'primary';
     }
 
     public static function render_button($attributes)
@@ -29,52 +21,39 @@ class Button_Utils
             return;
         }
 
-        $linkUrl = $attributes['linkObject']['url'];
+        $linkUrl = $attributes['linkObject']['url'] ?? '#';
 
-        // Check if the link contains 'https', if not, prepend 'https://'
+        // Ensure URL has protocol
         if (strpos($linkUrl, 'https://') === false && strpos($linkUrl, 'http://') === false) {
             $linkUrl = 'https://' . $linkUrl;
         }
 
-        if (!isset($attributes['linkText'])) {
-            $attributes['linkText'] = 'Mehr erfahren';
-        }
+        $linkText = $attributes['linkText'] ?? 'Mehr erfahren';
+        $openInNewTab = !empty($attributes['linkObject']['openInNewTab']);
 
+        // Tailwind button styles
+        $colorClass = self::get_tailwind_button_color($attributes['buttonColorName'] ?? 'primary');
 
+        echo "<a href='{$linkUrl}' 
+                class='{$colorClass} inline-block font-semibold py-2 px-4 rounded transition duration-300' 
+                target='" . ($openInNewTab ? "_blank" : "_self") . "'>
+                {$linkText}
+              </a>";
+    }
 
-        if (!isset($attributes['buttonColorName'])) {
-            $attributes['buttonColorName'] = 'primary';
-        }
-
-        if (!isset($attributes['linkObject']["openInNewTab"])) {
-            $attributes['linkObject']['openInNewTab'] = false;
-        }
-
-        $colorClass = '';
-        $textColorClass = '';
-        switch ($attributes['buttonColorName']) {
+    private static function get_tailwind_button_color($colorName)
+    {
+        switch ($colorName) {
             case 'primary':
-                $colorClass = 'btn-primary';
-                $textColorClass = 'text-white';
-                break;
+                return 'bg-primary-default hover:bg-primary-hover text-white';
             case 'secondary':
-                $colorClass = 'btn-secondary';
-                $textColorClass = 'text-white';
-                break;
+                return 'bg-secondary-default hover:bg-secondary-hover text-white';
             case 'white':
-                $colorClass = 'btn-white';
-                $textColorClass = 'text-text';
-                break;
+                return 'bg-white text-gray-800 border border-gray-300 hover:bg-gray-100';
             case 'gray':
-                $colorClass = 'btn-gray-500';
-                $textColorClass = 'text-primary';
-                break;
+                return 'bg-gray-200 hover:bg-gray-300 text-gray-800';
             default:
-                $colorClass = 'btn-primary';
-                $textColorClass = 'text-white';
-                break;
+                return 'bg-primary-default hover:bg-primary-hover text-white';
         }
-
-        echo "<a href='{$linkUrl}' class='btn {$colorClass} {$textColorClass}' target='" . ($attributes['linkObject']['openInNewTab'] ? "_blank" : "_self") . "'>{$attributes['linkText']}</a>";
     }
 }

@@ -77,9 +77,13 @@ function EditComponent(props) {
                 />
             </InspectorControls>
             <div className={`my-4 ${bgColor}`}>
-                <div className={`container ${spacerClass(attributes.spacer)}`}>
-                    <div className="row">
-                        <div className="border border-light p-2">
+                <div
+                    className={`container mx-auto mt-4 ${spacerClass(
+                        attributes.spacer
+                    )}`}
+                >
+                    <div className="flex flex-wrap -mx-2">
+                        <div className="border border-gray-200 p-2 w-full">
                             <InnerBlocks allowedBlocks={ALLOWED_BLOCKS} />
                         </div>
                     </div>

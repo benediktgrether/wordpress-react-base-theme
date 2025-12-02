@@ -1,7 +1,7 @@
 <section class="not-found">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
+    <div class="container mx-auto">
+        <div class="flex flex-wrap -mx-2">
+            <div class="w-full px-2">
                 <div class="position-relative w-100 h-100">
                     <div class="position-absolute top-50 start-50 translate-middle">
                         <h1 class="w-100 fs-300 fw-bold text-gray-300 text-center">

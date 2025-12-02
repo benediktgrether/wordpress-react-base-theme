@@ -1,0 +1,9 @@
+.heading {
+    h1{
+        @apply text-2xl font-bold;
+
+        @variant lg {
+            @apply text-9xl;
+        }
+    }
+}

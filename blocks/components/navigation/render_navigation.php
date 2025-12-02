@@ -23,7 +23,7 @@ class Render_Navigation
 
         <header class="sticky-top">
             <nav class="navbar navbar-expand-lg bg-primary">
-                <div class="container">
+                <div class="container mx-auto">
                     <a class="navbar-brand" href=" /" aria-label="Zur Startseite gehen">
                         <?php echo wp_get_attachment_image(
                             $mediaId,

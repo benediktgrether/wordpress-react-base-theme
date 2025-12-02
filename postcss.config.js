@@ -1,19 +1,13 @@
-const purgecss = require('@fullhuman/postcss-purgecss');
-const cssnano = require('cssnano');
+// export default {
+//     plugins: {
+//         '@tailwindcss/postcss': {},
+//         autoprefixer: {},
+//     },
+// };
 
 module.exports = {
-    plugins: [
-        require('autoprefixer'),
-        // eslint-disable-next-line no-undef
-        process.env.NODE_ENV === 'production'
-            ? cssnano({ preset: 'default' })
-            : null,
-        // eslint-disable-next-line no-undef
-        process.env.NODE_ENV === 'production'
-            ? purgecss({
-                  content: ['./**/*.php', './**/*.jsx', './**/*.html'],
-                  whitelist: ['body', 'html'],
-              })
-            : null,
-    ],
+    plugins: {
+        '@tailwindcss/postcss': {}, // ✅ use this package instead of tailwindcss()
+        autoprefixer: {},
+    },
 };

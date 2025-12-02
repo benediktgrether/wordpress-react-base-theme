@@ -12,7 +12,7 @@ import {
 registerBlockType('basetheme/blog-post', {
     title: 'Blog-post',
     icon: postList,
-    parent: ['base-theme/container'],
+    parent: ['basetheme/container'],
     category: 'layout',
     description: 'A Description',
     keywords: '[]',
@@ -134,7 +134,7 @@ function EditComponent(props) {
 
             <div className="blog-post">
                 <h2>Blog Post</h2>
-                <p className="alert alert-warning">
+                <p className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded">
                     Post Types werden im Backend zurzeit nicht angezeigt.
                 </p>
             </div>

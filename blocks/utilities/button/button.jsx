@@ -1,5 +1,5 @@
 import { useState } from '@wordpress/element';
-import { button, link } from '@wordpress/icons';
+import { link } from '@wordpress/icons';
 
 import {
     ToolbarGroup,
@@ -33,12 +33,12 @@ import {
 } from '../../configuration/align/align';
 
 export const defaultButtonAttributes = {
-    ...defaultColorNameAttributes, // This was your original block color
+    ...defaultColorNameAttributes,
     ...defaultSpacerAttributes,
     ...defaultAlignAttributes,
     linkText: { type: 'string', default: 'Mehr erfahren' },
     linkObject: { type: 'object', default: { url: '' } },
-    buttonColorName: { type: 'string', default: 'primary' }, // NEW attribute for button color
+    buttonColorName: { type: 'string', default: 'primary' },
 };
 
 export function ButtonSettings({
@@ -95,33 +95,31 @@ export function Button({ attributes, setAttributes }) {
         setAttributes({ linkText: setText });
     }
 
-    let buttonColor;
-    let textColor;
-
+    // Tailwind button styles
+    let buttonClasses = '';
     switch (attributes.buttonColorName) {
         case 'primary':
-            buttonColor = 'primary';
-            textColor = 'text-white';
+            buttonClasses =
+                'bg-primary-default hover:bg-primary-hover !text-white';
             break;
         case 'secondary':
-            buttonColor = 'secondary';
-            textColor = 'text-white';
+            buttonClasses =
+                'bg-secondary-default hover:bg-secondary-hover !text-white';
             break;
         case 'black':
-            buttonColor = 'black';
-            textColor = 'text-white';
+            buttonClasses = 'bg-black hover:bg-gray-900 !text-white';
             break;
         case 'white':
-            buttonColor = 'white';
-            textColor = 'text-black';
+            buttonClasses =
+                'bg-white text-black border border-gray-300 hover:bg-gray-100';
             break;
         case 'gray':
-            buttonColor = 'gray-500';
-            textColor = 'text-primary';
+            buttonClasses =
+                'bg-gray-200 hover:bg-gray-300 !text-primary-default';
             break;
         default:
-            buttonColor = 'primary';
-            textColor = 'text-white';
+            buttonClasses =
+                'bg-primary-default hover:bg-primary-hover !text-white';
     }
 
     return (
@@ -132,11 +130,13 @@ export function Button({ attributes, setAttributes }) {
                 isLinkPickerVisible={isLinkPickerVisible}
                 setIsLinkPickerVisible={setIsLinkPickerVisible}
             />
-            <div className={`d-flex ${alignClass(attributes.align)}`}>
+            <div className={`flex ${alignClass(attributes.align)}`}>
                 <RichText
                     allowedFormats={[]}
                     tagName="a"
-                    className={`btn btn-${buttonColor} ${textColor} ${spacerClass(attributes.spacer)}`}
+                    className={`inline-block ${buttonClasses} font-semibold py-2 px-4 rounded transition duration-300 cursor-pointer ${spacerClass(
+                        attributes.spacer
+                    )}`}
                     value={attributes.linkText}
                     onChange={handleTextChange}
                 />
