@@ -47,7 +47,7 @@ function EditComponent(props) {
                     <PanelRow>
                         <SelectControl
                             label="Columns Width"
-                            value={attributes.columnsWdith}
+                            value={attributes.columnsWidth}
                             options={[
                                 { label: '1/2', value: '1/2' },
                                 { label: '1/3', value: '1/3' },
@@ -56,14 +56,14 @@ function EditComponent(props) {
                                 { label: '2/3', value: '2/3' },
                                 { label: '3/4', value: '3/4' },
                             ]}
-                            onChange={(columnsWdith) =>
-                                setAttributes({ columnsWdith })
+                            onChange={(columnsWidth) =>
+                                setAttributes({ columnsWidth })
                             }
                         />
                     </PanelRow>
                 </PanelBody>
             </InspectorControls>
-            <div className={`grid-item-${attributes.columnsWdith}`}>
+            <div className={`grid-item-${attributes.columnsWidth}`}>
                 <div className="border border-light p-2">
                     <InnerBlocks allowedBlocks={allowedBlocks} />
                 </div>
