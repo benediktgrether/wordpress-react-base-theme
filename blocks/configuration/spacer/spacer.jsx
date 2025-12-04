@@ -31,7 +31,7 @@ export function SpacerSettings({ title, attributes, setAttributes }) {
                     label="Spacer"
                     value={attributes.spacer}
                     options={[
-                        { label: 'None', value: '' },
+                        { label: 'None', value: 'none' },
                         { label: 'Extra Small', value: 'xSmall' },
                         { label: 'Small', value: 'small' },
                         { label: 'Medium', value: 'medium' },
