@@ -4,23 +4,20 @@ export const defaultSpacerAttributes = {
     spacer: { type: 'string', default: 'medium' },
 };
 
+// NEW: mapping version of your old switch
 export const spacerClass = (spacer) => {
-    switch (spacer) {
-        case 'xSmall':
-            return 'mt-2';
-        case 'small':
-            return 'mt-3';
-        case 'medium':
-            return 'mt-4';
-        case 'large':
-            return 'mt-3 mt-lg-5';
-        case 'xLarge':
-            return 'mt-5 mt-lg-10';
-        case 'xxLarge':
-            return 'mt-6 mt-lg-12';
-        default:
-            return 'mt-0';
-    }
+    const spacerMap = {
+        xSmall: 'pt-2',
+        small: 'pt-4',
+        medium: 'pt-8',
+        large: 'pt-16',
+        xLarge: 'pt-32',
+        xxLarge: 'pt-48',
+        xxxLarge: 'pt-64',
+    };
+
+    // Return mapped class or fallback
+    return spacerMap[spacer] ?? 'pt-0';
 };
 
 export function SpacerSettings({ title, attributes, setAttributes }) {
@@ -38,6 +35,7 @@ export function SpacerSettings({ title, attributes, setAttributes }) {
                         { label: 'Large', value: 'large' },
                         { label: 'Extra Large', value: 'xLarge' },
                         { label: 'Extra Extra Large', value: 'xxLarge' },
+                        { label: 'Triple Extra Large', value: 'xxxLarge' },
                     ]}
                     onChange={(spacer) => setAttributes({ spacer })}
                 />
