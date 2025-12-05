@@ -120,7 +120,9 @@ export function ImageSettings({ attributes, setAttributes, imageSizeOptions }) {
 
 export function Image({ mediaUrl, variant }) {
     const classNames =
-        variant === 'cover' ? 'w-100 h-100 object-fit-cover' : 'w-auto h-100';
+        variant === 'cover'
+            ? 'w-full !h-[56.25rem] object-fit-cover'
+            : 'w-auto h-full';
 
     return <img className={classNames} src={mediaUrl} alt="Select Image" />;
 }
