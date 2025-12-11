@@ -48,18 +48,19 @@ function EditComponent(props) {
                 />
             </InspectorControls>
             <div className="hero-slider">
-                <div className="position-relative h-100">
-                    <div className="image-backdrop h-100">
+                <div className="relative h-full">
+                    <div className="image-backdrop h-full">
                         <Image mediaUrl={attributes.mediaUrl} variant="cover" />
                     </div>
-                    <div className="position-absolute w-100 z-1 top-50 start-50 translate-middle">
+                    <div className="absolute inset-0 bg-black/50"></div>
+                    <div className="absolute w-full z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <div className="container mx-auto">
                             <div className="flex flex-wrap -mx-2">
-                                <div className="col-6">
+                                <div className="w-full md:w-1/2 px-2">
                                     <Text
                                         attributes={attributes}
                                         setAttributes={setAttributes}
-                                        className="text-white fs-72"
+                                        className="text-white text-[72px]"
                                     />
                                     <Text
                                         attributes={{
@@ -70,9 +71,10 @@ function EditComponent(props) {
                                                 subtitle: newAttributes.text,
                                             });
                                         }}
-                                        className="text-white fs-24"
+                                        className="text-white text-2xl"
                                     />
-                                    <div className="d-flex">
+
+                                    <div className="flex">
                                         <Button
                                             attributes={attributes}
                                             setAttributes={setAttributes}
