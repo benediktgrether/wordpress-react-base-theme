@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../../fonts/Inter-VariableFont.ttf') format('truetype');
+    font-weight: 100 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../fonts/Inter-VariableFont.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* H1 — biggest, with 9xl on xl breakpoint */
+h1 {
+    @apply text-6xl leading-tight font-bold md:text-7xl lg:text-8xl xl:text-9xl dark:text-darkmode-text-dark;
+}
+
+/* H2 */
+h2 {
+    @apply text-3xl leading-snug font-semibold md:text-4xl lg:text-5xl xl:text-6xl dark:text-darkmode-dark;
+}
+
+/* H3 */
+h3 {
+    @apply text-2xl leading-snug font-semibold md:text-3xl lg:text-4xl xl:text-5xl dark:text-darkmode-dark;
+}
+
+/* H4 */
+h4 {
+    @apply text-xl leading-snug font-medium md:text-2xl lg:text-3xl xl:text-4xl dark:text-darkmode-dark;
+}
+
+/* H5 */
+h5 {
+    @apply text-lg leading-snug font-medium md:text-xl lg:text-2xl xl:text-3xl dark:text-darkmode-dark;
+}
+
+/* H6 */
+h6 {
+    @apply text-base leading-snug font-medium md:text-lg lg:text-xl xl:text-2xl dark:text-darkmode-dark;
+}
+
+p {
+    @apply leading-relaxed xl:text-lg dark:text-darkmode-dark;
+}
+
+.text-block,
+.headline {
+    @apply mx-auto;
+    max-width: 48.75rem;
+}
